@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "aIPQa8JgZhYRtja6jxpx8Zp4ytE9kaB2/ONVUL1Gxfp1DeElR9Cl2CwFM0xHHxXYAKK5v5D5DF0mebC1LlnlOA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Dragan\\Desktop\\BogdanskoQR\\bogdansko_backend\\BogdanskoQRWebApi\\BogdanskoQRWebApi.App\\BogdanskoQRWebApi.App.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Dragan\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\Dragan\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Dragan\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
+    "C:\\Users\\Dragan\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\Dragan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
+    "C:\\Users\\Dragan\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.5.0\\swashbuckle.aspnetcore.swaggerui.6.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}
