@@ -3,7 +3,7 @@ import styles from './Footer.module.css';
 const Footer = () => {
   return (
     <div className={styles.footerWrapper}>
-      &copy; 2024 Your Company Name. All rights reserved.
+      &copy; 2024 Maxim Caffee. All rights reserved.
     </div>
   );
 };

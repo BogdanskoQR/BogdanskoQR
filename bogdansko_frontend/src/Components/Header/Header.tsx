@@ -1,15 +1,12 @@
 import React from 'react';
-import styles from './Header.module.css';
+import './Header.css';
 
 const Header = () => {
   return (
-    <div className={styles.headerWrapper}>
-      <div className={styles.title}>Your Company Name</div>
-      <div className={styles.navWrapper}>
-        <div  className={styles.navLink}>Home</div>
-        <div  className={styles.navLink}>Menu</div>
-        <div  className={styles.navLink}>Contact</div>
-      </div>
+    <div className='headerWrapper'>
+      <div className='title'>Maxim Caffee</div>
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvT1mFL46Zpz_G2aW1lTxt5NUg0CA7e9FlK0HJj5IB51K0w5VYGpbJI5eyW-ruqVYvR5s&usqp=CAU" alt="logo" />
+
     </div>
   );
 };

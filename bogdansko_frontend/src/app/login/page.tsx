@@ -1,50 +1,95 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 import "./LoginPage.css";
+
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+interface RegisterFormValues {
+  name: string;
+  email: string;
+  password: string;
+}
+
+const loginSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email address").required("Required"),
+  password: Yup.string().required("Required").min(2).max(50),
+});
+
+const registerSchema = Yup.object().shape({
+  name: Yup.string().required("Required").min(2).max(50),
+  email: Yup.string().email("Invalid email address").required("Required"),
+  password: Yup.string().required("Required").min(2).max(50),
+});
 
 export default function Page() {
   const router = useRouter();
-  const handleOnLogin = () => {
+
+  const handleLoginSubmit = (values: LoginFormValues) => {
+    console.log("Login form values:", values);
     router.push("/dashboard");
   };
+
+  const handleSignUpSubmit = (values: RegisterFormValues) => {
+    console.log("Sign up form values:", values);
+  };
+
   return (
     <div className="mainWrapper">
       <div className="main">
         <input type="checkbox" id="chk" aria-hidden="true" />
         <div className="signup">
-          <form>
-            <label htmlFor="chk" aria-hidden="true">
-              Login
-            </label>
-            <input type="email" name="email" placeholder="Email" required />
-            <input
-              type="password"
-              name="pswd"
-              placeholder="Password"
-              required
-            />
-            <button onClick={handleOnLogin}>Login</button>
-
-          </form>
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            onSubmit={handleLoginSubmit}
+            validationSchema={loginSchema}
+          >
+            <Form>
+              <label htmlFor="chk" aria-hidden="true">
+                Login
+              </label>
+              <Field type="email" name="email" placeholder="Email" required />
+              <ErrorMessage name="email" component="div" className="error" />
+              <Field
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+              <ErrorMessage name="password" component="div" className="error" />
+              <button type="submit">Login</button>
+            </Form>
+          </Formik>
         </div>
 
         <div className="login">
-          <form>
-            <label htmlFor="chk" aria-hidden="true">
-              Sign Up
-            </label>
-
-            <input type="text" name="txt" placeholder="User name" required />
-            <input type="email" name="email" placeholder="Email" required />
-            <input
-              type="password"
-              name="pswd"
-              placeholder="Password"
-              required
-            />
-            <button>Sign up</button>
-
-          </form>
+          <Formik
+            initialValues={{ name: "", email: "", password: "" }}
+            onSubmit={handleSignUpSubmit}
+            validationSchema={registerSchema}
+          >
+            <Form>
+              <label htmlFor="chk" aria-hidden="true">
+                Sign Up
+              </label>
+              <Field type="text" name="name" placeholder="User name" required />
+              <ErrorMessage name="name" component="div" className="error" />
+              <Field type="email" name="email" placeholder="Email" required />
+              <ErrorMessage name="email" component="div" className="error" />
+              <Field
+                type="password"
+                name="password"
+                placeholder="Password"
+                required
+              />
+              <ErrorMessage name="password" component="div" className="error" />
+              <button type="submit">Sign up</button>
+            </Form>
+          </Formik>
         </div>
       </div>
     </div>

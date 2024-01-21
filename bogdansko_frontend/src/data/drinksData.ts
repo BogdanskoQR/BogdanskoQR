@@ -38,7 +38,7 @@ const drinksData = [
     drinks: [
       { id: 401, name: "Hot Chocolate", price: 4.5 },
       { id: 402, name: "Tea", price: 3.0 },
-      { id: 403, name: "Coffee with Cream", price: 3.8 },
+      { id: 403, name: "Coffee", price: 3.8 },
       { id: 404, name: "Chai Latte", price: 4.2 },
       { id: 405, name: "Irish Coffee", price: 7.0 },
     ],

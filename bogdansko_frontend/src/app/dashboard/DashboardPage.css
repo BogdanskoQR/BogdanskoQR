@@ -1,0 +1,106 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+}
+
+.menuPageWrapper {
+  min-height: 85vh;
+}
+
+.drinksCategoryWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+}
+
+.category {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 300px;
+}
+
+.category h2 {
+  background-color: #343a40;
+  color: #fff;
+  padding: 16px;
+  font-size: 1.5em;
+  border-radius: 8px 8px 0 0;
+}
+
+.drinksWrapper {
+  list-style: none;
+  padding: 0;
+}
+
+.drink {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.drink button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 7px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.addNewDrink {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 10px;
+  max-height: 30px;
+}
+
+.addNewDrink input:nth-child(1) {
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+  margin-left: 5px;
+}
+
+.addNewDrink button {
+  width: 30px;
+  border: none;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+.newPriceInput {
+  width: 50px;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ced4da;
+}
+
+.editDrinkWrapper {
+  display: flex;
+}
+.editDrinkWrapper input:nth-child(2) {
+  max-width: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.addNewDrinkButton {
+  margin-top: 10px;
+}
+
+.drinkButtons {
+  margin-left: 30px;
+}
+.drinkButtons button {
+  margin-left: 7px;
+}
+
+.editDrinkNameInput {
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+}
