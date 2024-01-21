@@ -1,0 +1,51 @@
+.headerWrapper {
+  display: none;
+}
+body {
+  font-family: "Papyrus", Times, serif;
+}
+.categoriesWrapper img {
+  min-width: 300px;
+  object-fit: cover;
+  max-height: 120px;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  color: white;
+}
+.menuPageWrapper {
+  background: linear-gradient(to bottom, #163136, #17292c);
+}
+.categoriesWrapper {
+  background: linear-gradient(to bottom, #285550, #1c3b38);
+  border-top-left-radius: 36px;
+  border-top-right-radius: 36px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
+    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  padding: 30px;
+}
+
+.oneCategorieCart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+.categorieTitle {
+  background: linear-gradient(to left, #101d1f, #34494d);
+  min-width: 300px;
+  height: 45px;
+  text-align: center;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
