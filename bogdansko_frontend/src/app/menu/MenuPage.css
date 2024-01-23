@@ -1,33 +1,29 @@
-.headerWrapper {
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+
+/* body {
+  font-family: 'Dancing Script', cursive;
+} */
+.headerWrapper{
   display: none;
 }
-body {
-  font-family: "Papyrus", Times, serif;
-}
-.categoriesWrapper img {
-  min-width: 300px;
-  object-fit: cover;
-  max-height: 120px;
-  border-bottom-left-radius: 32px;
-  border-bottom-right-radius: 32px;
-}
-
 .heading {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px;
+  margin-bottom: 0px;
   color: white;
 }
+
 .menuPageWrapper {
   background: linear-gradient(to bottom, #163136, #17292c);
 }
+
 .categoriesWrapper {
   background: linear-gradient(to bottom, #285550, #1c3b38);
   border-top-left-radius: 36px;
   border-top-right-radius: 36px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px,
-    rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   padding: 30px;
 }
 
@@ -37,6 +33,7 @@ body {
   align-items: center;
   margin-bottom: 50px;
 }
+
 .categorieTitle {
   background: linear-gradient(to left, #101d1f, #34494d);
   min-width: 300px;
@@ -48,4 +45,45 @@ body {
   align-items: center;
   justify-content: center;
   color: white;
+}
+
+.categoriesWrapper img {
+  min-width: 300px;
+  object-fit: cover;
+  max-height: 120px;
+  border-bottom-left-radius: 32px;
+  border-bottom-right-radius: 32px;
+}
+
+.menuTableWithPrices {
+  padding: 15px;
+  margin-top: 100px;
+}
+
+.oneMenuTableCategory {
+  display: flex;
+  flex-direction: column;
+  color: #93ac93;
+  padding: 10px;
+  margin-bottom: 70px;
+}
+
+.categoryTableDrinks {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  font-size: 15px;
+  padding: 9px;
+  padding-left: 1px;
+}
+
+.categoryTableDrinks p {
+  font-size: 15px;
+}
+
+.oneMenuTableCategory h3 {
+  padding: 5px;
+}
+.coctailCategory{
+  display: flex;
 }

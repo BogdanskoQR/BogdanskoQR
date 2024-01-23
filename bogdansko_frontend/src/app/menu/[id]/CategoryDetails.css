@@ -1,0 +1,97 @@
+.categoryDetailsPageWrapper {
+  background: linear-gradient(to bottom, #163136, #17292c);
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  color: #dcf2f1;
+}
+
+.categoryDetails {
+  background: linear-gradient(to bottom, #285550, #1c3b38);
+  border-top-left-radius: 36px;
+  border-top-right-radius: 36px;
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  padding: 30px;  
+  min-height: 80vh;
+}
+
+.oneMenuTableCategory {
+  display: flex;
+  flex-direction: column;
+  color: #93ac93;
+  padding: 10px;
+  margin-bottom: 70px;
+}
+
+.oneMenuTableCategory h3 {
+  padding: 5px;
+  font-weight: 500;
+}
+
+.categoryTableDrinks {
+  display: flex;
+  flex-direction: row;
+}
+
+.categoryTableDrinks h3 {
+  padding: 5px;
+}
+
+.categoryTableDrinks p {
+  margin-top: 5px;
+  font-size: 1.2rem;
+  color: #e2e9e2;
+}
+
+.headerWrapper {
+  display: none;
+}
+
+.coctailCategory{
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+}
+.coctelCategoryPrices{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.categoryDetails p {
+  font-size: 12px;
+}
+
+.coctelCategoryPrices h3{
+  font-size: 15px;
+  color: white;
+  margin-left: 0;
+  padding: 0;
+}
+
+.coctailCategory:first-child p {
+  text-align: right;
+  word-wrap: break-word; /* Allow words to break */
+
+  
+}
+
+.coctelCategoryPrices p {
+  text-align: left;
+}
+
+.backButton{
+  padding: 10px;
+  display: inline;
+}
+
+.backButton svg {
+  fill: white;
+  margin-top: 30px;
+  width: 30px;
+}
