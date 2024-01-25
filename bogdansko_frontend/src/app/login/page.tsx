@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { notification } from "antd";
 import React from "react";
 import "./LoginPage.css";
 
@@ -34,6 +35,10 @@ export default function Page() {
 
   const handleLoginSubmit = (values: LoginFormValues) => {
     console.log("Login form values:", values);
+    notification.success({
+      message: "Login Successful",
+      description: "You have successfully logged in.",
+    });
     router.push("/dashboard");
   };
 

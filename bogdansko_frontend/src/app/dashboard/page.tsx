@@ -54,15 +54,23 @@ export default function Page({}: Props) {
   const [isCreateDrinkModalOpen, setIsCreateDrinkModalOpen] =
     useState<boolean>(false);
 
-  const openNotificationWithIcon = (
-    type: NotificationType,
-    point: string
-  ): void => {
-    api[type]({
-      message: `Successfully added ${point}`,
-      description: `You have successfully added ${point}`,
-    });
-  };
+    const openNotificationWithIcon = (
+      type: NotificationType,
+      point: string,
+      drinkName?: string
+    ): void => {
+      const successMessages = {
+        create: `Successfully created ${drinkName ? drinkName : point}`,
+        update: `Successfully updated drink ${drinkName}`,
+        delete: `Successfully deleted drink ${drinkName}`,
+      };
+    
+      notification[type]({
+        message: successMessages[point],
+        description: successMessages[point],
+      });
+    };
+    
 
   const openModal = (modalType: "category" | "drink"): void => {
     if (modalType === "category") {
@@ -81,8 +89,13 @@ export default function Page({}: Props) {
   };
 
   const handleAddDrink = (): void => {
-    console.log("Add Drink:", selectedNewDrink, "to Category:", currentCategory);
-    openNotificationWithIcon("success", "drink");
+    console.log(
+      "Add Drink:",
+      selectedNewDrink,
+      "to Category:",
+      currentCategory
+    );
+    // openNotificationWithIcon("success", `drink with name ${selectedNewDrink?.name} into ${currentCategory}`);
     closeModal("drink");
   };
 
@@ -94,6 +107,7 @@ export default function Page({}: Props) {
 
   const handleUpdateDrink = (): void => {
     if (editedDrink) {
+      openNotificationWithIcon("success", "update", editDrinkName);
       console.log(
         "Update Drink:",
         editedDrink.id,
@@ -110,6 +124,7 @@ export default function Page({}: Props) {
   };
 
   const handleRemoveDrink = (drink: Drink, category: Category): void => {
+    openNotificationWithIcon("success", "delete", drink.name);
     console.log("Remove Drink:", drink, "category", category);
   };
 
@@ -191,11 +206,12 @@ export default function Page({}: Props) {
       >
         <Formik
           initialValues={{ categoryName: "", drinks: [{ name: "", price: 0 }] }}
-          onSubmit={(values, {resetForm}) => {
+          onSubmit={(values, { resetForm }) => {
             console.log("Form values:", values);
-            openNotificationWithIcon("success", "category");
-            resetForm()
+            openNotificationWithIcon("success", "create", `category with name ${values.categoryName}`);
+            resetForm();
           }}
+          
         >
           {({ values, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
@@ -205,6 +221,7 @@ export default function Page({}: Props) {
               <Input
                 type="text"
                 name="categoryName"
+                value='categoryName'
                 placeholder="Enter Category Name"
                 required
               />
@@ -254,8 +271,9 @@ export default function Page({}: Props) {
           initialValues={{ categoryName: 0, drinkName: "", drinkPrice: 0 }}
           onSubmit={(values) => {
             console.log("Add Drink Form values:", values);
-            openNotificationWithIcon("success", "drink");
+            openNotificationWithIcon("success", 'create', `product with name ${values.drinkName}`);
           }}
+          
         >
           {({ values, handleChange, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
