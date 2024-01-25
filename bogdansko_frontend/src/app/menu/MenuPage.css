@@ -13,6 +13,7 @@
   padding: 30px;
   margin-bottom: 0px;
   color: white;
+  
 }
 
 .menuPageWrapper {
@@ -83,7 +84,4 @@
 
 .oneMenuTableCategory h3 {
   padding: 5px;
-}
-.coctailCategory{
-  display: flex;
 }

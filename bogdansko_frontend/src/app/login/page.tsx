@@ -2,19 +2,10 @@
 import { useRouter } from "next/navigation";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import React from "react";
 import "./LoginPage.css";
 
-interface LoginFormValues {
-  email: string;
-  password: string;
-}
-
-interface RegisterFormValues {
-  name: string;
-  email: string;
-  password: string;
-}
-
+// Define form validation schemas
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().required("Required").min(2).max(50),
@@ -25,6 +16,18 @@ const registerSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().required("Required").min(2).max(50),
 });
+
+// Define form initial values interfaces
+interface LoginFormValues {
+  email: string;
+  password: string;
+}
+
+interface RegisterFormValues {
+  name: string;
+  email: string;
+  password: string;
+}
 
 export default function Page() {
   const router = useRouter();
@@ -42,6 +45,7 @@ export default function Page() {
     <div className="mainWrapper">
       <div className="main">
         <input type="checkbox" id="chk" aria-hidden="true" />
+
         <div className="signup">
           <Formik
             initialValues={{ email: "", password: "" }}
