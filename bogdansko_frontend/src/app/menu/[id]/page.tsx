@@ -43,7 +43,7 @@ export default function Page({ params }:any) {
             <div key={oneDrink.name} className="categoryTableDrinks">
               {isCocktailsCategory ? (
                 <div className="coctailCategory">
-                  <p>{oneDrink.description}</p>
+                  <p>{oneDrink.name}</p>
                   <div className="coctelCategoryPrices">
                   <h3>{oneDrink.name}</h3>
                   <p>{oneDrink.price.toFixed(0)} ден.</p>
