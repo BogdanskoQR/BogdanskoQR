@@ -2,24 +2,57 @@
   background: linear-gradient(to bottom, #163136, #17292c);
 }
 
-.heading {
+.menuItemHeader {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 50px;
   padding-top: 0px;
-  padding-bottom: 10px;
+  padding-bottom: 0px;
   color: #dcf2f1;
   margin-top: 20px;
+  position: relative;
+  padding-top: 0px;
+  margin-top: 0px;
+  height: 160px;
+  justify-content: flex-end;
 }
-
+.menuItemHeadingName{
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  width: 200px;
+  height: 110px;
+  background-color: #ecf0f1;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  opacity: 0.65;
+  margin-top: 50px;
+}
+.menuItemHeadingName h2 {
+  margin-top: 13px;
+}
+.categoryName{
+  text-align: center;
+  color: white;
+  padding: 15px;
+}
+.mainHeader{
+  display: flex;
+}
 .categoryDetails {
-  background: linear-gradient(to bottom, #285550, #1c3b38);
+  background-color: #ecf0f1;
   border-top-left-radius: 36px;
   border-top-right-radius: 36px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
   padding: 30px;  
   min-height: 80vh;
+  position: relative;
+  z-index: 0;
 }
 
 .oneMenuTableCategory {
@@ -37,18 +70,21 @@
 
 .categoryTableDrinks {
   display: flex;
-  flex-direction: row;
-  padding: 5px;
+    flex-direction: row;
+    padding: 5px;
+    justify-content: space-between;
+    color: black;
 }
 
 .categoryTableDrinks h3 {
   padding: 5px;
+  color: black;
 }
 
 .categoryTableDrinks p {
   margin-top: 5px;
   font-size: 1.2rem;
-  color: #e2e9e2;
+  color:black;
 }
 
 .headerWrapper {
@@ -73,7 +109,7 @@
 
 .coctelCategoryPrices h3{
   font-size: 15px;
-  color: white;
+  color: black;
   margin-left: 0;
   padding: 0;
 }
@@ -92,11 +128,19 @@
 
 .backButton{
   padding: 10px;
-  display: inline;
+  display: none;
 }
 
 .backButton svg {
   fill: white;
   margin-top: 30px;
   width: 30px;
+}
+
+.coffeeImage img {
+  width: 400px;
+  position: absolute;
+  height: 230px;
+  z-index: 0;
+  object-fit: cover;
 }

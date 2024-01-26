@@ -4,7 +4,7 @@ import { useState } from "react";
 import "./DashboardPage.css";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, notification, Modal, Input, Select } from "antd";
-import { Field, FieldArray, Form, Formik, FormikHelpers } from "formik";
+import {  FieldArray, Form, Formik, FormikHelpers } from "formik";
 
 type NotificationType = "success" | "info" | "warning" | "error";
 
@@ -59,7 +59,7 @@ export default function Page({}: Props) {
       point: string,
       drinkName?: string
     ): void => {
-      const successMessages = {
+      const successMessages:any = {
         create: `Successfully created ${drinkName ? drinkName : point}`,
         update: `Successfully updated drink ${drinkName}`,
         delete: `Successfully deleted drink ${drinkName}`,
