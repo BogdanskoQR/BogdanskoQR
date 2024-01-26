@@ -136,7 +136,7 @@ export default function Page({}: Props) {
   const handleAddMoreDrinks = (
     formikArrayHelpers: FormikHelpers<FormCategoryValues["drinks"]>
   ): void => {
-    formikArrayHelpers.push({ name: "", price: 0 });
+    // formikArrayHelpers.push({ name: "", price: 0 });
   };
 
   return (
