@@ -63,14 +63,12 @@ export default function Page({}: Props) {
     useState<boolean>(false);
   const [isEditMenuModalOpen, setIsEditMenuModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [menuBackgroundColor, setMenuBackgroundColor] = useState(
-    "linear-gradient(to right, #ffffff, #dfe6e9)"
-  );
+  const [menuBackgroundColor, setMenuBackgroundColor] = useState(companyDetails.menuThemeColor);
   const [categoryTitleBackgroundColor, setCategoryTitleBackgroundColor] =
-    useState("linear-gradient(to top, #dfe6e9, #d6e2eb)");
-  const [categoryTextColor, setCategoryTextColor] = useState("black");
-  const [headerTextColor, setHeaderTextColor] = useState("white");
-  const [headerImage, setHeaderImage] = useState<File | null>(null);
+    useState(companyDetails.categoryTitleColor);
+  const [categoryTextColor, setCategoryTextColor] = useState(companyDetails.categoryTextTitleColor);
+  const [headerTextColor, setHeaderTextColor] = useState(companyDetails.headerTextColor);
+  const [headerImage, setHeaderImage] = useState<File | null | undefined >(null);
 
   const openNotificationWithIcon = (
     type: NotificationType,
