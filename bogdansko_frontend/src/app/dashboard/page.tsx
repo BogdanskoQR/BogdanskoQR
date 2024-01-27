@@ -8,7 +8,8 @@ import { FieldArray, Form, Formik, FormikHelpers } from "formik";
 import { UploadOutlined } from "@ant-design/icons";
 import type { UploadProps } from "antd";
 import { Upload } from "antd";
-import type { ColorPickerProps } from "antd";
+import { message, Popconfirm } from "antd";
+import { Image } from 'antd';
 
 import { ColorPicker } from "antd";
 
@@ -63,12 +64,18 @@ export default function Page({}: Props) {
     useState<boolean>(false);
   const [isEditMenuModalOpen, setIsEditMenuModalOpen] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
-  const [menuBackgroundColor, setMenuBackgroundColor] = useState(companyDetails.menuThemeColor);
+  const [menuBackgroundColor, setMenuBackgroundColor] = useState(
+    companyDetails.menuThemeColor
+  );
   const [categoryTitleBackgroundColor, setCategoryTitleBackgroundColor] =
     useState(companyDetails.categoryTitleColor);
-  const [categoryTextColor, setCategoryTextColor] = useState(companyDetails.categoryTextTitleColor);
-  const [headerTextColor, setHeaderTextColor] = useState(companyDetails.headerTextColor);
-  const [headerImage, setHeaderImage] = useState<File | null | undefined >(null);
+  const [categoryTextColor, setCategoryTextColor] = useState(
+    companyDetails.categoryTextTitleColor
+  );
+  const [headerTextColor, setHeaderTextColor] = useState(
+    companyDetails.headerTextColor
+  );
+  const [headerImage, setHeaderImage] = useState<File | null | undefined>(null);
 
   const openNotificationWithIcon = (
     type: NotificationType,
@@ -80,6 +87,7 @@ export default function Page({}: Props) {
       update: `Successfully updated drink ${drinkName}`,
       delete: `Successfully deleted drink ${drinkName}`,
       editMenu: `Successfully edited the menu`,
+      text: `${drinkName}`,
     };
 
     notification[type]({
@@ -135,7 +143,6 @@ export default function Page({}: Props) {
     }
   };
 
-
   const handleAddDrink = (): void => {
     console.log(
       "Add Drink:",
@@ -184,16 +191,55 @@ export default function Page({}: Props) {
   const handleAddMoreDrinks = (
     formikArrayHelpers: FormikHelpers<FormCategoryValues["drinks"]>
   ): void => {
-    // formikArrayHelpers.push({ name: "", price: 0 });
+    formikArrayHelpers.push({ name: "", price: 0 });
+  };
+
+  const handleDeleteCateogry = (category: Category) => {
+    console.log(category);
+    openNotificationWithIcon(
+      "success",
+      "text",
+      `Successfully deleted ${category.name} category`
+    );
+  };
+
+  const cancel = () => {
+    message.error("Click on No");
   };
 
   return (
     <div className="menuPageWrapper">
+      <Button type="primary" onClick={() => openModal("category")}>
+        Add new Category
+      </Button>
+
+      <Button type="primary" onClick={() => openModal("drink")}>
+        Add new product
+      </Button>
+      <Button type="primary" onClick={() => openModal("editMenu")}>
+        Edit Menu
+      </Button>
       <div className="drinksCategoryWrapper">
         {contextHolder}
         {categories.map((category) => (
           <div key={category.id} className="category">
-            <h2>{category.name}</h2>
+            <div className="deleteCategory">
+              <Popconfirm
+                title="Delete the Category"
+                description="Are you sure to delete this category?"
+                onConfirm={() => handleDeleteCateogry(category)}
+                onCancel={cancel}
+                okText="Yes"
+                cancelText="No"
+              >
+                <Button>
+                  <DeleteOutlined />
+                </Button>
+              </Popconfirm>
+
+              <h2>{category.name}</h2>
+            </div>
+
             <ul className="drinksWrapper">
               {category.drinks.map((drink) => (
                 <li key={drink.id} className="drink">
@@ -219,14 +265,20 @@ export default function Page({}: Props) {
                     <>
                       {drink.name} - ${drink.price.toFixed(2)}
                       <div className="drinkButtons">
-                        <Button onClick={() => handleEditDrink(drink)}>
-                          <EditOutlined />
-                        </Button>
-                        <Button
-                          onClick={() => handleRemoveDrink(drink, category)}
+                        <EditOutlined
+                          style={{ padding: "7px" }}
+                          onClick={() => handleEditDrink(drink)}
+                        />
+                        <Popconfirm
+                          title="Delete Product"
+                          description="Are you sure to delete product?"
+                          onConfirm={() => handleRemoveDrink(drink, category)}
+                          onCancel={cancel}
+                          okText="Yes"
+                          cancelText="No"
                         >
-                          <DeleteOutlined />
-                        </Button>
+                          <DeleteOutlined style={{ padding: "7px" }} />
+                        </Popconfirm>
                       </div>
                     </>
                   )}
@@ -237,16 +289,6 @@ export default function Page({}: Props) {
         ))}
       </div>
 
-      <Button type="primary" onClick={() => openModal("category")}>
-        Add new Category
-      </Button>
-
-      <Button type="primary" onClick={() => openModal("drink")}>
-        Add new product
-      </Button>
-      <Button type="primary" onClick={() => openModal("editMenu")}>
-        Edit Menu
-      </Button>
       <Modal
         width={600}
         title="Create Category"
@@ -270,50 +312,59 @@ export default function Page({}: Props) {
         >
           {({ values, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
-              <label htmlFor="categoryName" aria-hidden="true">
-                Category Name
-              </label>
-              <Input
-                type="text"
-                name="categoryName"
-                value="categoryName"
-                placeholder="Enter Category Name"
-                required
-              />
-              <p>Drinks:</p>
-              <FieldArray
-                name="drinks"
-                render={(arrayHelpers: any) => (
-                  <div>
-                    {values.drinks.map((drink, index) => (
-                      <div key={index} className="addNewDrink">
-                        <Input
-                          type="text"
-                          placeholder={`New Drink Name ${index + 1}`}
-                          name={`drinks.${index}.name`}
-                        />
-                        <Input
-                          className="newPriceInput"
-                          type="number"
-                          placeholder={`New Drink Price ${index + 1}`}
-                          name={`drinks.${index}.price`}
-                        />
-                        {index === values.drinks.length - 1 && (
-                          <button
-                            onClick={() => handleAddMoreDrinks(arrayHelpers)}
-                          >
-                            <PlusOutlined />
-                          </button>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              />
-              <Upload {...categoryUploadProps}>
-                <Button icon={<UploadOutlined />}>Upload</Button>
-              </Upload>
-              <Button htmlType="submit">Add more drinks</Button>
+              <div className="createCategoryField">
+                <label htmlFor="categoryName" aria-hidden="true">
+                  Category Name
+                </label>
+
+                <Input
+                  type="text"
+                  name="categoryName"
+                  placeholder="Enter Category Name"
+                  required
+                />
+              </div>
+
+              <div className="createCategoryField">
+                <p>Drinks:</p>
+                <FieldArray
+                  name="drinks"
+                  render={(arrayHelpers: any) => (
+                    <div>
+                      {values.drinks.map((drink, index) => (
+                        <div key={index} className="addNewDrink">
+                          <Input
+                            type="text"
+                            placeholder={`New Drink Name ${index + 1}`}
+                            name={`drinks.${index}.name`}
+                          />
+                          <Input
+                            className="newPriceInput"
+                            type="number"
+                            placeholder={`New Drink Price ${index + 1}`}
+                            name={`drinks.${index}.price`}
+                          />
+                          {index === values.drinks.length - 1 && (
+                            <button
+                              onClick={() => handleAddMoreDrinks(arrayHelpers)}
+                            >
+                              <PlusOutlined />
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                />
+              </div>
+              <div className="createCategoryField">
+                <p>Category Image:</p>
+                <Upload {...categoryUploadProps}>
+                  <Button icon={<UploadOutlined />}>Upload</Button>
+                </Upload>
+              </div>
+
+              {/* <Button htmlType="submit">Add more drinks</Button> */}
             </Form>
           )}
         </Formik>
@@ -340,44 +391,58 @@ export default function Page({}: Props) {
         >
           {({ values, handleChange, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
-              <label>Drink Category:</label>
+              <div className="createProductField">
+                <label>Drink Category:</label>
+                <br />
+                <Select
+                  style={{ width: "460px" }}
+                  options={categories.map((oneCategory) => ({
+                    value: oneCategory.id,
+                    label: oneCategory.name,
+                  }))}
+                  onSelect={(value: Drink) => setSelectedNewDrink(value)}
+                />
+              </div>
+
               <br />
-              <Select
-                style={{ width: "470px" }}
-                options={categories.map((oneCategory) => ({
-                  value: oneCategory.id,
-                  label: oneCategory.name,
-                }))}
-                onSelect={(value: Drink) => setSelectedNewDrink(value)}
-              />
-              <br />
-              <label htmlFor="drinkName">Drink Name:</label>
-              <Input
-                type="text"
-                id="drinkName"
-                name="drinkName"
-                value={values.drinkName}
-                onChange={handleChange}
-              />
-              <label htmlFor="drinkPrice">Drink Price:</label>
-              <Input
-                type="number"
-                id="drinkPrice"
-                name="drinkPrice"
-                value={values.drinkPrice}
-                onChange={handleChange}
-              />
-              <Upload {...productUploadProps}>
-                <Button icon={<UploadOutlined />}>Upload</Button>
-              </Upload>
-              <Button htmlType="submit">Add Drink</Button>
+              <div className="createProductField">
+                <label htmlFor="drinkName">Drink Name:</label>
+                <Input
+                  type="text"
+                  id="drinkName"
+                  name="drinkName"
+                  value={values.drinkName}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="createProductField">
+                <label htmlFor="drinkPrice">Drink Price:</label>
+                <Input
+                  type="number"
+                  id="drinkPrice"
+                  name="drinkPrice"
+                  value={values.drinkPrice}
+                  onChange={handleChange}
+                  style={{ marginBottom: "10px" }}
+                />
+              </div>
+              <div className="createProductField">
+                <label htmlFor="drinkPrice">Product Photo(optional):</label>
+                <br />
+                <Upload {...productUploadProps}>
+                  <Button icon={<UploadOutlined />}>Upload</Button>
+                </Upload>
+              </div>
+
+              {/* <Button htmlType="submit">Add Drink</Button> */}
             </Form>
           )}
         </Formik>
       </Modal>
       <Modal
         width={1000}
-        title="Edit"
+        className="editMenuModal"
+        title="Edit Menu"
         open={isEditMenuModalOpen}
         onOk={() => {
           closeModal("editMenu");
@@ -431,8 +496,8 @@ export default function Page({}: Props) {
           </div>
           <div className="rightSideEditMenu">
             <div className="editSettingWrapper">
-            <div className="menuBackgorundColor">
-                <p>Change Picture</p>
+              <div className="menuBackgorundColor">
+                <p>Change Header Picture</p>
                 <Upload
                   {...menuUploadProps}
                   onChange={(info) => {

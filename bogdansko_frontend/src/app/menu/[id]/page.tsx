@@ -4,6 +4,7 @@ import drinksData from "../../../data/drinksData";
 import "./CategoryDetails.css";
 import { useRouter } from "next/navigation";
 import { companyDetails } from "../../../data/drinksData";
+import { Divider } from 'antd';
 
 export default function Page({ params }:any) {
   const selectedCategory = drinksData.find(
@@ -40,27 +41,33 @@ export default function Page({ params }:any) {
             isCocktailsCategory ? "cocktailsCategory" : ""
           }`}
         >
+          <h3 style={{color: 'black', textAlign: 'center', marginBottom: '15px', fontWeight: '600'}}>{selectedCategory.name}</h3>
           {selectedCategory.drinks.map((oneDrink) => (
             <div key={oneDrink.name} className={`categoryDetailsTableDrinks ${oneDrink.img ? "coctails" : ''}`}>
               {oneDrink.img  ? (
                 <div className="coctailCategory">
-                  <p>{oneDrink.name}</p>
+                  <p>{oneDrink.description}</p>
                   <div className="coctelCategoryPrices">
                   <h3>{oneDrink.name}</h3>
                   <img className="coctailImage" src={oneDrink.img} alt="" />
                   <p>{oneDrink.price.toFixed(0)} ден.</p>
                   </div>
-
+                  <Divider/>
                 </div>
+                
               ) : (
                 <>
+                
                   <h3>{oneDrink.name}</h3>
                   <p>{oneDrink.price.toFixed(0)} ден.</p>
                 </>
+
               )}
+
             </div>
           ))}
         </div>
+        
       </div>
     </div>
   );

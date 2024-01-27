@@ -33,6 +33,11 @@ const drinksData = [
       { id: 303, name: "Cappuccino", price: 81.2 ,img: null },
       { id: 304, name: "Mocha", price: 81.5,img: null  },
       { id: 305, name: "Americano", price: 80.8 ,img: null },
+            { id: 401, name: "Hot Chocolate", price: 81.5 ,img: null },
+      { id: 402, name: "Tea", price: 81.0,img: null },
+      { id: 403, name: "Coffee", price: 80.8 ,img: null },
+      { id: 404, name: "Chai Latte", price: 81.2 ,img: null },
+      { id: 405, name: "Irish Coffee", price: 87.0,img: null },
     ],
   },
   {
@@ -40,6 +45,11 @@ const drinksData = [
     img: 'https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/418392816_1169692214012371_3377569790133421022_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=wU67rFCdi2wAX_5bAMa&_nc_ht=scontent.fskp3-1.fna&oh=03_AdS0hG4dYYbXvGVTGsde6ED4Z2nwgJUP-au_fAsHiKFtgw&oe=65D598A8',
     name: "Hot Drinks",
     drinks: [
+      { id: 401, name: "Hot Chocolate", price: 81.5 ,img: null },
+      { id: 402, name: "Tea", price: 81.0,img: null },
+      { id: 403, name: "Coffee", price: 80.8 ,img: null },
+      { id: 404, name: "Chai Latte", price: 81.2 ,img: null },
+      { id: 405, name: "Irish Coffee", price: 87.0,img: null },
       { id: 401, name: "Hot Chocolate", price: 81.5 ,img: null },
       { id: 402, name: "Tea", price: 81.0,img: null },
       { id: 403, name: "Coffee", price: 80.8 ,img: null },
