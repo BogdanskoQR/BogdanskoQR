@@ -100,6 +100,7 @@ body {
   padding: 5px;
   justify-content: center;
   color: black;
+  align-items: center;
 }
 
 .categoryDetailsTableDrinks h3 {

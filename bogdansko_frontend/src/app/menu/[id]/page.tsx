@@ -41,7 +41,7 @@ export default function Page({ params }:any) {
           }`}
         >
           {selectedCategory.drinks.map((oneDrink) => (
-            <div key={oneDrink.name} className={`categoryDetailsTableDrinks ${isCocktailsCategory ? "coctails" : ''}`}>
+            <div key={oneDrink.name} className={`categoryDetailsTableDrinks ${oneDrink.img ? "coctails" : ''}`}>
               {oneDrink.img  ? (
                 <div className="coctailCategory">
                   <p>{oneDrink.name}</p>
