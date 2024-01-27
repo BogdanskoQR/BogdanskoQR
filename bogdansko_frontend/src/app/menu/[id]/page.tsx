@@ -3,6 +3,7 @@ import { LeftOutlined } from "@ant-design/icons";
 import drinksData from "../../../data/drinksData";
 import "./CategoryDetails.css";
 import { useRouter } from "next/navigation";
+import { companyDetails } from "../../../data/drinksData";
 
 export default function Page({ params }:any) {
   const selectedCategory = drinksData.find(
@@ -28,11 +29,11 @@ export default function Page({ params }:any) {
 
       <div className="menuItemHeader">
         <div className="menuItemHeadingName">
-        <h2>Maxim</h2>
-        <h3>Coffee Bar</h3>
+        <h2 style={{ 'color': companyDetails.headerTextColor }}>Maxim</h2>
+          <h3 style={{ 'color': companyDetails.headerTextColor }}>Coffee Bar</h3>
         </div>
       </div>
-      <div className="categoryDetails">
+      <div className="categoryDetails" style={{ 'background': companyDetails.menuThemeColor }} >
         <div
           key={selectedCategory.name}
           className={`oneMenuTableCategory ${
@@ -40,13 +41,13 @@ export default function Page({ params }:any) {
           }`}
         >
           {selectedCategory.drinks.map((oneDrink) => (
-            <div key={oneDrink.name} className="categoryTableDrinks">
-              {isCocktailsCategory ? (
+            <div key={oneDrink.name} className={`categoryDetailsTableDrinks ${isCocktailsCategory ? "coctails" : ''}`}>
+              {oneDrink.img  ? (
                 <div className="coctailCategory">
                   <p>{oneDrink.name}</p>
                   <div className="coctelCategoryPrices">
                   <h3>{oneDrink.name}</h3>
-                  <img className="coctailImage" src='https://i.pinimg.com/736x/83/5d/56/835d563804b0b6c712f31da53bd18812.jpg' alt="" />
+                  <img className="coctailImage" src={oneDrink.img} alt="" />
                   <p>{oneDrink.price.toFixed(0)} ден.</p>
                   </div>
 

@@ -6,6 +6,10 @@
 .headerWrapper{
   display: none;
 }
+
+.menuPageWrapper{
+  overflow: hidden;
+}
 .heading {
   display: flex;
   flex-direction: column;
@@ -40,7 +44,6 @@
 }
 
 .categoriesWrapper {
-  background: linear-gradient(to top, #dfe6e9, #d6e2eb);
   border-top-left-radius: 36px;
   border-top-right-radius: 36px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -57,7 +60,6 @@
 }
 
 .categorieTitle {
-  background: linear-gradient(to right, #ffffff, #dfe6e9);
   min-width: 300px;
   height: 45px;
   text-align: center;
@@ -92,18 +94,6 @@
   margin-bottom: 70px;
 }
 
-.categoryTableDrinks {
-  display: flex;
-  justify-content: space-between;
-  color: white;
-  font-size: 15px;
-  padding: 9px;
-  padding-left: 1px;
-}
-
-.categoryTableDrinks p {
-  font-size: 15px;
-}
 
 .oneMenuTableCategory h3 {
   padding: 5px;

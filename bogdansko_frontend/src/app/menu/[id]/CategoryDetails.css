@@ -1,23 +1,20 @@
-/* Global styles */
 body {
   margin: 0;
   padding: 0;
 }
 
-/* Page container */
 .categoryDetailsPageWrapper {
   background: linear-gradient(to bottom, #163136, #17292c);
+  overflow: hidden;
 }
 
 .headerWrapper{
   display: none;
 }
-/* Header */
 .mainHeader {
   display: flex;
 }
 
-/* Back button */
 .backButton {
   padding: 10px;
   display: none;
@@ -29,7 +26,6 @@ body {
   width: 30px;
 }
 
-/* Menu Item Header */
 .menuItemHeader {
   display: flex;
   flex-direction: column;
@@ -46,7 +42,6 @@ body {
   justify-content: flex-end;
 }
 
-/* Menu Item Heading Name */
 .menuItemHeadingName {
   display: flex;
   flex-direction: column;
@@ -64,7 +59,6 @@ body {
   margin-top: 13px;
 }
 
-/* Category Details Container */
 .categoryDetails {
   background-color: #ecf0f1;
   border-top-left-radius: 36px;
@@ -78,13 +72,13 @@ body {
   justify-content: center;
 }
 
-/* Drinks Category */
 .oneMenuTableCategory {
   display: flex;
   flex-direction: column;
   color: #93ac93;
   padding: 10px;
   margin-bottom: 72px;
+  width: 100%;
 }
 
 .oneMenuTableCategory h3 {
@@ -92,27 +86,33 @@ body {
   font-weight: 500;
 }
 
-/* Drinks in Category */
-.categoryTableDrinks {
+.categoryDetailsTableDrinks {
   display: flex;
   flex-direction: row;
-  padding: 5px;
+  padding: 10px;
   justify-content: space-between;
   color: black;
 }
 
-.categoryTableDrinks h3 {
+.coctails {
+  display: flex;
+  flex-direction: row;
+  padding: 5px;
+  justify-content: center;
+  color: black;
+}
+
+.categoryDetailsTableDrinks h3 {
   padding: 5px;
   color: black;
 }
 
-.categoryTableDrinks p {
+.categoryDetailsTableDrinks p {
   margin-top: 5px;
   font-size: 1.2rem;
   color: black;
 }
 
-/* Cocktail Category */
 .coctailCategory {
   display: flex;
   flex-direction: column-reverse;
@@ -133,7 +133,6 @@ body {
   padding: 0;
 }
 
-/* Additional styles for specific elements */
 .categoryDetails p {
   font-size: 12px;
 }
@@ -148,7 +147,6 @@ body {
   text-align: left;
 }
 
-/* Coffee Image */
 .coffeeImage img {
   width: 390px;
   position: absolute;
@@ -157,10 +155,11 @@ body {
   object-fit: cover;
 }
 
-/* Cocktail Image */
 .coctailImage {
-  width: 230px;
+  min-width: 300px;
+  height: 200px;
   border-radius: 12px;
+  object-fit: cover;
 }
 
 .coctelCategoryPrices h3 {
