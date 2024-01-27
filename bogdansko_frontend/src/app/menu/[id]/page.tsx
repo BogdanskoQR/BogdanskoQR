@@ -46,7 +46,7 @@ export default function Page({ params }:any) {
             <div key={oneDrink.name} className={`categoryDetailsTableDrinks ${oneDrink.img ? "coctails" : ''}`}>
               {oneDrink.img  ? (
                 <div className="coctailCategory">
-                  <p>{oneDrink.description}</p>
+                  <p>{oneDrink.name}</p>
                   <div className="coctelCategoryPrices">
                   <h3>{oneDrink.name}</h3>
                   <img className="coctailImage" src={oneDrink.img} alt="" />
