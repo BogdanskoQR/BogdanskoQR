@@ -9,6 +9,9 @@ body {
   background: linear-gradient(to bottom, #163136, #17292c);
 }
 
+.headerWrapper{
+  display: none;
+}
 /* Header */
 .mainHeader {
   display: flex;
