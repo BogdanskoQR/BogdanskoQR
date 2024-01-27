@@ -1,10 +1,16 @@
 "use client";
-import drinksData from "../../data/drinksData";
+import drinksData, { companyDetails } from "../../data/drinksData";
 import { useState } from "react";
 import "./DashboardPage.css";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, notification, Modal, Input, Select } from "antd";
-import {  FieldArray, Form, Formik, FormikHelpers } from "formik";
+import { FieldArray, Form, Formik, FormikHelpers } from "formik";
+import { UploadOutlined } from "@ant-design/icons";
+import type { UploadProps } from "antd";
+import { Upload } from "antd";
+import type { ColorPickerProps } from "antd";
+
+import { ColorPicker } from "antd";
 
 type NotificationType = "success" | "info" | "warning" | "error";
 
@@ -29,6 +35,7 @@ interface DrinkFormValues {
   drinkName: string;
   drinkPrice: number;
 }
+
 interface FormCategoryValues {
   categoryName: string;
   drinks: Drink[];
@@ -39,6 +46,7 @@ interface FormProductValues {
   drinkName: string;
   drinkPrice: number;
 }
+
 interface Props {}
 
 export default function Page({}: Props) {
@@ -53,40 +61,82 @@ export default function Page({}: Props) {
     useState<boolean>(false);
   const [isCreateDrinkModalOpen, setIsCreateDrinkModalOpen] =
     useState<boolean>(false);
+  const [isEditMenuModalOpen, setIsEditMenuModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
+  const [menuBackgroundColor, setMenuBackgroundColor] = useState(
+    "linear-gradient(to right, #ffffff, #dfe6e9)"
+  );
+  const [categoryTitleBackgroundColor, setCategoryTitleBackgroundColor] =
+    useState("linear-gradient(to top, #dfe6e9, #d6e2eb)");
+  const [categoryTextColor, setCategoryTextColor] = useState("black");
+  const [headerTextColor, setHeaderTextColor] = useState("white");
+  const [headerImage, setHeaderImage] = useState<File | null>(null);
 
-    const openNotificationWithIcon = (
-      type: NotificationType,
-      point: string,
-      drinkName?: string
-    ): void => {
-      const successMessages:any = {
-        create: `Successfully created ${drinkName ? drinkName : point}`,
-        update: `Successfully updated drink ${drinkName}`,
-        delete: `Successfully deleted drink ${drinkName}`,
-      };
-    
-      notification[type]({
-        message: successMessages[point],
-        description: successMessages[point],
-      });
+  const openNotificationWithIcon = (
+    type: NotificationType,
+    point: string,
+    drinkName?: string
+  ): void => {
+    const successMessages: any = {
+      create: `Successfully created ${drinkName ? drinkName : point}`,
+      update: `Successfully updated drink ${drinkName}`,
+      delete: `Successfully deleted drink ${drinkName}`,
+      editMenu: `Successfully edited the menu`,
     };
-    
 
-  const openModal = (modalType: "category" | "drink"): void => {
+    notification[type]({
+      message: successMessages[point],
+      description: successMessages[point],
+    });
+  };
+
+  const categoryUploadProps: UploadProps = {
+    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+    listType: "picture",
+    beforeUpload(file) {
+      setHeaderImage(file);
+      return false;
+    },
+  };
+
+  const menuUploadProps: UploadProps = {
+    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+    listType: "picture",
+    beforeUpload(file) {
+      setHeaderImage(file);
+      return false;
+    },
+  };
+
+  const productUploadProps: UploadProps = {
+    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
+    listType: "picture",
+    beforeUpload(file) {
+      setSelectedImage(file);
+      return false;
+    },
+  };
+
+  const openModal = (modalType: "category" | "drink" | "editMenu"): void => {
     if (modalType === "category") {
       setIsCreateCategoryModalOpen(true);
     } else if (modalType === "drink") {
       setIsCreateDrinkModalOpen(true);
+    } else if (modalType === "editMenu") {
+      setIsEditMenuModalOpen(true);
     }
   };
 
-  const closeModal = (modalType: "category" | "drink"): void => {
+  const closeModal = (modalType: "category" | "drink" | "editMenu"): void => {
     if (modalType === "category") {
       setIsCreateCategoryModalOpen(false);
     } else if (modalType === "drink") {
       setIsCreateDrinkModalOpen(false);
+    } else if (modalType === "editMenu") {
+      setIsEditMenuModalOpen(false);
     }
   };
+
 
   const handleAddDrink = (): void => {
     console.log(
@@ -196,7 +246,9 @@ export default function Page({}: Props) {
       <Button type="primary" onClick={() => openModal("drink")}>
         Add new product
       </Button>
-
+      <Button type="primary" onClick={() => openModal("editMenu")}>
+        Edit Menu
+      </Button>
       <Modal
         width={600}
         title="Create Category"
@@ -208,10 +260,15 @@ export default function Page({}: Props) {
           initialValues={{ categoryName: "", drinks: [{ name: "", price: 0 }] }}
           onSubmit={(values, { resetForm }) => {
             console.log("Form values:", values);
-            openNotificationWithIcon("success", "create", `category with name ${values.categoryName}`);
+            console.log("Selected Image:", selectedImage);
+            openNotificationWithIcon(
+              "success",
+              "create",
+              `category with name ${values.categoryName}`
+            );
             resetForm();
+            setSelectedImage(null);
           }}
-          
         >
           {({ values, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
@@ -221,7 +278,7 @@ export default function Page({}: Props) {
               <Input
                 type="text"
                 name="categoryName"
-                value='categoryName'
+                value="categoryName"
                 placeholder="Enter Category Name"
                 required
               />
@@ -255,6 +312,9 @@ export default function Page({}: Props) {
                   </div>
                 )}
               />
+              <Upload {...categoryUploadProps}>
+                <Button icon={<UploadOutlined />}>Upload</Button>
+              </Upload>
               <Button htmlType="submit">Add more drinks</Button>
             </Form>
           )}
@@ -271,9 +331,14 @@ export default function Page({}: Props) {
           initialValues={{ categoryName: 0, drinkName: "", drinkPrice: 0 }}
           onSubmit={(values) => {
             console.log("Add Drink Form values:", values);
-            openNotificationWithIcon("success", 'create', `product with name ${values.drinkName}`);
+            console.log("Selected Image:", selectedImage);
+            openNotificationWithIcon(
+              "success",
+              "create",
+              `product with name ${values.drinkName}`
+            );
+            setSelectedImage(null);
           }}
-          
         >
           {({ values, handleChange, handleSubmit }) => (
             <Form onSubmit={handleSubmit}>
@@ -304,10 +369,124 @@ export default function Page({}: Props) {
                 value={values.drinkPrice}
                 onChange={handleChange}
               />
+              <Upload {...productUploadProps}>
+                <Button icon={<UploadOutlined />}>Upload</Button>
+              </Upload>
               <Button htmlType="submit">Add Drink</Button>
             </Form>
           )}
         </Formik>
+      </Modal>
+      <Modal
+        width={1000}
+        title="Edit"
+        open={isEditMenuModalOpen}
+        onOk={() => {
+          closeModal("editMenu");
+          console.log(
+            menuBackgroundColor,
+            categoryTitleBackgroundColor,
+            categoryTextColor
+          );
+          openNotificationWithIcon("success", "editMenu");
+        }}
+        onCancel={() => closeModal("editMenu")}
+      >
+        <div className="editMenuModalWrapper">
+          <div className="leftSideEditMenu">
+            <div className="menuPageWrapper">
+              <div className="coffeeImage">
+                <img
+                  src={
+                    headerImage
+                      ? URL.createObjectURL(headerImage)
+                      : companyDetails.headerImage
+                  }
+                  alt="companyImage"
+                />
+              </div>
+              <div className="heading">
+                <div className="headingName">
+                  <h2 style={{ color: headerTextColor }}>Maxim</h2>
+                  <h3 style={{ color: headerTextColor }}>Coffee Bar</h3>
+                </div>
+              </div>
+              <div
+                className="categoriesWrapper"
+                style={{ background: menuBackgroundColor }}
+              >
+                {drinksData.slice(0, 3).map((oneCategory) => (
+                  <div key={oneCategory.name} className="oneCategorieCart">
+                    <div
+                      className="categorieTitle"
+                      style={{ background: categoryTitleBackgroundColor }}
+                    >
+                      <h3 style={{ color: categoryTextColor }}>
+                        {oneCategory.name}
+                      </h3>
+                    </div>
+                    <img src={oneCategory.img} alt="img" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="rightSideEditMenu">
+            <div className="editSettingWrapper">
+            <div className="menuBackgorundColor">
+                <p>Change Picture</p>
+                <Upload
+                  {...menuUploadProps}
+                  onChange={(info) => {
+                    if (info.file.status === "done") {
+                      setHeaderImage(info.file.originFileObj);
+                    }
+                  }}
+                >
+                  <Button icon={<UploadOutlined />}>Upload</Button>
+                </Upload>
+              </div>
+              <div className="menuBackgorundColor">
+                <p>Menu Background Color</p>
+                <ColorPicker
+                  value={menuBackgroundColor}
+                  defaultValue="linear-gradient(to right, #ffffff, #dfe6e9)"
+                  onChange={(color) =>
+                    setMenuBackgroundColor(color.toHexString())
+                  }
+                />
+              </div>
+              <div className="categoryTitleColor">
+                <p>Category Title Color</p>
+                <ColorPicker
+                  defaultValue="linear-gradient(to top, #dfe6e9, #d6e2eb)"
+                  value={categoryTitleBackgroundColor}
+                  onChange={(color) =>
+                    setCategoryTitleBackgroundColor(color.toHexString())
+                  }
+                />
+              </div>
+              <div className="menuBackgorundColor">
+                <p>Category Title Text Color</p>
+                <ColorPicker
+                  defaultValue="#c8d0db"
+                  value={categoryTextColor}
+                  onChange={(color) =>
+                    setCategoryTextColor(color.toHexString())
+                  }
+                />
+              </div>
+              <div className="menuBackgorundColor">
+                <p>Header Title Text Color</p>
+                <ColorPicker
+                  defaultValue="#c8d0db"
+                  value={headerTextColor}
+                  onChange={(color) => setHeaderTextColor(color.toHexString())}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </Modal>
     </div>
   );
