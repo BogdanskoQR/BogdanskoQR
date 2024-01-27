@@ -154,6 +154,8 @@ body {
 
 .coctelCategoryPrices p {
   text-align: left;
+  font-size: 16px;
+  font-weight: 900;
 }
 
 .coffeeImage img {
