@@ -36,7 +36,7 @@
   margin-top: 10px;
 }
 .coffeeImage img {
-  width: 390px;
+  width: 100%;
   position: absolute;
   height: 200px;
   z-index: 0;
