@@ -23,14 +23,12 @@
   margin-top: 30px;
   width: 200px;
   height: 110px;
-  background-color: #ecf0f1;
-  color: black;
+  color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
     border-top-left-radius: 30px;
   border-top-right-radius: 30px;
-  opacity: 0.65;
   margin-top: 50px;
 }
 .menuItemHeadingName h2 {
@@ -61,6 +59,7 @@
   color: #93ac93;
   padding: 10px;
   margin-bottom: 70px;
+  /* align-items: center; */
 }
 
 .oneMenuTableCategory h3 {
@@ -101,7 +100,8 @@
 .coctelCategoryPrices{
   display: flex;
   flex-direction: column;
-  align-items: centar;
+  align-items: center;
+
 }
 .categoryDetails p {
   font-size: 12px;
@@ -143,4 +143,13 @@
   height: 230px;
   z-index: 0;
   object-fit: cover;
+}
+
+.coctailImage{
+  width: 230px;
+  border-radius: 12px;
+}
+
+.coctelCategoryPrices h3 {
+  padding: 8px;
 }
