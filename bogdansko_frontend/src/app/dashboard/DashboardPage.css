@@ -20,6 +20,8 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   margin: 10px;
   width: 300px;
+  height: 100%;
+
 }
 
 .category h2 {
@@ -221,4 +223,20 @@ body {
 .ant-modal-body {
   max-height: 87vh;
 }
+.createProductSelect{
+  width: 460px;
+  @media screen and (max-width: 600px) {
+    width: 290px;
+  }
+}
 
+.addButtons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+.addButtons button{
+  margin-left: 5px;
+}

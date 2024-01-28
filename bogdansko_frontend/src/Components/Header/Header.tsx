@@ -1,10 +1,10 @@
 import React from 'react';
 import './Header.css';
-
+import { companyDetails } from '@/data/drinksData';
 const Header = () => {
   return (
     <div className='headerWrapper'>
-      <div className='title'>Maxim Caffee</div>
+      <div className='title'>{companyDetails.name}</div>
     </div>
   );
 };

@@ -209,6 +209,7 @@ export default function Page({}: Props) {
 
   return (
     <div className="menuPageWrapper">
+      <div className="addButtons">
       <Button type="primary" onClick={() => openModal("category")}>
         Add new Category
       </Button>
@@ -219,6 +220,8 @@ export default function Page({}: Props) {
       <Button type="primary" onClick={() => openModal("editMenu")}>
         Edit Menu
       </Button>
+      </div>
+
       <div className="drinksCategoryWrapper">
         {contextHolder}
         {categories.map((category) => (
@@ -395,7 +398,7 @@ export default function Page({}: Props) {
                 <label>Drink Category:</label>
                 <br />
                 <Select
-                  style={{ width: "460px" }}
+                  className="createProductSelect"
                   options={categories.map((oneCategory) => ({
                     value: oneCategory.id,
                     label: oneCategory.name,

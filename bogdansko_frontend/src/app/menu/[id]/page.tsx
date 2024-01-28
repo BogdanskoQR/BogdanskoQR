@@ -41,7 +41,7 @@ export default function Page({ params }:any) {
             isCocktailsCategory ? "cocktailsCategory" : ""
           }`}
         >
-          <h3 style={{color: 'black', textAlign: 'center', marginBottom: '15px', fontWeight: '600'}}>{selectedCategory.name}</h3>
+          <h3 style={{color: 'black', textAlign: 'center', marginBottom: '0px', fontWeight: '600'}}>{selectedCategory.name}</h3>
           {selectedCategory.drinks.map((oneDrink) => (
             <div key={oneDrink.name} className={`categoryDetailsTableDrinks ${oneDrink.img ? "coctails" : ''}`}>
               {oneDrink.img  ? (

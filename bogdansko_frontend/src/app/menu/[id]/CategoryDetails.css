@@ -16,9 +16,11 @@ body {
 }
 
 .backButton {
-  padding: 10px;
-  display: none;
+  position: absolute;
+  z-index: 99;
+  left: 10px;
 }
+
 
 .backButton svg {
   fill: white;
@@ -120,13 +122,13 @@ body {
   margin-top: 5px;
   font-size: 1.2rem;
   color: black;
+  font-weight: 600;
 }
 
 .coctailCategory {
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .coctelCategoryPrices {
@@ -167,7 +169,7 @@ body {
 }
 
 .coctailImage {
-  min-width: 300px;
+  width: 300px;
   height: 200px;
   border-radius: 12px;
   object-fit: cover;
