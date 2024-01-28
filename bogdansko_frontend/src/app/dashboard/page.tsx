@@ -3,15 +3,12 @@ import drinksData, { companyDetails } from "../../data/drinksData";
 import { useState } from "react";
 import "./DashboardPage.css";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, notification, Modal, Input, Select } from "antd";
+import { Button, notification, Modal, Input, Select,message, Popconfirm  } from "antd";
 import { FieldArray, Form, Formik, FormikHelpers } from "formik";
 import { UploadOutlined } from "@ant-design/icons";
-import type { UploadProps } from "antd";
-import { Upload } from "antd";
-import { message, Popconfirm } from "antd";
-import { Image } from 'antd';
 
 import { ColorPicker } from "antd";
+import { useEdgeStore } from "../lib/edgestore";
 
 type NotificationType = "success" | "info" | "warning" | "error";
 
@@ -27,10 +24,6 @@ interface Category {
   drinks: Drink[];
 }
 
-interface FormValues {
-  categoryName: string;
-  drinks: Drink[];
-}
 
 interface DrinkFormValues {
   drinkName: string;
@@ -42,28 +35,23 @@ interface FormCategoryValues {
   drinks: Drink[];
 }
 
-interface FormProductValues {
-  categoryName: number;
-  drinkName: string;
-  drinkPrice: number;
-}
-
 interface Props {}
 
 export default function Page({}: Props) {
   const [categories, setCategories] = useState<Category[]>(drinksData);
   const [editedDrink, setEditedDrink] = useState<Drink | null>(null);
   const [editDrinkPrice, setEditDrinkPrice] = useState<string>("");
+  const [headerImgFile, setHeaderImgFile] = useState<File>();
+  const [productImgFile, setProductImgFile] = useState<File>();
+  const [categoryImgFIle, setCategoryImgFile] = useState<File>();
   const [editDrinkName, setEditDrinkName] = useState<string>("");
   const [selectedNewDrink, setSelectedNewDrink] = useState<Drink>();
-  const [currentCategory, setCurrentCategory] = useState<number | null>(null);
   const [api, contextHolder] = notification.useNotification();
   const [isCreateCategoryModalOpen, setIsCreateCategoryModalOpen] =
     useState<boolean>(false);
   const [isCreateDrinkModalOpen, setIsCreateDrinkModalOpen] =
     useState<boolean>(false);
   const [isEditMenuModalOpen, setIsEditMenuModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [menuBackgroundColor, setMenuBackgroundColor] = useState(
     companyDetails.menuThemeColor
   );
@@ -75,8 +63,20 @@ export default function Page({}: Props) {
   const [headerTextColor, setHeaderTextColor] = useState(
     companyDetails.headerTextColor
   );
-  const [headerImage, setHeaderImage] = useState<File | null | undefined>(null);
+  const [headerImgUrl, setHeaderImgUrl] = useState<{
+    url: string;
+    thumbmailUrl: string | null;
+  }>();
+  const [productImgUrl, setProductImgUrl] = useState<{
+    url: string;
+    thumbmailUrl: string | null;
+  }>();
+  const [categoryImgUrl, setCategoryUrlImg] = useState<{
+    url: string;
+    thumbmailUrl: string | null;
+  }>();
 
+  const { edgestore } = useEdgeStore();
   const openNotificationWithIcon = (
     type: NotificationType,
     point: string,
@@ -94,33 +94,6 @@ export default function Page({}: Props) {
       message: successMessages[point],
       description: successMessages[point],
     });
-  };
-
-  const categoryUploadProps: UploadProps = {
-    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
-    listType: "picture",
-    beforeUpload(file) {
-      setHeaderImage(file);
-      return false;
-    },
-  };
-
-  const menuUploadProps: UploadProps = {
-    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
-    listType: "picture",
-    beforeUpload(file) {
-      setHeaderImage(file);
-      return false;
-    },
-  };
-
-  const productUploadProps: UploadProps = {
-    action: "https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188",
-    listType: "picture",
-    beforeUpload(file) {
-      setSelectedImage(file);
-      return false;
-    },
   };
 
   const openModal = (modalType: "category" | "drink" | "editMenu"): void => {
@@ -141,17 +114,6 @@ export default function Page({}: Props) {
     } else if (modalType === "editMenu") {
       setIsEditMenuModalOpen(false);
     }
-  };
-
-  const handleAddDrink = (): void => {
-    console.log(
-      "Add Drink:",
-      selectedNewDrink,
-      "to Category:",
-      currentCategory
-    );
-    // openNotificationWithIcon("success", `drink with name ${selectedNewDrink?.name} into ${currentCategory}`);
-    closeModal("drink");
   };
 
   const handleEditDrink = (drink: Drink): void => {
@@ -183,11 +145,6 @@ export default function Page({}: Props) {
     console.log("Remove Drink:", drink, "category", category);
   };
 
-  const handleStartAddingNewDrink = (categoryId: number): void => {
-    setCurrentCategory(categoryId);
-    openModal("drink");
-  };
-
   const handleAddMoreDrinks = (
     formikArrayHelpers: FormikHelpers<FormCategoryValues["drinks"]>
   ): void => {
@@ -206,20 +163,19 @@ export default function Page({}: Props) {
   const cancel = () => {
     message.error("Click on No");
   };
-
   return (
     <div className="menuPageWrapper">
       <div className="addButtons">
-      <Button type="primary" onClick={() => openModal("category")}>
-        Add new Category
-      </Button>
+        <Button type="primary" onClick={() => openModal("category")}>
+          Add new Category
+        </Button>
 
-      <Button type="primary" onClick={() => openModal("drink")}>
-        Add new product
-      </Button>
-      <Button type="primary" onClick={() => openModal("editMenu")}>
-        Edit Menu
-      </Button>
+        <Button type="primary" onClick={() => openModal("drink")}>
+          Add new product
+        </Button>
+        <Button type="primary" onClick={() => openModal("editMenu")}>
+          Edit Menu
+        </Button>
       </div>
 
       <div className="drinksCategoryWrapper">
@@ -300,17 +256,18 @@ export default function Page({}: Props) {
         onCancel={() => closeModal("category")}
       >
         <Formik
-          initialValues={{ categoryName: "", drinks: [{ name: "", price: 0 }] }}
+          initialValues={{
+            categoryName: "",
+            drinks: [{ name: "", price: 0 }],
+          }}
           onSubmit={(values, { resetForm }) => {
-            console.log("Form values:", values);
-            console.log("Selected Image:", selectedImage);
+            console.log("Form values:", values, "category img", categoryImgUrl);
             openNotificationWithIcon(
               "success",
               "create",
               `category with name ${values.categoryName}`
             );
             resetForm();
-            setSelectedImage(null);
           }}
         >
           {({ values, handleSubmit }) => (
@@ -361,13 +318,31 @@ export default function Page({}: Props) {
                 />
               </div>
               <div className="createCategoryField">
-                <p>Category Image:</p>
-                <Upload {...categoryUploadProps}>
-                  <Button icon={<UploadOutlined />}>Upload</Button>
-                </Upload>
+                <input
+                  type="file"
+                  onChange={(e) => {
+                    setCategoryImgFile(e.target.files?.[0]);
+                  }}
+                />
+                <Button
+                  icon={<UploadOutlined />}
+                  onClick={async () => {
+                    if (categoryImgFIle) {
+                      const res = await edgestore.myPublicImages.upload({
+                        file: categoryImgFIle,
+                      });
+                      setCategoryUrlImg({
+                        url: res.url,
+                        thumbmailUrl: res.thumbnailUrl,
+                      });
+                    }
+                  }}
+                >
+                  Upload
+                </Button>
               </div>
 
-              {/* <Button htmlType="submit">Add more drinks</Button> */}
+              <Button htmlType="submit">Add more drinks</Button>
             </Form>
           )}
         </Formik>
@@ -376,20 +351,23 @@ export default function Page({}: Props) {
       <Modal
         title="Create Product"
         open={isCreateDrinkModalOpen}
-        onOk={handleAddDrink}
+        onOk={() => setIsCreateDrinkModalOpen(false)}
         onCancel={() => closeModal("drink")}
       >
         <Formik
-          initialValues={{ categoryName: 0, drinkName: "", drinkPrice: 0 }}
+          initialValues={{
+            categoryName: 0,
+            drinkName: "",
+            drinkPrice: 0,
+            productImage: productImgUrl,
+          }}
           onSubmit={(values) => {
             console.log("Add Drink Form values:", values);
-            console.log("Selected Image:", selectedImage);
             openNotificationWithIcon(
               "success",
               "create",
               `product with name ${values.drinkName}`
             );
-            setSelectedImage(null);
           }}
         >
           {({ values, handleChange, handleSubmit }) => (
@@ -432,12 +410,32 @@ export default function Page({}: Props) {
               <div className="createProductField">
                 <label htmlFor="drinkPrice">Product Photo(optional):</label>
                 <br />
-                <Upload {...productUploadProps}>
-                  <Button icon={<UploadOutlined />}>Upload</Button>
-                </Upload>
+                <input
+                  type="file"
+                  onChange={(e) => {
+                    setProductImgFile(e.target.files?.[0]);
+                  }}
+                />
+                <Button
+                  icon={<UploadOutlined />}
+                  onClick={async () => {
+                    if (productImgFile) {
+                      const res = await edgestore.myPublicImages.upload({
+                        file: productImgFile,
+                      });
+                      setProductImgUrl({
+                        url: res.url,
+                        thumbmailUrl: res.thumbnailUrl,
+                      });
+                      // we can save to database here
+                    }
+                  }}
+                >
+                  Upload
+                </Button>
               </div>
 
-              {/* <Button htmlType="submit">Add Drink</Button> */}
+              <Button htmlType="submit">Add Drink</Button>
             </Form>
           )}
         </Formik>
@@ -464,8 +462,8 @@ export default function Page({}: Props) {
               <div className="coffeeImage">
                 <img
                   src={
-                    headerImage
-                      ? URL.createObjectURL(headerImage)
+                    headerImgUrl?.url
+                      ? headerImgUrl.url
                       : companyDetails.headerImage
                   }
                   alt="companyImage"
@@ -501,16 +499,29 @@ export default function Page({}: Props) {
             <div className="editSettingWrapper">
               <div className="menuBackgorundColor">
                 <p>Change Header Picture</p>
-                <Upload
-                  {...menuUploadProps}
-                  onChange={(info) => {
-                    if (info.file.status === "done") {
-                      setHeaderImage(info.file.originFileObj);
+                <input
+                  type="file"
+                  onChange={(e) => {
+                    setHeaderImgFile(e.target.files?.[0]);
+                  }}
+                />
+                <Button
+                  icon={<UploadOutlined />}
+                  onClick={async () => {
+                    if (headerImgFile) {
+                      const res = await edgestore.myPublicImages.upload({
+                        file: headerImgFile,
+                      });
+                      setHeaderImgUrl({
+                        url: res.url,
+                        thumbmailUrl: res.thumbnailUrl,
+                      });
+                      // we can save to database here
                     }
                   }}
                 >
-                  <Button icon={<UploadOutlined />}>Upload</Button>
-                </Upload>
+                  Upload
+                </Button>
               </div>
               <div className="menuBackgorundColor">
                 <p>Menu Background Color</p>
