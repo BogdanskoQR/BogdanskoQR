@@ -3,7 +3,15 @@ import drinksData, { companyDetails } from "../../data/drinksData";
 import { useState } from "react";
 import "./DashboardPage.css";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, notification, Modal, Input, Select,message, Popconfirm  } from "antd";
+import {
+  Button,
+  notification,
+  Modal,
+  Input,
+  Select,
+  message,
+  Popconfirm,
+} from "antd";
 import { FieldArray, Form, Formik, FormikHelpers } from "formik";
 import { UploadOutlined } from "@ant-design/icons";
 
@@ -22,12 +30,6 @@ interface Category {
   id: number;
   name: string;
   drinks: Drink[];
-}
-
-
-interface DrinkFormValues {
-  drinkName: string;
-  drinkPrice: number;
 }
 
 interface FormCategoryValues {
