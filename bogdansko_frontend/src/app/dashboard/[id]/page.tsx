@@ -1,5 +1,5 @@
 "use client";
-import drinksData, { companyDetails } from "../../../data/drinksData";
+import { companyDetails } from "../../../data/drinksData";
 import { useState } from "react";
 import "./DashboardPage.css";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
@@ -30,6 +30,7 @@ interface Drink {
 interface Category {
   id: number;
   name: string;
+  img: string;
   drinks: Drink[];
 }
 
@@ -41,20 +42,27 @@ interface FormCategoryValues {
 interface Props {}
 
 export default function Page({ params }: any) {
-  const company = companyDetails.find((company) => company.id === Number(params.id));
-  const categories = company?.menu
+  const company = companyDetails.find(
+    (company) => company.id === Number(params.id)
+  );
+  const categories = company?.menu;
   const [editedDrink, setEditedDrink] = useState<Drink | null>(null);
   const [editDrinkPrice, setEditDrinkPrice] = useState<string>("");
   const [headerImgFile, setHeaderImgFile] = useState<File>();
   const [productImgFile, setProductImgFile] = useState<File>();
+  const [editProductImgFile, setEditProductImgFile] = useState<File>();
   const [categoryImgFIle, setCategoryImgFile] = useState<File>();
   const [editDrinkName, setEditDrinkName] = useState<string>("");
+  const [editProductImage, setEditProductImage] = useState<
+    string | undefined
+  >();
   const [selectedNewDrink, setSelectedNewDrink] = useState<Drink>();
   const [api, contextHolder] = notification.useNotification();
   const [isCreateCategoryModalOpen, setIsCreateCategoryModalOpen] =
     useState<boolean>(false);
   const [isCreateDrinkModalOpen, setIsCreateDrinkModalOpen] =
     useState<boolean>(false);
+  const [isEditProductModalShown, setIsEditProductModalShown] = useState(false);
   const [isEditMenuModalOpen, setIsEditMenuModalOpen] = useState(false);
   const [menuBackgroundColor, setMenuBackgroundColor] = useState(
     company?.menuThemeColor
@@ -75,11 +83,15 @@ export default function Page({ params }: any) {
     url: string;
     thumbmailUrl: string | null;
   }>();
+  const [editProductImgUrl, setEditProductImgUrl] = useState<{
+    url: string;
+    thumbmailUrl: string | null;
+  }>();
   const [categoryImgUrl, setCategoryUrlImg] = useState<{
     url: string;
     thumbmailUrl: string | null;
   }>();
-  const router = useRouter()
+  const router = useRouter();
 
   const { edgestore } = useEdgeStore();
   const openNotificationWithIcon = (
@@ -121,10 +133,11 @@ export default function Page({ params }: any) {
     }
   };
 
-  const handleEditDrink = (drink: Drink): void => {
+  const handleEditDrink = (drink: any): void => {
     setEditedDrink(drink);
     setEditDrinkName(drink.name);
     setEditDrinkPrice(drink.price.toFixed(2));
+    setEditProductImage(drink?.img);
   };
 
   const handleUpdateDrink = (): void => {
@@ -170,8 +183,8 @@ export default function Page({ params }: any) {
   };
 
   const onLogoutButton = () => {
-    router.push('/login')
-  }
+    router.push("/login");
+  };
   return (
     <div className="menuPageWrapper">
       <Header companyName={company?.name} onLogout={onLogoutButton} />
@@ -212,45 +225,28 @@ export default function Page({ params }: any) {
             <ul className="drinksWrapper">
               {category.drinks.map((drink) => (
                 <li key={drink.id} className="drink">
-                  {editedDrink && editedDrink.id === drink.id ? (
-                    <div className="editDrinkWrapper">
-                      <Input
-                        type="text"
-                        className="editDrinkNameInput"
-                        placeholder="Edit Drink Name"
-                        value={editDrinkName}
-                        onChange={(e) => setEditDrinkName(e.target.value)}
+                  <>
+                    {drink.name} - ${drink.price.toFixed(2)}
+                    <div className="drinkButtons">
+                      <EditOutlined
+                        style={{ padding: "7px" }}
+                        onClick={() => {
+                          handleEditDrink(drink);
+                          setIsEditProductModalShown(true);
+                        }}
                       />
-                      <Input
-                        type="number"
-                        className="newPriceInput"
-                        placeholder="Edit Drink Price"
-                        value={editDrinkPrice}
-                        onChange={(e) => setEditDrinkPrice(e.target.value)}
-                      />
-                      <Button onClick={handleUpdateDrink}>Save</Button>
+                      <Popconfirm
+                        title="Delete Product"
+                        description="Are you sure to delete product?"
+                        onConfirm={() => handleRemoveDrink(drink, category)}
+                        onCancel={cancel}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <DeleteOutlined style={{ padding: "7px" }} />
+                      </Popconfirm>
                     </div>
-                  ) : (
-                    <>
-                      {drink.name} - ${drink.price.toFixed(2)}
-                      <div className="drinkButtons">
-                        <EditOutlined
-                          style={{ padding: "7px" }}
-                          onClick={() => handleEditDrink(drink)}
-                        />
-                        <Popconfirm
-                          title="Delete Product"
-                          description="Are you sure to delete product?"
-                          onConfirm={() => handleRemoveDrink(drink, category)}
-                          onCancel={cancel}
-                          okText="Yes"
-                          cancelText="No"
-                        >
-                          <DeleteOutlined style={{ padding: "7px" }} />
-                        </Popconfirm>
-                      </div>
-                    </>
-                  )}
+                  </>
                 </li>
               ))}
             </ul>
@@ -487,7 +483,7 @@ export default function Page({ params }: any) {
                 className="categoriesWrapper"
                 style={{ background: menuBackgroundColor }}
               >
-                {drinksData.slice(0, 3).map((oneCategory) => (
+                {categories?.slice(0, 3).map((oneCategory: Category) => (
                   <div key={oneCategory.name} className="oneCategorieCart">
                     <div
                       className="categorieTitle"
@@ -572,6 +568,107 @@ export default function Page({ params }: any) {
             </div>
           </div>
         </div>
+      </Modal>
+
+      <Modal
+        title="Edit Product"
+        open={isEditProductModalShown}
+        onOk={() => {
+          setEditDrinkName("");
+          setEditDrinkPrice("");
+          setEditProductImage("");
+          setEditProductImgUrl(undefined);
+          setIsEditProductModalShown(false);
+          openNotificationWithIcon("success", "update", editDrinkName);
+
+          
+        }}
+        onCancel={() => {
+          setEditDrinkName("");
+          setEditDrinkPrice("");
+          setEditProductImage("");
+          setEditProductImgUrl(undefined);
+          setIsEditProductModalShown(false);
+        }}
+      >
+        <Formik
+          initialValues={{
+            drinkName: editDrinkName,
+            drinkPrice: editDrinkPrice,
+            productImage: editProductImage,
+          }}
+          onSubmit={(values) => {
+            console.log("edit Drink Form values:", values);
+            openNotificationWithIcon(
+              "success",
+              "create",
+              `product with name ${values.drinkName}`
+            );
+          }}
+        >
+          {({ values, handleChange, handleSubmit }) => (
+            <Form onSubmit={handleSubmit}>
+              <div className="createProductField">
+                <label>Drink Name:</label>
+                <Input
+                  className="createProductSelect"
+                  value={editDrinkName}
+                  onChange={(e) => {
+                    setEditDrinkName(e.target.value);
+                  }}
+                />
+              </div>
+
+              <br />
+              <div className="createProductField">
+                <label htmlFor="drinkName">Drink Price:</label>
+                <Input
+                  type="number"
+                  value={editDrinkPrice}
+                  onChange={(e) => setEditDrinkPrice(e.target.value)}
+                />
+              </div>
+              <div className="createProductField">
+                <label htmlFor="drinkPrice">Drink Image:</label>
+                <img
+                  src={
+                    editProductImgUrl ? editProductImgUrl.url : editProductImage
+                  }
+                  alt=""
+                />
+                <label htmlFor="drinkPrice">
+                  Edit product photo(optional):
+                </label>
+                <Input
+                  type="file"
+                  onChange={(e) => setEditProductImgFile(e.target.files?.[0])}
+                  style={{ marginBottom: "10px" }}
+                />
+              </div>
+              <div className="createProductField">
+                <Button
+                  icon={<UploadOutlined />}
+                  onClick={async () => {
+                    if (editProductImgFile) {
+                      const res = await edgestore.myPublicImages.upload({
+                        file: editProductImgFile,
+                      });
+                      setEditProductImgUrl({
+                        url: res.url,
+                        thumbmailUrl: res.thumbnailUrl,
+                      });
+                      // we can save to database here
+                    }
+                  }}
+                >
+                  Upload
+                </Button>
+              </div>
+
+              {/* <Button htmlType="submit">Add Drink</Button> */}
+            </Form>
+          )}
+        </Formik>
       </Modal>
     </div>
   );

@@ -240,3 +240,17 @@ body {
 .addButtons button{
   margin-left: 5px;
 }
+
+.createProductField img{
+  width: 200px;
+  height: 200px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+}
+
+.createProductField{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1px;
+}

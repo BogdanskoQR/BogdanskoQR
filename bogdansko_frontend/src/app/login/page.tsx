@@ -3,10 +3,10 @@ import { useRouter } from "next/navigation";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { notification } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import "./LoginPage.css";
+import { companyDetails } from "@/data/drinksData";
 
-// Define form validation schemas
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
   password: Yup.string().required("Required").min(2).max(50),
@@ -18,7 +18,6 @@ const registerSchema = Yup.object().shape({
   password: Yup.string().required("Required").min(2).max(50),
 });
 
-// Define form initial values interfaces
 interface LoginFormValues {
   email: string;
   password: string;
@@ -32,19 +31,28 @@ interface RegisterFormValues {
 
 export default function Page() {
   const router = useRouter();
-
   const handleLoginSubmit = (values: LoginFormValues) => {
     console.log("Login form values:", values);
+    const loggedInCompany = companyDetails.find((company)=> company.email === values.email && company.password === values.password)
+    if(loggedInCompany){
+    router.push(`/dashboard/${loggedInCompany.id}`);
     notification.success({
       message: "Login Successful",
       description: "You have successfully logged in.",
     });
-    router.push("/dashboard");
+    } else {
+      notification.error({
+        message: "Invalid Credentials",
+        description: "Please enter correct email and password.",
+      });
+    }
+    console.log(loggedInCompany)
   };
 
   const handleSignUpSubmit = (values: RegisterFormValues) => {
     console.log("Sign up form values:", values);
   };
+
 
   return (
     <div className="mainWrapper">

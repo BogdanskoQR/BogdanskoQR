@@ -1,8 +1,9 @@
 .mainWrapper {
-  min-height: 84vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: linear-gradient(to right, #ff6b6b, #6b83ff);
 }
 
 .main {
