@@ -1,5 +1,5 @@
 "use client";
-import drinksData, { companyDetails } from "../../data/drinksData";
+import drinksData, { companyDetails } from "../../../data/drinksData";
 import { useState } from "react";
 import "./DashboardPage.css";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
@@ -14,9 +14,10 @@ import {
 } from "antd";
 import { FieldArray, Form, Formik, FormikHelpers } from "formik";
 import { UploadOutlined } from "@ant-design/icons";
-
 import { ColorPicker } from "antd";
-import { useEdgeStore } from "../lib/edgestore";
+import { useEdgeStore } from "../../lib/edgestore";
+import Header from "@/Components/Header/Header";
+import { useRouter } from "next/navigation";
 
 type NotificationType = "success" | "info" | "warning" | "error";
 
@@ -39,8 +40,9 @@ interface FormCategoryValues {
 
 interface Props {}
 
-export default function Page({}: Props) {
-  const [categories, setCategories] = useState<Category[]>(drinksData);
+export default function Page({ params }: any) {
+  const company = companyDetails.find((company) => company.id === Number(params.id));
+  const categories = company?.menu
   const [editedDrink, setEditedDrink] = useState<Drink | null>(null);
   const [editDrinkPrice, setEditDrinkPrice] = useState<string>("");
   const [headerImgFile, setHeaderImgFile] = useState<File>();
@@ -55,15 +57,15 @@ export default function Page({}: Props) {
     useState<boolean>(false);
   const [isEditMenuModalOpen, setIsEditMenuModalOpen] = useState(false);
   const [menuBackgroundColor, setMenuBackgroundColor] = useState(
-    companyDetails.menuThemeColor
+    company?.menuThemeColor
   );
   const [categoryTitleBackgroundColor, setCategoryTitleBackgroundColor] =
-    useState(companyDetails.categoryTitleColor);
+    useState(company?.categoryTitleColor);
   const [categoryTextColor, setCategoryTextColor] = useState(
-    companyDetails.categoryTextTitleColor
+    company?.categoryTextTitleColor
   );
   const [headerTextColor, setHeaderTextColor] = useState(
-    companyDetails.headerTextColor
+    company?.headerTextColor
   );
   const [headerImgUrl, setHeaderImgUrl] = useState<{
     url: string;
@@ -77,6 +79,7 @@ export default function Page({}: Props) {
     url: string;
     thumbmailUrl: string | null;
   }>();
+  const router = useRouter()
 
   const { edgestore } = useEdgeStore();
   const openNotificationWithIcon = (
@@ -165,8 +168,13 @@ export default function Page({}: Props) {
   const cancel = () => {
     message.error("Click on No");
   };
+
+  const onLogoutButton = () => {
+    router.push('/login')
+  }
   return (
     <div className="menuPageWrapper">
+      <Header companyName={company?.name} onLogout={onLogoutButton} />
       <div className="addButtons">
         <Button type="primary" onClick={() => openModal("category")}>
           Add new Category
@@ -182,7 +190,7 @@ export default function Page({}: Props) {
 
       <div className="drinksCategoryWrapper">
         {contextHolder}
-        {categories.map((category) => (
+        {categories?.map((category) => (
           <div key={category.id} className="category">
             <div className="deleteCategory">
               <Popconfirm
@@ -379,7 +387,7 @@ export default function Page({}: Props) {
                 <br />
                 <Select
                   className="createProductSelect"
-                  options={categories.map((oneCategory) => ({
+                  options={categories?.map((oneCategory) => ({
                     value: oneCategory.id,
                     label: oneCategory.name,
                   }))}
@@ -464,9 +472,7 @@ export default function Page({}: Props) {
               <div className="coffeeImage">
                 <img
                   src={
-                    headerImgUrl?.url
-                      ? headerImgUrl.url
-                      : companyDetails.headerImage
+                    headerImgUrl?.url ? headerImgUrl.url : company?.headerImage
                   }
                   alt="companyImage"
                 />
