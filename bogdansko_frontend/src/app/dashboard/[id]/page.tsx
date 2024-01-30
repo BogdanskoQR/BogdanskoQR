@@ -1,6 +1,6 @@
 "use client";
 import { companyDetails } from "../../../data/drinksData";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import "./DashboardPage.css";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import {

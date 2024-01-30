@@ -211,6 +211,11 @@ body {
   justify-content: space-between;
 }
 
+.deleteCategory button {
+  max-width: 45px;
+  margin: 5px;
+}
+
 .createProductField {
   padding: 5px;
 }
@@ -239,7 +244,8 @@ body {
 
 .addButtons button{
   margin-left: 5px;
-  max-width: 150px;
+  max-width: 140px;
+  margin: 10px !important;
 }
 
 .createProductField img{
