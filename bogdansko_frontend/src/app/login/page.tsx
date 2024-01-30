@@ -3,7 +3,6 @@ import { useRouter } from "next/navigation";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { notification } from "antd";
-import React, { useState } from "react";
 import "./LoginPage.css";
 import { companyDetails } from "@/data/drinksData";
 
