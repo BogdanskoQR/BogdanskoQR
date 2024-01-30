@@ -49,7 +49,6 @@ export default function Page({ params }: any) {
   useEffect(() => {
     if (!sessionStorage.getItem('hasReloaded')) {
       location.reload();
-
       sessionStorage.setItem('hasReloaded', 'true');
     }
   }, []);
@@ -191,6 +190,7 @@ export default function Page({ params }: any) {
   };
 
   const onLogoutButton = () => {
+    sessionStorage.clear()
     router.push("/login");
   };
   return (
