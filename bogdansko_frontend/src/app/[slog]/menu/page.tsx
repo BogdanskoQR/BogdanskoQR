@@ -1,6 +1,5 @@
 "use client";
 import "./MenuPage.css";
-import drinksData from "../../../data/drinksData";
 import { companyDetails } from "../../../data/drinksData";
 import { useRouter } from "next/navigation";
 

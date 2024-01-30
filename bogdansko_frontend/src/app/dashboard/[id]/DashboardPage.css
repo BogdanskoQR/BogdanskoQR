@@ -239,6 +239,7 @@ body {
 
 .addButtons button{
   margin-left: 5px;
+  max-width: 150px;
 }
 
 .createProductField img{

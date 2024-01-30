@@ -1,6 +1,6 @@
 "use client";
 import { companyDetails } from "../../../data/drinksData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./DashboardPage.css";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import {
@@ -42,6 +42,7 @@ interface FormCategoryValues {
 interface Props {}
 
 export default function Page({ params }: any) {
+
   const company = companyDetails.find(
     (company) => company.id === Number(params.id)
   );
