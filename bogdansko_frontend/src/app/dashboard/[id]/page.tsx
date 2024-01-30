@@ -1,6 +1,6 @@
 "use client";
 import { companyDetails } from "../../../data/drinksData";
-import {  useState } from "react";
+import {  useCallback, useEffect, useState } from "react";
 import "./DashboardPage.css";
 import { EditOutlined, DeleteOutlined, PlusOutlined } from "@ant-design/icons";
 import {
@@ -46,6 +46,13 @@ export default function Page({ params }: any) {
   const company = companyDetails.find(
     (company) => company.id === Number(params.id)
   );
+  useEffect(() => {
+    if (!sessionStorage.getItem('hasReloaded')) {
+      location.reload();
+
+      sessionStorage.setItem('hasReloaded', 'true');
+    }
+  }, []);
   const categories = company?.menu;
   const [editedDrink, setEditedDrink] = useState<Drink | null>(null);
   const [editDrinkPrice, setEditDrinkPrice] = useState<string>("");
