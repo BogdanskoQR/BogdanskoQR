@@ -48,7 +48,7 @@ export default function Page({ params }: any) {
   );
   useEffect(() => {
     if (!sessionStorage.getItem('hasReloaded')) {
-      location.reload();
+      router.refresh();
       sessionStorage.setItem('hasReloaded', 'true');
     }
   }, []);
