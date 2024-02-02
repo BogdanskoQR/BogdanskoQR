@@ -19,7 +19,7 @@ interface EditMenuModalProps {
     | undefined;
   company?: { headerImage: string };
   headerTextColor: string | undefined;
-  categories?: Category[];
+  categories?: any[];
   setHeaderImgFile: (file: File | undefined) => void;
   headerImgFile?: File | null;
   setHeaderImgUrl: (url: { url: string; thumbmailUrl: string }) => void;

@@ -1,6 +1,6 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Modal, Form, Select, Input, Button } from "antd";
-import { Formik } from "formik";
+import { Modal,Select, Input, Button } from "antd";
+import { Formik,Form } from "formik";
 import React from "react";
 import { Category, Drink } from "../Types/types";
 import { NotificationType } from "@/app/dashboard/[id]/page";

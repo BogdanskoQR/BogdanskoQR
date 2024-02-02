@@ -4,7 +4,6 @@ import "./CategoryDetails.css";
 import { useRouter } from "next/navigation";
 import { companyDetails } from "../../../../data/drinksData";
 import { Divider } from "antd";
-import { useEffect } from "react";
 export default function Page({ params }: any) {
 
   const company = companyDetails.find(

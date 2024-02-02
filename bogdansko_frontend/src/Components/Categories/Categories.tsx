@@ -32,10 +32,10 @@ const Categories = ({
   handleEditDrink,
   setIsEditProductModalShown,
   handleRemoveDrink
-}) => {
+}:any) => {
   return (
     <>
-      {categories?.map((category) => (
+      {categories?.map((category:Category) => (
         <div key={category.id} className="category">
           <div className="deleteCategory">
             <Popconfirm
@@ -62,7 +62,7 @@ const Categories = ({
           </div>
 
           <ul className="drinksWrapper">
-            {category.drinks.map((drink) => (
+            {category.drinks.map((drink: Drink) => (
               <li key={drink.id} className="drink">
                 <>
                   {drink.name} - ${drink.price.toFixed(2)}

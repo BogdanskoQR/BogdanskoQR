@@ -1,7 +1,7 @@
 import { NotificationType } from "@/app/dashboard/[id]/page";
 import { UploadOutlined } from "@ant-design/icons";
-import { Modal, Form, Input, Button } from "antd";
-import { Formik } from "formik";
+import { Modal, Input, Button } from "antd";
+import { Formik, Form } from "formik";
 import React from "react";
 
 interface EditCategoryModalProps {
