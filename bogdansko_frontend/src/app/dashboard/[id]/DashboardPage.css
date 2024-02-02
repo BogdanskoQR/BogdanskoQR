@@ -224,7 +224,10 @@ body {
   padding: 10px;
   padding-left: 0;
 }
-
+.createCategoryField img {
+  width: 300px;
+  padding: 10px;
+}
 .ant-modal-body {
   max-height: 87vh;
 }
@@ -253,6 +256,7 @@ body {
   height: 200px;
   margin-bottom: 30px;
   border-radius: 12px;
+  object-fit: cover;
 }
 
 .createProductField{

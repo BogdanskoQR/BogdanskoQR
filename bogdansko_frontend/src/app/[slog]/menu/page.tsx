@@ -7,7 +7,7 @@ export default function Page({params}: any) {
   const router = useRouter();
   const company = companyDetails.find((company)=> company.name === params.slog)
   const redirectToCategory = (categoryId: number) => {
-    router.push(`/${company?.name}/menu/${categoryId}`);
+    router.push(`/${company?.name}/menu/${categoryId}`,);
   };
 
   return (

@@ -4,21 +4,13 @@ import "./CategoryDetails.css";
 import { useRouter } from "next/navigation";
 import { companyDetails } from "../../../../data/drinksData";
 import { Divider } from "antd";
-import { useRouter as pavic } from "next/router";
 import { useEffect } from "react";
 export default function Page({ params }: any) {
 
   const company = companyDetails.find(
     (company) => company.name === params.slog
   );
-
   const router = useRouter();
-  const router2 = pavic()
-
-    useEffect(()=> {
-      router2.reload()
-
-    },[])
   const selectedCategory = company?.menu.find(
     (category) => category.id === Number(params.id)
   );
