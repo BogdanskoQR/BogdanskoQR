@@ -179,7 +179,7 @@ export default function Page({ params }: any) {
   };
   return (
     <div className="menuPageWrapper">
-      <Header companyName={company?.name} onLogout={onLogoutButton} />
+      <Header companyName={company?.name} onLogout={onLogoutButton} logoUrl={company?.companyLogo} />
       <div className="addButtons">
         <Button type="primary" onClick={() => openModal("category")}>
           Add new Category

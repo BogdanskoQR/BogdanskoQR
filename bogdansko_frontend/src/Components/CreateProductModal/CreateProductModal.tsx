@@ -107,18 +107,16 @@ const CreateProductModal = ({
                 style={{ marginBottom: "10px" }}
               />
             </div>
-            <div className="createProductField">
+            <div className="createProductImageField">
               <label htmlFor="drinkPrice">Product Photo(optional):</label>
-              <br />
+              <div className="productModalImgInput">
               <input
+              className="createProductInput"
                 type="file"
                 onChange={(e) => {
                   setProductImgFile(e.target.files?.[0]);
                 }}
               />
-              {productImgUrl?.url ? (
-                <img src={productImgUrl?.url} alt="" />
-              ) : null}
               <Button
                 icon={<UploadOutlined />}
                 onClick={async () => {
@@ -136,9 +134,12 @@ const CreateProductModal = ({
               >
                 Upload
               </Button>
+              </div>     
             </div>
-
-            <Button htmlType="submit">Add Drink</Button>
+            {productImgUrl?.url ? (
+                <img className="createProductImg" src={productImgUrl?.url} alt="" />
+              ) : null}
+            {/* <Button htmlType="submit">Add Drink</Button> */}
           </Form>
         )}
       </Formik>

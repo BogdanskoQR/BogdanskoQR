@@ -108,7 +108,7 @@ const EditProductModal = ({
               <label htmlFor="drinkPrice">Drink Image:</label>
               <img
                 src={
-                  editProductImgUrl ? editProductImgUrl.url : editProductImage
+                  editProductImgUrl ? editProductImgUrl.url : editProductImage ? editProductImage : 'https://totalcomp.com/images/no-image.jpeg'
                 }
                 alt=""
               />

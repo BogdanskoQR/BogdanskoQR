@@ -97,15 +97,15 @@ const CreateCategoryModal = ({
                 )}
               />
             </div>
-            <div className="createCategoryField">
+            <div className="createCategoryFieldImage">
               <input
                 type="file"
                 onChange={(e) => {
                   setCategoryImgFile(e.target.files?.[0]);
                 }}
               />
-              <img src={categoryImgUrl?.url} alt="" />
               <Button
+                style={{marginLeft: '10px'}}
                 icon={<UploadOutlined />}
                 onClick={async () => {
                   if (categoryImgFIle) {
@@ -122,8 +122,9 @@ const CreateCategoryModal = ({
                 Upload
               </Button>
             </div>
+            <img className="createCategoryImg" src={categoryImgUrl?.url} alt="" />
 
-            <Button htmlType="submit">Add more drinks</Button>
+            {/* <Button htmlType="submit">Add more drinks</Button> */}
           </Form>
         )}
       </Formik>

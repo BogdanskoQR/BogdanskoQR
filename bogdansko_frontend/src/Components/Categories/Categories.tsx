@@ -1,11 +1,11 @@
-import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { Popconfirm, Button } from 'antd';
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
+import { Popconfirm, Button } from "antd";
 
 interface Drink {
   id: number;
   name: string;
   price: number;
-  img?: string
+  img?: string;
 }
 
 interface Category {
@@ -31,13 +31,13 @@ const Categories = ({
   handleEditCategory,
   handleEditDrink,
   setIsEditProductModalShown,
-  handleRemoveDrink
-}:any) => {
+  handleRemoveDrink,
+}: any) => {
   return (
     <>
-      {categories?.map((category:Category) => (
+       {categories?.map((category: Category) => (
         <div key={category.id} className="category">
-          <div className="deleteCategory">
+          <div className="categoryHeader">
             <Popconfirm
               title="Delete the Category"
               description="Are you sure to delete this category?"
@@ -50,46 +50,49 @@ const Categories = ({
                 <DeleteOutlined />
               </Button>
             </Popconfirm>
-            <Button
-              onClick={() => {
-                setIsEditCategoryModalOpen(true);
-                handleEditCategory(category);
-              }}
-            >
-              <EditOutlined />
-            </Button>
+            <div className="deleteCategoryButtons">
+              <Button
+                onClick={() => {
+                  setIsEditCategoryModalOpen(true);
+                  handleEditCategory(category);
+                }}
+              >
+                <EditOutlined />
+              </Button>
+            </div>
             <h2>{category.name}</h2>
           </div>
 
-          <ul className="drinksWrapper">
-            {category.drinks.map((drink: Drink) => (
-              <li key={drink.id} className="drink">
-                <>
-                  {drink.name} - ${drink.price.toFixed(2)}
-                  <div className="drinkButtons">
-                    <EditOutlined
-                      style={{ padding: "7px" }}
-                      onClick={() => {
-                        // Assuming handleEditDrink is a valid function
-                        handleEditDrink(drink);
-                        setIsEditProductModalShown(true);
-                      }}
-                    />
-                    <Popconfirm
-                      title="Delete Product"
-                      description="Are you sure to delete product?"
-                      onConfirm={() => handleRemoveDrink(drink)}
-                      onCancel={() => {}}
-                      okText="Yes"
-                      cancelText="No"
-                    >
-                      <DeleteOutlined style={{ padding: "7px" }} />
-                    </Popconfirm>
-                  </div>
-                </>
-              </li>
-            ))}
-          </ul>
+          <div className="categoryBody">
+            <ul className="drinksWrapper">
+              {category.drinks.map((drink: Drink) => (
+                <li key={drink.id} className="drink">
+                  <>
+                    {drink.name} - ${drink.price.toFixed(2)}
+                    <div className="drinkButtons">
+                      <EditOutlined
+                        style={{ padding: "7px" }}
+                        onClick={() => {
+                          handleEditDrink(drink);
+                          setIsEditProductModalShown(true);
+                        }}
+                      />
+                      <Popconfirm
+                        title="Delete Product"
+                        description="Are you sure to delete product?"
+                        onConfirm={() => handleRemoveDrink(drink)}
+                        onCancel={() => {}}
+                        okText="Yes"
+                        cancelText="No"
+                      >
+                        <DeleteOutlined style={{ padding: "7px" }} />
+                      </Popconfirm>
+                    </div>
+                  </>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       ))}
     </>
