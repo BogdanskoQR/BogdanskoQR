@@ -18,6 +18,16 @@ body {
   flex-wrap: wrap;
 }
 
+@media screen and (max-width: 768px) {
+  .drinksCategoryWrapper{
+    padding: 0px; 
+    justify-content: center
+  }
+  .category{
+    min-width: 330px;
+  }
+}
+
 
 .category {
   background-color: #fff;
