@@ -8,7 +8,7 @@ interface CreateCategoryModalProps {
   handleAddMoreDrinks: any;
   isOpen: boolean;
   onAddMoreDrinks: any;
-  onCategorySubmit: () => void;
+  onCategorySubmit: (value:any) => void;
   onClose: () => void;
   setCategoryImgFile: (value: File | undefined) => void;
   setCategoryUrlImg: any;
@@ -35,7 +35,7 @@ const CreateCategoryModal = ({
     <Modal
       width={600}
       title="Create Category"
-      visible={isOpen}
+      open={isOpen}
       onOk={onClose}
       onCancel={onClose}
     >
@@ -43,10 +43,11 @@ const CreateCategoryModal = ({
         initialValues={{
           categoryName: "",
           drinks: [{ name: "", price: 0 }],
+          img: categoryImgUrl?.url || "",
         }}
         onSubmit={(values, { resetForm }) => {
           console.log("Form values:", values, "category img", categoryImgUrl);
-          onCategorySubmit();
+          onCategorySubmit(values);
           resetForm();
         }}
       >
@@ -105,7 +106,7 @@ const CreateCategoryModal = ({
                 }}
               />
               <Button
-                style={{marginLeft: '10px'}}
+                style={{ marginLeft: "10px" }}
                 icon={<UploadOutlined />}
                 onClick={async () => {
                   if (categoryImgFIle) {
@@ -122,7 +123,11 @@ const CreateCategoryModal = ({
                 Upload
               </Button>
             </div>
-            <img className="createCategoryImg" src={categoryImgUrl?.url} alt="" />
+            <img
+              className="createCategoryImg"
+              src={categoryImgUrl?.url}
+              alt=""
+            />
 
             {/* <Button htmlType="submit">Add more drinks</Button> */}
           </Form>

@@ -19,15 +19,17 @@ body {
 }
 
 @media screen and (max-width: 768px) {
-  .drinksCategoryWrapper{
-    padding: 0px; 
-    justify-content: center
+  .drinksCategoryWrapper {
+    padding: 0px;
+    justify-content: center;
   }
-  .category{
+  .category {
     min-width: 330px;
   }
+  .editButtonDashboard{
+    display: none;
+  }
 }
-
 
 .category {
   background-color: #fff;
@@ -61,7 +63,7 @@ body {
 
 .categoryBody {
   max-height: 400px;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 .categoryBody::-webkit-scrollbar {
@@ -255,7 +257,7 @@ body {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
-  justify-content: flex-end
+  justify-content: flex-end;
 }
 
 .deleteCategory button {
@@ -278,14 +280,14 @@ body {
 .ant-modal-body {
   max-height: 87vh;
 }
-.createProductSelect{
+.createProductSelect {
   width: 460px;
   @media screen and (max-width: 600px) {
     width: 290px;
   }
 }
 
-.addButtons{
+.addButtons {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -293,12 +295,12 @@ body {
   margin-top: 5px;
 }
 
-.addButtons button{
+.addButtons button {
   margin-left: 5px;
   max-width: 140px;
 }
 
-.createProductField img{
+.createProductField img {
   width: 200px;
   height: 200px;
   margin-bottom: 30px;
@@ -306,43 +308,43 @@ body {
   object-fit: cover;
 }
 
-.createProductField{
+.createProductField {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 1px;
 }
 
-.createCategoryFieldImage{
+.createCategoryFieldImage {
   display: flex;
   padding: 10px;
   padding-left: 0px;
   align-items: center;
 }
 
-.createProductImageField{
+.createProductImageField {
   padding: 10px;
   padding-left: 0px;
   display: flex;
   flex-direction: column;
 }
 
-.createProductInput{
+.createProductInput {
   padding: 3px;
   margin-bottom: 10px;
 }
 
-.deleteCategoryButtons{
+.deleteCategoryButtons {
   display: flex;
   margin-left: 30px;
 }
 
-.createCategoryImg{
+.createCategoryImg {
   max-width: 250px;
   border-radius: 12px;
 }
 
-.createProductImg{
+.createProductImg {
   max-width: 250px;
   border-radius: 12px;
 }

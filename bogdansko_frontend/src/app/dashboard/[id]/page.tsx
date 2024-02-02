@@ -164,6 +164,10 @@ export default function Page({ params }: any) {
     // formikArrayHelpers.push({ name: "", price: 0 });
   };
 
+  const handleCreateCategory = (value:any) => {
+    console.log(value)
+  }
+
   const handleDeleteCateogry = (category: Category) => {
     console.log(category);
     openNotificationWithIcon(
@@ -187,7 +191,7 @@ export default function Page({ params }: any) {
         <Button type="primary" onClick={() => openModal("drink")}>
           Add new product
         </Button>
-        <Button type="primary" onClick={() => openModal("editMenu")}>
+        <Button className="editButtonDashboard" type="primary" onClick={() => openModal("editMenu")}>
           Edit Menu
         </Button>
       </div>
@@ -210,7 +214,7 @@ export default function Page({ params }: any) {
         handleAddMoreDrinks={handleAddMoreDrinks}
         isOpen={isCreateCategoryModalOpen}
         onAddMoreDrinks={handleAddMoreDrinks}
-        onCategorySubmit={() => {}}
+        onCategorySubmit={handleCreateCategory}
         onClose={() => setIsCreateCategoryModalOpen(false)}
         setCategoryImgFile={setCategoryImgFile}
         setCategoryUrlImg={setCategoryUrlImg}

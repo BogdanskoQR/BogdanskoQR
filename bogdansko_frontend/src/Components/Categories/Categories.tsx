@@ -35,7 +35,7 @@ const Categories = ({
 }: any) => {
   return (
     <>
-       {categories?.map((category: Category) => (
+      {categories?.map((category: Category) => (
         <div key={category.id} className="category">
           <div className="categoryHeader">
             <Popconfirm
