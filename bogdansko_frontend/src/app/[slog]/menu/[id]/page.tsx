@@ -18,7 +18,7 @@ export default function Page({ params }: any) {
   }
 
   const isCocktailsCategory =
-    selectedCategory.categoryName.toLowerCase() === "cocktails";
+    selectedCategory?.categoryName?.toLowerCase() === "cocktails";
 
   const onBackClick = () => {
     router.push(`/${company?.name}/menu`);

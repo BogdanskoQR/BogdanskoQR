@@ -25,14 +25,14 @@ export default function Page({params}: any) {
       <div className="categoriesWrapper" style={{ 'background': company?.menuThemeColor }}>
         {company?.menu.map((oneCategory) => (
           <div
-            key={oneCategory.img}
+            key={oneCategory.categoryBackgroundImg}
             className="oneCategorieCart"
             onClick={() => redirectToCategory(oneCategory.categoryId)}
           >
             <div className="categorieTitle" style={{ 'background': company?.categoryTitleColor }}>
               <h3 style={{ 'color': company?.categoryTextTitleColor }}>{oneCategory.categoryName}</h3>
             </div>
-            <img src={oneCategory.img} alt="img" />
+            <img src={oneCategory.categoryBackgroundImg} alt="img" />
           </div>
         ))}
       </div>
