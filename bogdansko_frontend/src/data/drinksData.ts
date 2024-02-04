@@ -349,8 +349,8 @@ export const companyDetails = [
     headerImage:'https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Hertha_BSC_vs._West_Ham_United_20190731_%28186%29.jpg/220px-Hertha_BSC_vs._West_Ham_United_20190731_%28186%29.jpg',
     menu: [
       {
-        id: 1,
-        name: "Soft Drinks",
+        categoryId: 1,
+        categoryName: "Soft Drinks",
         img: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/414109446_363952673046373_9100556337143579254_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=U8v8BbtCrugAX80JqFx&_nc_ht=scontent.fskp3-1.fna&oh=03_AdRwTNJg2COL2kXSAz1A_H2-RCsUzuIOeCrDdXBEbrNoGw&oe=65D59D06",
         drinks: [
           {
@@ -387,9 +387,9 @@ export const companyDetails = [
         ],
       },
       {
-        id: 2,
+        categoryId: 1,
         img: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/414162965_2025273677847564_9103021549812902095_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=IbX5Moq0tssAX-dX11B&_nc_ht=scontent.fskp3-1.fna&oh=03_AdQD22gJuceeyNIx7op9QnIwveFAh9Anodx6T5s3Ax_N6w&oe=65D56B89",
-        name: "Cocktails",
+        categoryName: "Cocktails",
         drinks: [
           {
             id: 201,
@@ -434,8 +434,8 @@ export const companyDetails = [
         ],
       },
       {
-        id: 5,
-        name: "Alcohol",
+        categoryId: 1,
+        categoryName: "Alcohol",
         img: "https://scontent.fskp1-2.fna.fbcdn.net/v/t1.15752-9/420191741_1074987170479750_7363821678081952832_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=fxXIQwSDdB4AX8cEyzW&_nc_ht=scontent.fskp1-2.fna&oh=03_AdTM8B2dGpnxqFtNxAmN5pm6mY049xfHhLMGhuMW6shjdQ&oe=65D75701",
         drinks: [
           {
@@ -486,8 +486,8 @@ export const companyDetails = [
       "https://media.reprezentacija.ba/2018/06/antonio-pavic-zeljeznicar-1024x683.jpg",
     menu: [
       {
-        id: 5,
-        name: "Alcohol",
+        categoryId: 1,
+        categoryName: "Alcohol",
         img: "https://scontent.fskp1-2.fna.fbcdn.net/v/t1.15752-9/420191741_1074987170479750_7363821678081952832_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=fxXIQwSDdB4AX8cEyzW&_nc_ht=scontent.fskp1-2.fna&oh=03_AdTM8B2dGpnxqFtNxAmN5pm6mY049xfHhLMGhuMW6shjdQ&oe=65D75701",
         drinks: [
           {

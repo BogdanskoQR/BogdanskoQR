@@ -11,14 +11,14 @@ export default function Page({ params }: any) {
   );
   const router = useRouter();
   const selectedCategory = company?.menu.find(
-    (category) => category.id === Number(params.id)
+    (category) => category.categoryId === Number(params.id)
   );
   if (!selectedCategory) {
     return null;
   }
 
   const isCocktailsCategory =
-    selectedCategory.name.toLowerCase() === "cocktails";
+    selectedCategory.categoryName.toLowerCase() === "cocktails";
 
   const onBackClick = () => {
     router.push(`/${company?.name}/menu`);
@@ -47,7 +47,7 @@ export default function Page({ params }: any) {
         style={{ background: company?.menuThemeColor }}
       >
         <div
-          key={selectedCategory.name}
+          key={selectedCategory.categoryName}
           className={`oneMenuTableCategory ${
             isCocktailsCategory ? "cocktailsCategory" : ""
           }`}
@@ -60,7 +60,7 @@ export default function Page({ params }: any) {
               fontWeight: "600",
             }}
           >
-            {selectedCategory.name}
+            {selectedCategory.categoryName}
           </h3>
           {selectedCategory.drinks.map((oneDrink) => (
             <div
