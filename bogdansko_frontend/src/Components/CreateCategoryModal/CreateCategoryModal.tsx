@@ -38,18 +38,31 @@ const CreateCategoryModal = ({
         drinks: [{ name: "", price: 0 }],
         img: categoryImgUrl?.url,
       }}
-      onSubmit={(values,) => {
-        console.log("pavic values",values)
+      onSubmit={(values) => {
+        console.log("pavic values", values);
         onCategorySubmit(values);
+        setTimeout(()=> {
+          setCategoryImgFile(undefined)
+          setCategoryUrlImg('')
+        },1000)
+       
       }}
     >
-      {({ values, handleSubmit,setFieldValue,resetForm }) => (
+      {({ values, handleSubmit, setFieldValue, resetForm }) => (
         <Modal
           width={600}
           title="Create Category"
           open={isOpen}
-          onOk={()=> {handleSubmit(); onClose();}}
-          onCancel={()=> {onClose()}}
+          onOk={() => {
+            handleSubmit();
+            onClose();
+            setTimeout(() => {
+              resetForm();
+            }, 1000);
+          }}
+          onCancel={() => {
+            onClose();
+          }}
         >
           <Form onSubmit={handleSubmit}>
             <div className="createCategoryField">
@@ -60,7 +73,7 @@ const CreateCategoryModal = ({
               <Input
                 type="text"
                 name="categoryName"
-                onChange={(e)=> setFieldValue('categoryName', e.target.value)}
+                onChange={(e) => setFieldValue("categoryName", e.target.value)}
                 value={values.categoryName}
                 placeholder="Enter Category Name"
                 required
@@ -81,7 +94,10 @@ const CreateCategoryModal = ({
                           placeholder={`New Drink Name ${index + 1}`}
                           name={`drinks.${index}.name`}
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            setFieldValue(`drinks.${index}.name`, e.target.value)
+                            setFieldValue(
+                              `drinks.${index}.name`,
+                              e.target.value
+                            )
                           }
                         />
                         <Field
@@ -91,7 +107,10 @@ const CreateCategoryModal = ({
                           placeholder={`New Drink Price ${index + 1}`}
                           name={`drinks.${index}.price`}
                           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                            setFieldValue(`drinks.${index}.price`, e.target.value)
+                            setFieldValue(
+                              `drinks.${index}.price`,
+                              e.target.value
+                            )
                           }
                         />
                         {index === values.drinks.length - 1 && (
@@ -126,6 +145,7 @@ const CreateCategoryModal = ({
                       url: res.url,
                       thumbmailUrl: res.thumbnailUrl,
                     });
+                    setFieldValue("img", res.url);
                   }
                 }}
               >

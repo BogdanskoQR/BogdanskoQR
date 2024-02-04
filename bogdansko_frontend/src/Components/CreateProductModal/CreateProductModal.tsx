@@ -69,12 +69,21 @@ const CreateProductModal = ({
         setIsCreateDrinkModalOpen(false);
       }}
     >
-      {({ values, handleChange, handleSubmit, setFieldValue,resetForm }) => (
+      {({values, handleSubmit, setFieldValue,resetForm }) => (
         <Modal
           title="Create Product"
           open={isCreateDrinkModalOpen}
-          onOk={() => {handleSubmit(); closeModal('drink');}}
-          onCancel={() => {closeModal("drink");}}
+          onOk={() => {
+            handleSubmit();
+            closeModal("drink");
+            setTimeout(()=> {
+              resetForm()
+            },1000)
+            
+          }}
+          onCancel={() => {
+            closeModal("drink");
+          }}
         >
           <Form>
             <div className="createProductField">
@@ -96,6 +105,7 @@ const CreateProductModal = ({
                 type="text"
                 id="drinkName"
                 name="drinkName"
+                value={values.drinkName}
                 onChange={(e) => setFieldValue("drinkName", e.target.value)}
               />
             </div>
@@ -104,6 +114,7 @@ const CreateProductModal = ({
               <Input
                 type="number"
                 id="drinkPrice"
+                value={values.drinkPrice}
                 name="drinkPrice"
                 style={{ marginBottom: "10px" }}
                 onChange={(e) => setFieldValue("drinkPrice", e.target.value)}
@@ -130,7 +141,7 @@ const CreateProductModal = ({
                         url: res.url,
                         thumbmailUrl: res.thumbnailUrl,
                       });
-                      setFieldValue('productImage', res.url)
+                      setFieldValue("productImage", res.url);
                     }
                   }}
                 >

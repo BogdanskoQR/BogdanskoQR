@@ -40,7 +40,7 @@ const Categories = ({
           <div className="categoryHeader">
             <Popconfirm
               title="Delete the Category"
-              description="Are you sure to delete this category?"
+              description="Are you sure u want to delete this category?"
               onConfirm={() => handleDeleteCategory(category)}
               onCancel={() => {}}
               okText="Yes"
@@ -79,7 +79,7 @@ const Categories = ({
                       />
                       <Popconfirm
                         title="Delete Product"
-                        description="Are you sure to delete product?"
+                        description="Are you sure u want to delete this product?"
                         onConfirm={() => handleRemoveDrink(drink)}
                         onCancel={() => {}}
                         okText="Yes"

@@ -173,6 +173,7 @@ export default function Page({ params }: any) {
     }
   };
   const handleDeleteCategory = async (category: Category) => {
+    console.log("pavic", category)
     try {
       const response = await axios.delete(`${BASE_URL}/${category.id}`);
       console.log("Post request successful:", response.data);
@@ -220,6 +221,7 @@ export default function Page({ params }: any) {
   };
 
   const handleRemoveDrink = async (drink: Drink) => {
+    console.log("pavic", drink)
     try {
       const response = await axios.delete(`${BASE_URL}/${drink.id}`);
       console.log("Post request successful:", response.data);

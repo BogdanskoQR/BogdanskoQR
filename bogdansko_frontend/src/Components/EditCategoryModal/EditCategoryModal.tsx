@@ -52,7 +52,7 @@ const EditCategoryModal = ({
       }}
       onSubmit={(values) => {
         handleUpdateCategory(values);
-        console.log("pavic edit Category Form values:", values);
+        console.log("pavic edit Category Form values:", values,editCategoryImg);
         openNotificationWithIcon("success", "update", values.editCategoryName);
         setIsEditCategoryModalOpen(false);
         setEditCategoryName("");
