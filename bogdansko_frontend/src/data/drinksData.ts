@@ -10,12 +10,12 @@ export const companyDetails = [
     headerTextColor: "white",
     companyLogo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoGjCcbIf84x-KsAuL9X94bFATVuWsT-yU5f8YvLUQXw&s",
     headerImage:
-      "https://scontent.fskp1-2.fna.fbcdn.net/v/t39.30808-6/361086482_1003088147611941_5940843451065858315_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=783fdb&_nc_ohc=4tGvb0dmZ-0AX9MCpUy&_nc_ht=scontent.fskp1-2.fna&oh=00_AfCQC9aqW_yBdOh4Ry6fNZZck0nORBlQVVRItedkbQzu6A&oe=65BE31D8",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRKNtgAFm_uQvk0BZMZmyW-jHbD-wgZg2WgTdjuLraTzw&s",
     menu: [
       {
-        id: 1,
-        name: "Soft Drinks",
-        img: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/414109446_363952673046373_9100556337143579254_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=U8v8BbtCrugAX80JqFx&_nc_ht=scontent.fskp3-1.fna&oh=03_AdRwTNJg2COL2kXSAz1A_H2-RCsUzuIOeCrDdXBEbrNoGw&oe=65D59D06",
+        categoryId: 1,
+        categoryName: "Soft Drinks",
+        categoryBackgroundImg: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/414109446_363952673046373_9100556337143579254_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=U8v8BbtCrugAX80JqFx&_nc_ht=scontent.fskp3-1.fna&oh=03_AdRwTNJg2COL2kXSAz1A_H2-RCsUzuIOeCrDdXBEbrNoGw&oe=65D59D06",
         drinks: [
           {
             id: 105,
@@ -70,9 +70,9 @@ export const companyDetails = [
         ],
       },
       {
-        id: 2,
-        img: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/414162965_2025273677847564_9103021549812902095_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=IbX5Moq0tssAX-dX11B&_nc_ht=scontent.fskp3-1.fna&oh=03_AdQD22gJuceeyNIx7op9QnIwveFAh9Anodx6T5s3Ax_N6w&oe=65D56B89",
-        name: "Cocktails",
+        categoryId: 2,
+        categoryBackgroundImg: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/414162965_2025273677847564_9103021549812902095_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=IbX5Moq0tssAX-dX11B&_nc_ht=scontent.fskp3-1.fna&oh=03_AdQD22gJuceeyNIx7op9QnIwveFAh9Anodx6T5s3Ax_N6w&oe=65D56B89",
+        categoryName: "Cocktails",
         drinks: [
           {
             id: 201,
@@ -168,9 +168,9 @@ export const companyDetails = [
         ],
       },
       {
-        id: 3,
-        img: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/414290567_1497163470846226_6765045948819366753_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=uiKPZmLKuPoAX_e7oBq&_nc_ht=scontent.fskp3-1.fna&oh=03_AdTtudSltCG-n8xYF764ytqZhE-E_s_EbzT3BZ4icd9Etg&oe=65D5932E",
-        name: "Coffees",
+        categoryId: 3,
+        categoryBackgroundImg: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/414290567_1497163470846226_6765045948819366753_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=uiKPZmLKuPoAX_e7oBq&_nc_ht=scontent.fskp3-1.fna&oh=03_AdTtudSltCG-n8xYF764ytqZhE-E_s_EbzT3BZ4icd9Etg&oe=65D5932E",
+        categoryName: "Coffees",
         drinks: [
           { id: 301, name: "Espresso", price: 80.5, img: null },
           { id: 302, name: "Latte", price: 81.0, img: null },
@@ -183,9 +183,9 @@ export const companyDetails = [
         ],
       },
       {
-        id: 4,
-        img: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/418392816_1169692214012371_3377569790133421022_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=wU67rFCdi2wAX_5bAMa&_nc_ht=scontent.fskp3-1.fna&oh=03_AdS0hG4dYYbXvGVTGsde6ED4Z2nwgJUP-au_fAsHiKFtgw&oe=65D598A8",
-        name: "Hot Drinks",
+        categoryId: 4,
+        categoryBackgroundImg: "https://scontent.fskp3-1.fna.fbcdn.net/v/t1.15752-9/418392816_1169692214012371_3377569790133421022_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=wU67rFCdi2wAX_5bAMa&_nc_ht=scontent.fskp3-1.fna&oh=03_AdS0hG4dYYbXvGVTGsde6ED4Z2nwgJUP-au_fAsHiKFtgw&oe=65D598A8",
+        categoryName: "Hot Drinks",
         drinks: [
           { id: 401, name: "Hot Chocolate", price: 81.5, img: null },
           { id: 402, name: "Tea", price: 81.0, img: null },
@@ -199,9 +199,9 @@ export const companyDetails = [
         ],
       },
       {
-        id: 5,
-        name: "Alcohol",
-        img: "https://scontent.fskp1-2.fna.fbcdn.net/v/t1.15752-9/420191741_1074987170479750_7363821678081952832_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=fxXIQwSDdB4AX8cEyzW&_nc_ht=scontent.fskp1-2.fna&oh=03_AdTM8B2dGpnxqFtNxAmN5pm6mY049xfHhLMGhuMW6shjdQ&oe=65D75701",
+        categoryId: 5,
+        categoryName: "Alcohol",
+        categoryBackgroundImg: "https://scontent.fskp1-2.fna.fbcdn.net/v/t1.15752-9/420191741_1074987170479750_7363821678081952832_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=fxXIQwSDdB4AX8cEyzW&_nc_ht=scontent.fskp1-2.fna&oh=03_AdTM8B2dGpnxqFtNxAmN5pm6mY049xfHhLMGhuMW6shjdQ&oe=65D75701",
         drinks: [
           {
             id: 501,
@@ -267,8 +267,8 @@ export const companyDetails = [
         ],
       },
       {
-        id: 5,
-        name: "Alcohol",
+        categoryId: 5,
+        categoryName: "Alcohol",
         img: "https://scontent.fskp1-2.fna.fbcdn.net/v/t1.15752-9/420191741_1074987170479750_7363821678081952832_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=8cd0a2&_nc_ohc=fxXIQwSDdB4AX8cEyzW&_nc_ht=scontent.fskp1-2.fna&oh=03_AdTM8B2dGpnxqFtNxAmN5pm6mY049xfHhLMGhuMW6shjdQ&oe=65D75701",
         drinks: [
           {

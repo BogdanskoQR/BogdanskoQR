@@ -10,7 +10,7 @@ interface Drink {
 
 interface Category {
   id: number;
-  name: string;
+  categoryName: string;
   drinks: Drink[];
 }
 
@@ -60,7 +60,7 @@ const Categories = ({
                 <EditOutlined />
               </Button>
             </div>
-            <h2>{category.name}</h2>
+            <h2>{category.categoryName}</h2>
           </div>
 
           <div className="categoryBody">

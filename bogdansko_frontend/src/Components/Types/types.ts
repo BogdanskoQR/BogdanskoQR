@@ -23,3 +23,5 @@ export interface Company {
     headerImage: string;
     menu: Category[];
   }
+
+export const BASE_URL = 'test'

@@ -28,6 +28,7 @@ interface EditMenuModalProps {
   setCategoryTitleBackgroundColor: (color: string) => void;
   setCategoryTextColor: (color: string) => void;
   setHeaderTextColor: (color: string) => void;
+  handleUpdateEditMenu: (value:any) => void
 }
 const EditMenuModal = ({
   isEditMenuModalOpen,
@@ -48,6 +49,7 @@ const EditMenuModal = ({
   setCategoryTitleBackgroundColor,
   setCategoryTextColor,
   setHeaderTextColor,
+  handleUpdateEditMenu
 }: EditMenuModalProps) => {
   return (
     <Modal
@@ -58,11 +60,11 @@ const EditMenuModal = ({
       onOk={() => {
         closeModal("editMenu");
         console.log(
-          menuBackgroundColor,
-          categoryTitleBackgroundColor,
-          categoryTextColor
+          "pavic",
+          menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl,company?.headerImage
         );
         openNotificationWithIcon("success", "editMenu");
+        handleUpdateEditMenu({menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl})
       }}
       onCancel={() => closeModal("editMenu")}
     >

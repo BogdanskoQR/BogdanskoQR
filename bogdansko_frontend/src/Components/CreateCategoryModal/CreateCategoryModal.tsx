@@ -1,5 +1,5 @@
 import { Modal, Input, Button } from "antd";
-import { Formik, FieldArray, Form } from "formik";
+import { Formik, FieldArray, Form, Field } from "formik";
 import { UploadOutlined, PlusOutlined } from "@ant-design/icons";
 
 interface CreateCategoryModalProps {
@@ -8,7 +8,7 @@ interface CreateCategoryModalProps {
   handleAddMoreDrinks: any;
   isOpen: boolean;
   onAddMoreDrinks: any;
-  onCategorySubmit: (value:any) => void;
+  onCategorySubmit: (value: any) => void;
   onClose: () => void;
   setCategoryImgFile: (value: File | undefined) => void;
   setCategoryUrlImg: any;
@@ -32,26 +32,25 @@ const CreateCategoryModal = ({
   categoryImgUrl,
 }: CreateCategoryModalProps) => {
   return (
-    <Modal
-      width={600}
-      title="Create Category"
-      open={isOpen}
-      onOk={onClose}
-      onCancel={onClose}
+    <Formik
+      initialValues={{
+        categoryName: "",
+        drinks: [{ name: "", price: 0 }],
+        img: categoryImgUrl?.url,
+      }}
+      onSubmit={(values,) => {
+        console.log("pavic values",values)
+        onCategorySubmit(values);
+      }}
     >
-      <Formik
-        initialValues={{
-          categoryName: "",
-          drinks: [{ name: "", price: 0 }],
-          img: categoryImgUrl?.url || "",
-        }}
-        onSubmit={(values, { resetForm }) => {
-          console.log("Form values:", values, "category img", categoryImgUrl);
-          onCategorySubmit(values);
-          resetForm();
-        }}
-      >
-        {({ values, handleSubmit }) => (
+      {({ values, handleSubmit,setFieldValue,resetForm }) => (
+        <Modal
+          width={600}
+          title="Create Category"
+          open={isOpen}
+          onOk={()=> {handleSubmit(); onClose();}}
+          onCancel={()=> {onClose()}}
+        >
           <Form onSubmit={handleSubmit}>
             <div className="createCategoryField">
               <label htmlFor="categoryName" aria-hidden="true">
@@ -61,6 +60,8 @@ const CreateCategoryModal = ({
               <Input
                 type="text"
                 name="categoryName"
+                onChange={(e)=> setFieldValue('categoryName', e.target.value)}
+                value={values.categoryName}
                 placeholder="Enter Category Name"
                 required
               />
@@ -74,23 +75,31 @@ const CreateCategoryModal = ({
                   <div>
                     {values.drinks.map((drink, index) => (
                       <div key={index} className="addNewDrink">
-                        <Input
+                        <Field
+                          as={Input}
                           type="text"
                           placeholder={`New Drink Name ${index + 1}`}
                           name={`drinks.${index}.name`}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setFieldValue(`drinks.${index}.name`, e.target.value)
+                          }
                         />
-                        <Input
+                        <Field
+                          as={Input}
                           className="newPriceInput"
                           type="number"
                           placeholder={`New Drink Price ${index + 1}`}
                           name={`drinks.${index}.price`}
+                          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                            setFieldValue(`drinks.${index}.price`, e.target.value)
+                          }
                         />
                         {index === values.drinks.length - 1 && (
-                          <button
+                          <Button
                             onClick={() => handleAddMoreDrinks(arrayHelpers)}
                           >
                             <PlusOutlined />
-                          </button>
+                          </Button>
                         )}
                       </div>
                     ))}
@@ -131,9 +140,9 @@ const CreateCategoryModal = ({
 
             {/* <Button htmlType="submit">Add more drinks</Button> */}
           </Form>
-        )}
-      </Formik>
-    </Modal>
+        </Modal>
+      )}
+    </Formik>
   );
 };
 

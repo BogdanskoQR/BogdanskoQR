@@ -5,6 +5,9 @@ import * as Yup from "yup";
 import { notification } from "antd";
 import "./LoginPage.css";
 import { companyDetails } from "@/data/drinksData";
+import axios from 'axios';
+import { BASE_URL } from "@/Components/Types/types";
+
 
 const loginSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email address").required("Required"),
@@ -29,6 +32,14 @@ interface RegisterFormValues {
 }
 
 export default function Page() {
+  // const loginUser = async (data:LoginFormValues) => {
+  //   try {
+  //     const response = await axios.post(`${BASE_URL}`, data);
+  //     console.log('Post request successful:', response.data);
+  //   } catch (error) {
+  //     console.error('Error making post request:', error);
+  //   }
+  // };
   const router = useRouter();
   const handleLoginSubmit = (values: LoginFormValues) => {
     console.log("Login form values:", values);

@@ -1,7 +1,7 @@
 import { NotificationType } from "@/app/dashboard/[id]/page";
 import { UploadOutlined } from "@ant-design/icons";
-import { Modal,Input, Button } from "antd";
-import { Formik,Form } from "formik";
+import { Modal, Input, Button } from "antd";
+import { Formik, Form, useFormik } from "formik";
 import React from "react";
 
 interface EditProductModalProps {
@@ -30,7 +30,9 @@ interface EditProductModalProps {
     point: string,
     drinkName?: string
   ) => void;
+  handleUpdateProduct: (value: any) => any;
 }
+
 const EditProductModal = ({
   isEditProductModalShown,
   setIsEditProductModalShown,
@@ -46,43 +48,47 @@ const EditProductModal = ({
   editProductImgFile,
   setEditProductImgFile,
   openNotificationWithIcon,
+  handleUpdateProduct,
 }: EditProductModalProps) => {
   return (
-    <Modal
-      title="Edit Product"
-      open={isEditProductModalShown}
-      onOk={() => {
-        setEditDrinkName("");
-        setEditDrinkPrice("");
-        setEditProductImage("");
-        setEditProductImgUrl(undefined);
-        setIsEditProductModalShown(false);
-        openNotificationWithIcon("success", "update", editDrinkName);
+    <Formik
+      initialValues={{
+        drinkName: editDrinkName,
+        drinkPrice: editDrinkPrice,
+        productImage: editProductImage,
       }}
-      onCancel={() => {
-        setEditDrinkName("");
-        setEditDrinkPrice("");
-        setEditProductImage("");
-        setEditProductImgUrl(undefined);
+      onSubmit={async (values) => {
+        await handleUpdateProduct({editDrinkName,editDrinkPrice,editProductImgUrl});
+        console.log("pavic tes", {editDrinkName,editDrinkPrice,editProductImgUrl,editProductImage});
+        openNotificationWithIcon(
+          "success",
+          "update",
+          `product with name ${values.drinkName}`
+        );
         setIsEditProductModalShown(false);
+        setEditProductImage('')
+        setEditProductImgFile(undefined)
+        setEditProductImgUrl(undefined)
+        setEditDrinkName('')
+        setEditDrinkPrice('')
       }}
     >
-      <Formik
-        initialValues={{
-          drinkName: editDrinkName,
-          drinkPrice: editDrinkPrice,
-          productImage: editProductImage,
-        }}
-        onSubmit={(values) => {
-          console.log("edit Drink Form values:", values);
-          openNotificationWithIcon(
-            "success",
-            "create",
-            `product with name ${values.drinkName}`
-          );
-        }}
-      >
-        {({ values, handleChange, handleSubmit }) => (
+      {({ values, handleChange, handleSubmit, setFieldValue }) => (
+        <Modal
+          title="Edit Product"
+          open={isEditProductModalShown}
+          onOk={async () => {
+            handleSubmit();
+            setIsEditProductModalShown(false);
+          }}
+          onCancel={() => {
+            setEditDrinkName("");
+            setEditDrinkPrice("");
+            setEditProductImage("");
+            setEditProductImgUrl(undefined);
+            setIsEditProductModalShown(false);
+          }}
+        >
           <Form onSubmit={handleSubmit}>
             <div className="createProductField">
               <label>Drink Name:</label>
@@ -108,14 +114,21 @@ const EditProductModal = ({
               <label htmlFor="drinkPrice">Drink Image:</label>
               <img
                 src={
-                  editProductImgUrl ? editProductImgUrl.url : editProductImage ? editProductImage : 'https://totalcomp.com/images/no-image.jpeg'
+                  editProductImgUrl
+                    ? editProductImgUrl.url
+                    : editProductImage
+                    ? editProductImage
+                    : "https://totalcomp.com/images/no-image.jpeg"
                 }
                 alt=""
               />
               <label htmlFor="drinkPrice">Edit product photo(optional):</label>
               <Input
                 type="file"
-                onChange={(e) => setEditProductImgFile(e.target.files?.[0])}
+                onChange={(e) => {
+                  setFieldValue("productImage", e.target.files?.[0]);
+                  setEditProductImgFile(e.target.files?.[0]);
+                }}
                 style={{ marginBottom: "10px" }}
               />
             </div>
@@ -131,19 +144,17 @@ const EditProductModal = ({
                       url: res.url,
                       thumbmailUrl: res.thumbnailUrl,
                     });
-                    // we can save to database here
+                    setFieldValue('productImage', res.url)
                   }
                 }}
               >
                 Upload
               </Button>
             </div>
-
-            {/* <Button htmlType="submit">Add Drink</Button> */}
           </Form>
-        )}
-      </Formik>
-    </Modal>
+        </Modal>
+      )}
+    </Formik>
   );
 };
 

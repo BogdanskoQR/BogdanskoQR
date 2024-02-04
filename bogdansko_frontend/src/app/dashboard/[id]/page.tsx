@@ -2,10 +2,7 @@
 import { companyDetails } from "../../../data/drinksData";
 import { useEffect, useState } from "react";
 import "./DashboardPage.css";
-import {
-  Button,
-  notification
-} from "antd";
+import { Button, notification } from "antd";
 import { FormikHelpers } from "formik";
 import { useEdgeStore } from "../../lib/edgestore";
 import Header from "@/Components/Header/Header";
@@ -16,6 +13,8 @@ import CreateProductModal from "@/Components/CreateProductModal/CreateProductMod
 import EditMenuModal from "@/Components/EditMenuModal/EditMenuModal";
 import EditProductModal from "@/Components/EditProductModal/EditProductModal";
 import EditCategoryModal from "@/Components/EditCategoryModal/EditCategoryModal";
+import axios from "axios";
+import { BASE_URL } from "@/Components/Types/types";
 
 export type NotificationType = "success" | "info" | "warning" | "error";
 
@@ -23,13 +22,13 @@ interface Drink {
   id: number;
   name: string;
   price: number;
-  img?: string
+  img?: string;
 }
 
 interface Category {
   id: number;
-  name: string;
-  img: string;
+  categoryName: string;
+  categoryBackgroundImg: string;
   drinks: Drink[];
 }
 
@@ -39,38 +38,67 @@ interface FormCategoryValues {
 }
 
 export default function Page({ params }: any) {
-  const company = companyDetails.find((company) => company.id === Number(params.id));
+  const company = companyDetails.find(
+    (company) => company.id === Number(params.id)
+  );
   const [api, contextHolder] = notification.useNotification();
-  const [isCreateCategoryModalOpen, setIsCreateCategoryModalOpen] = useState<boolean>(false);
-  const [isCreateDrinkModalOpen, setIsCreateDrinkModalOpen] = useState<boolean>(false);
-  const [isEditCategoryModalOpen, setIsEditCategoryModalOpen] = useState<boolean>(false);
+  const [isCreateCategoryModalOpen, setIsCreateCategoryModalOpen] =
+    useState<boolean>(false);
+  const [isCreateDrinkModalOpen, setIsCreateDrinkModalOpen] =
+    useState<boolean>(false);
+  const [isEditCategoryModalOpen, setIsEditCategoryModalOpen] =
+    useState<boolean>(false);
   const [isEditProductModalShown, setIsEditProductModalShown] = useState(false);
   const [isEditMenuModalOpen, setIsEditMenuModalOpen] = useState(false);
 
-  const [menuBackgroundColor, setMenuBackgroundColor] = useState(company?.menuThemeColor);
-  const [categoryTitleBackgroundColor, setCategoryTitleBackgroundColor] = useState(company?.categoryTitleColor);
-  const [categoryTextColor, setCategoryTextColor] = useState(company?.categoryTextTitleColor);
-  const [headerTextColor, setHeaderTextColor] = useState(company?.headerTextColor);
-  
+  const [menuBackgroundColor, setMenuBackgroundColor] = useState(
+    company?.menuThemeColor
+  );
+  const [categoryTitleBackgroundColor, setCategoryTitleBackgroundColor] =
+    useState(company?.categoryTitleColor);
+  const [categoryTextColor, setCategoryTextColor] = useState(
+    company?.categoryTextTitleColor
+  );
+  const [headerTextColor, setHeaderTextColor] = useState(
+    company?.headerTextColor
+  );
+
   const categories = company?.menu;
   const [editedDrink, setEditedDrink] = useState<Drink | null>(null);
   const [editDrinkName, setEditDrinkName] = useState<string>("");
   const [editDrinkPrice, setEditDrinkPrice] = useState<string>("");
-  const [editProductImage, setEditProductImage] = useState<string | undefined>();
-  
+  const [editProductImage, setEditProductImage] = useState<
+    string | undefined
+  >();
+
   const [headerImgFile, setHeaderImgFile] = useState<File>();
   const [productImgFile, setProductImgFile] = useState<File>();
   const [editProductImgFile, setEditProductImgFile] = useState<File>();
   const [categoryImgFIle, setCategoryImgFile] = useState<File>();
-  
+
   const [selectedNewDrink, setSelectedNewDrink] = useState<Drink>();
-  const [headerImgUrl, setHeaderImgUrl] = useState<{ url: string; thumbmailUrl: string | null }>();
-  const [productImgUrl, setProductImgUrl] = useState<{ url: string; thumbmailUrl: string | null }>();
-  const [editProductImgUrl, setEditProductImgUrl] = useState<{ url: string; thumbmailUrl: string | null }>();
-  const [categoryImgUrl, setCategoryUrlImg] = useState<{ url: string; thumbmailUrl: string | null }>();
-  
+  const [headerImgUrl, setHeaderImgUrl] = useState<{
+    url: string;
+    thumbmailUrl: string | null;
+  }>();
+  const [productImgUrl, setProductImgUrl] = useState<{
+    url: string;
+    thumbmailUrl: string | null;
+  }>();
+  const [editProductImgUrl, setEditProductImgUrl] = useState<{
+    url: string;
+    thumbmailUrl: string | null;
+  }>();
+  const [categoryImgUrl, setCategoryUrlImg] = useState<{
+    url: string;
+    thumbmailUrl: string | null;
+  }>();
+
   const [editCategoryName, setEditCategoryName] = useState<string>();
-  const [editCategoryImageUrl, setEditCategoryImageUrl] = useState<{ url: string; thumbmailUrl: string | null }>();
+  const [editCategoryImageUrl, setEditCategoryImageUrl] = useState<{
+    url: string;
+    thumbmailUrl: string | null;
+  }>();
   const [editCategoryImg, setEditCategoryImg] = useState<string>();
   const [editCategoryImgFile, setEditCategoryImgFile] = useState<File>();
 
@@ -83,7 +111,7 @@ export default function Page({ params }: any) {
       sessionStorage.setItem("hasReloaded", "true");
     }
   }, []);
-  
+
   const openNotificationWithIcon = (
     type: NotificationType,
     point: string,
@@ -130,51 +158,99 @@ export default function Page({ params }: any) {
     setEditProductImage(drink?.img);
   };
 
-  const handleEditCategory = (category: Category): void => {
-    setEditCategoryName(category.name);
-    setEditCategoryImg(category.img);
+  const handleEditCategory = async (category: Category) => {
+    console.log("pavic l set the to these", category);
+    setEditCategoryName(category.categoryName);
+    setEditCategoryImg(category.categoryBackgroundImg);
   };
 
-  const handleUpdateDrink = (): void => {
-    if (editedDrink) {
-      openNotificationWithIcon("success", "update", editDrinkName);
-      console.log(
-        "Update Drink:",
-        editedDrink.id,
-        "with Name:",
-        editDrinkName,
-        "and Price:",
-        editDrinkPrice
-      );
+  const handleUpdateCategory = async (categoryUpdateData: Category) => {
+    try {
+      const response = await axios.patch(`${BASE_URL}`, categoryUpdateData);
+      console.log("Post request successful:", response.data);
+    } catch (error) {
+      console.error("Error making post request:", error);
     }
+  };
+  const handleDeleteCategory = async (category: Category) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/${category.id}`);
+      console.log("Post request successful:", response.data);
+      if (response.status === 201) {
+        openNotificationWithIcon(
+          "success",
+          "text",
+          `Successfully deleted ${category.categoryName} category`
+        );
+      }
+    } catch (error) {
+      console.error("Error making post request:", error);
+    }
+  };
+  const handleCreateCategory = async (value: any) => {
+    console.log("pavic create category values", value);
+    try {
+      const response = await axios.post(`${BASE_URL}`, value);
+      openNotificationWithIcon(
+        "success",
+        "text",
+        `Successfully Created ${value.categoryName} category`
+      );
+      console.log("Post request successful:", response.data);
+    } catch (error) {
+      console.error("Error making post request:", error);
+    }
+  };
 
+  const handleUpdateProduct = async (drinkUpdateData: Drink) => {
+    if (editedDrink) {
+      try {
+        const response = await axios.patch(`${BASE_URL}`, drinkUpdateData);
+        console.log("Post request successful:", response.data);
+        if (response.status === 201) {
+          openNotificationWithIcon("success", "update", editDrinkName);
+        }
+      } catch (error) {
+        console.error("Error making post request:", error);
+      }
+    }
     setEditedDrink(null);
     setEditDrinkName("");
     setEditDrinkPrice("");
   };
 
-  const handleRemoveDrink = (drink: Drink, category: Category): void => {
-    openNotificationWithIcon("success", "delete", drink.name);
-    console.log("Remove Drink:", drink, "category", category);
+  const handleRemoveDrink = async (drink: Drink) => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/${drink.id}`);
+      console.log("Post request successful:", response.data);
+      openNotificationWithIcon("success", "delete", drink.name);
+    } catch (error) {
+      console.error("Error making post request:", error);
+      openNotificationWithIcon("success", "delete", drink.name);
+    }
+  };
+  const handleCreateProduct = async (value: any) => {
+    try {
+      const response = await axios.post(`${BASE_URL}`, value);
+      console.log("Post request successful:", response.data);
+    } catch (error) {
+      console.error("Error making post request:", error);
+    }
   };
 
-  const handleAddMoreDrinks = (
+  const handleAddMoreDrinksInputs = (
     formikArrayHelpers: FormikHelpers<FormCategoryValues["drinks"]>
   ): void => {
     // formikArrayHelpers.push({ name: "", price: 0 });
   };
 
-  const handleCreateCategory = (value:any) => {
-    console.log(value)
-  }
-
-  const handleDeleteCateogry = (category: Category) => {
-    console.log(category);
-    openNotificationWithIcon(
-      "success",
-      "text",
-      `Successfully deleted ${category.name} category`
-    );
+  const handleUpdateEditMenu = async (editMenuData: any) => {
+    try {
+      const response = await axios.patch(`${BASE_URL}`, editMenuData);
+      console.log("Post request successful:", response.data);
+    } catch (error) {
+      console.error("Error making post request:", error);
+    }
   };
 
   const onLogoutButton = () => {
@@ -183,7 +259,11 @@ export default function Page({ params }: any) {
   };
   return (
     <div className="menuPageWrapper">
-      <Header companyName={company?.name} onLogout={onLogoutButton} logoUrl={company?.companyLogo} />
+      <Header
+        companyName={company?.name}
+        onLogout={onLogoutButton}
+        logoUrl={company?.companyLogo}
+      />
       <div className="addButtons">
         <Button type="primary" onClick={() => openModal("category")}>
           Add new Category
@@ -191,7 +271,11 @@ export default function Page({ params }: any) {
         <Button type="primary" onClick={() => openModal("drink")}>
           Add new product
         </Button>
-        <Button className="editButtonDashboard" type="primary" onClick={() => openModal("editMenu")}>
+        <Button
+          className="editButtonDashboard"
+          type="primary"
+          onClick={() => openModal("editMenu")}
+        >
           Edit Menu
         </Button>
       </div>
@@ -199,7 +283,7 @@ export default function Page({ params }: any) {
       <div className="drinksCategoryWrapper">
         {contextHolder}
         <Categories
-          handleDeleteCategory={handleDeleteCateogry}
+          handleDeleteCategory={handleDeleteCategory}
           handleEditCategory={handleEditCategory}
           handleEditDrink={handleEditDrink}
           handleRemoveDrink={handleRemoveDrink}
@@ -211,9 +295,9 @@ export default function Page({ params }: any) {
       <CreateCategoryModal
         categoryImgFIle={categoryImgFIle}
         edgestore={edgestore}
-        handleAddMoreDrinks={handleAddMoreDrinks}
+        handleAddMoreDrinks={handleAddMoreDrinksInputs}
         isOpen={isCreateCategoryModalOpen}
-        onAddMoreDrinks={handleAddMoreDrinks}
+        onAddMoreDrinks={handleAddMoreDrinksInputs}
         onCategorySubmit={handleCreateCategory}
         onClose={() => setIsCreateCategoryModalOpen(false)}
         setCategoryImgFile={setCategoryImgFile}
@@ -233,6 +317,7 @@ export default function Page({ params }: any) {
         productImgFile={productImgFile}
         edgestore={edgestore}
         setProductImgUrl={setProductImgUrl}
+        handleCreateProduct={handleCreateProduct}
       />
 
       <EditMenuModal
@@ -254,6 +339,7 @@ export default function Page({ params }: any) {
         setCategoryTitleBackgroundColor={setCategoryTitleBackgroundColor}
         setCategoryTextColor={setCategoryTextColor}
         setHeaderTextColor={setHeaderTextColor}
+        handleUpdateEditMenu={handleUpdateEditMenu}
       />
 
       <EditProductModal
@@ -271,6 +357,7 @@ export default function Page({ params }: any) {
         editProductImgFile={editProductImgFile}
         setEditProductImgFile={setEditProductImgFile}
         openNotificationWithIcon={openNotificationWithIcon}
+        handleUpdateProduct={handleUpdateProduct}
       />
 
       <EditCategoryModal
@@ -285,6 +372,7 @@ export default function Page({ params }: any) {
         edgestore={edgestore}
         openNotificationWithIcon={openNotificationWithIcon}
         editCategoryImg={editCategoryImg}
+        handleUpdateCategory={handleUpdateCategory}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import { UploadOutlined } from "@ant-design/icons";
-import { Modal,Select, Input, Button } from "antd";
-import { Formik,Form } from "formik";
+import { Modal, Select, Input, Button } from "antd";
+import { Formik, Form, useFormikContext } from "formik";
 import React from "react";
 import { Category, Drink } from "../Types/types";
 import { NotificationType } from "@/app/dashboard/[id]/page";
@@ -33,7 +33,9 @@ interface CreateProductModalProps {
         }
       | undefined
   ) => void;
+  handleCreateProduct: (value: any) => void;
 }
+
 const CreateProductModal = ({
   isCreateDrinkModalOpen,
   setIsCreateDrinkModalOpen,
@@ -46,54 +48,55 @@ const CreateProductModal = ({
   productImgFile,
   edgestore,
   setProductImgUrl,
+  handleCreateProduct,
 }: CreateProductModalProps) => {
   return (
-    <Modal
-      title="Create Product"
-      open={isCreateDrinkModalOpen}
-      onOk={() => setIsCreateDrinkModalOpen(false)}
-      onCancel={() => closeModal("drink")}
+    <Formik
+      initialValues={{
+        categoryName: 0,
+        drinkName: "",
+        drinkPrice: 0,
+        productImage: productImgUrl,
+      }}
+      onSubmit={(values) => {
+        handleCreateProduct(values);
+        console.log("pavic values", values);
+        openNotificationWithIcon(
+          "success",
+          "create",
+          `product with name ${values.drinkName}`
+        );
+        setIsCreateDrinkModalOpen(false);
+      }}
     >
-      <Formik
-        initialValues={{
-          categoryName: 0,
-          drinkName: "",
-          drinkPrice: 0,
-          productImage: productImgUrl,
-        }}
-        onSubmit={(values) => {
-          console.log("Add Drink Form values:", values);
-          openNotificationWithIcon(
-            "success",
-            "create",
-            `product with name ${values.drinkName}`
-          );
-        }}
-      >
-        {({ values, handleChange, handleSubmit }) => (
-          <Form onSubmit={handleSubmit}>
+      {({ values, handleChange, handleSubmit, setFieldValue,resetForm }) => (
+        <Modal
+          title="Create Product"
+          open={isCreateDrinkModalOpen}
+          onOk={() => {handleSubmit(); closeModal('drink');}}
+          onCancel={() => {closeModal("drink");}}
+        >
+          <Form>
             <div className="createProductField">
               <label>Drink Category:</label>
-              <br />
               <Select
                 className="createProductSelect"
                 options={categories?.map((oneCategory: Category) => ({
                   value: oneCategory.categoryId,
                   label: oneCategory.categoryName,
                 }))}
-                onSelect={(value: Drink) => setSelectedNewDrink(value)}
+                onSelect={(value: Category) =>
+                  setFieldValue("categoryName", value.categoryName)
+                }
               />
             </div>
-
-            <br />
             <div className="createProductField">
               <label htmlFor="drinkName">Drink Name:</label>
               <Input
                 type="text"
                 id="drinkName"
                 name="drinkName"
-                value={values.drinkName}
-                onChange={handleChange}
+                onChange={(e) => setFieldValue("drinkName", e.target.value)}
               />
             </div>
             <div className="createProductField">
@@ -102,48 +105,50 @@ const CreateProductModal = ({
                 type="number"
                 id="drinkPrice"
                 name="drinkPrice"
-                value={values.drinkPrice}
-                onChange={handleChange}
                 style={{ marginBottom: "10px" }}
+                onChange={(e) => setFieldValue("drinkPrice", e.target.value)}
               />
             </div>
             <div className="createProductImageField">
               <label htmlFor="drinkPrice">Product Photo(optional):</label>
               <div className="productModalImgInput">
-              <input
-              className="createProductInput"
-                type="file"
-                onChange={(e) => {
-                  setProductImgFile(e.target.files?.[0]);
-                }}
-              />
-              <Button
-                icon={<UploadOutlined />}
-                onClick={async () => {
-                  if (productImgFile) {
-                    const res = await edgestore.myPublicImages.upload({
-                      file: productImgFile,
-                    });
-                    setProductImgUrl({
-                      url: res.url,
-                      thumbmailUrl: res.thumbnailUrl,
-                    });
-                    // we can save to database here
-                  }
-                }}
-              >
-                Upload
-              </Button>
-              </div>     
+                <input
+                  className="createProductInput"
+                  type="file"
+                  onChange={(e) => {
+                    setProductImgFile(e.target.files?.[0]);
+                  }}
+                />
+                <Button
+                  icon={<UploadOutlined />}
+                  onClick={async () => {
+                    if (productImgFile) {
+                      const res = await edgestore.myPublicImages.upload({
+                        file: productImgFile,
+                      });
+                      setProductImgUrl({
+                        url: res.url,
+                        thumbmailUrl: res.thumbnailUrl,
+                      });
+                      setFieldValue('productImage', res.url)
+                    }
+                  }}
+                >
+                  Upload
+                </Button>
+              </div>
             </div>
             {productImgUrl?.url ? (
-                <img className="createProductImg" src={productImgUrl?.url} alt="" />
-              ) : null}
-            {/* <Button htmlType="submit">Add Drink</Button> */}
+              <img
+                className="createProductImg"
+                src={productImgUrl?.url}
+                alt=""
+              />
+            ) : null}
           </Form>
-        )}
-      </Formik>
-    </Modal>
+        </Modal>
+      )}
+    </Formik>
   );
 };
 

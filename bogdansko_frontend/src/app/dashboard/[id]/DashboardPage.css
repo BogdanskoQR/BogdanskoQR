@@ -281,10 +281,7 @@ body {
   max-height: 87vh;
 }
 .createProductSelect {
-  width: 460px;
-  @media screen and (max-width: 600px) {
-    width: 290px;
-  }
+  width: 100%;  
 }
 
 .addButtons {
