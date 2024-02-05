@@ -191,7 +191,11 @@ export default function Page({ params }: any) {
   const handleCreateCategory = async (value: any) => {
     console.log("pavic create category values", value);
     try {
-      const response = await axios.post(`${BASE_URL}`, value);
+      const response = await axios.post('http://localhost:5119/api/Category', {
+        CompanyId: 2,
+        Name: value.categoryName,
+        BackgroundImage: value.img
+      });
       openNotificationWithIcon(
         "success",
         "text",

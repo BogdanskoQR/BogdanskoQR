@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BogdanciQRWebApi.App", "BogdanciQRWebApi.App\BogdanciQRWebApi.App.csproj", "{E1D1C605-FE2F-4673-B3F1-D4035D2A22C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BogdanskoQRWebApi.Domain", "BogdanskoQRWebApi.Domain\BogdanskoQRWebApi.Domain.csproj", "{24EFD26C-1B5A-4999-B97C-E4C19F326D8F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BogdanskoQRWebApi.DataAccess", "BogdanskoQRWebApi.DataAccess\BogdanskoQRWebApi.DataAccess.csproj", "{75A04714-AB54-4F07-93A2-A15DB41D168C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BogdanskoQRWebApi.Helpers", "BogdanskoQRWebApi.Helpers\BogdanskoQRWebApi.Helpers.csproj", "{94E9A738-115D-42E6-B894-F2CB94816771}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BogdanskoQRWebApi.Services", "BogdanskoQRWebApi.Services\BogdanskoQRWebApi.Services.csproj", "{9A0EE3A1-99C5-4AB8-AAFD-8954EBFB021E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BogdanskoQRWebApi.DTOs", "BogdanskoQRWebApi.DTOs\BogdanskoQRWebApi.DTOs.csproj", "{AB8093FA-48FD-45D2-98B3-DD68CF1BF8DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BogdanskoQRWebApi.Mappers", "BogdanskoQRWebApi.Mappers\BogdanskoQRWebApi.Mappers.csproj", "{A08045C0-6643-44F9-9546-7273413B75A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1D1C605-FE2F-4673-B3F1-D4035D2A22C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D1C605-FE2F-4673-B3F1-D4035D2A22C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D1C605-FE2F-4673-B3F1-D4035D2A22C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D1C605-FE2F-4673-B3F1-D4035D2A22C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24EFD26C-1B5A-4999-B97C-E4C19F326D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24EFD26C-1B5A-4999-B97C-E4C19F326D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24EFD26C-1B5A-4999-B97C-E4C19F326D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24EFD26C-1B5A-4999-B97C-E4C19F326D8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75A04714-AB54-4F07-93A2-A15DB41D168C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75A04714-AB54-4F07-93A2-A15DB41D168C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75A04714-AB54-4F07-93A2-A15DB41D168C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75A04714-AB54-4F07-93A2-A15DB41D168C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94E9A738-115D-42E6-B894-F2CB94816771}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94E9A738-115D-42E6-B894-F2CB94816771}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94E9A738-115D-42E6-B894-F2CB94816771}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94E9A738-115D-42E6-B894-F2CB94816771}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A0EE3A1-99C5-4AB8-AAFD-8954EBFB021E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A0EE3A1-99C5-4AB8-AAFD-8954EBFB021E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A0EE3A1-99C5-4AB8-AAFD-8954EBFB021E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A0EE3A1-99C5-4AB8-AAFD-8954EBFB021E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB8093FA-48FD-45D2-98B3-DD68CF1BF8DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB8093FA-48FD-45D2-98B3-DD68CF1BF8DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB8093FA-48FD-45D2-98B3-DD68CF1BF8DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB8093FA-48FD-45D2-98B3-DD68CF1BF8DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A08045C0-6643-44F9-9546-7273413B75A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A08045C0-6643-44F9-9546-7273413B75A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A08045C0-6643-44F9-9546-7273413B75A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A08045C0-6643-44F9-9546-7273413B75A7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BBD3D6FB-AAF6-4748-87BE-EB932779E9E2}
+	EndGlobalSection
+EndGlobal

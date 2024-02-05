@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "GO0IB4rcrL5SCQ8qEiMorX99f69zuRn8+LL+kkgbYQQ=",
+  "Source": "BogdanciQRWebApi.App",
+  "BasePath": "_content/BogdanciQRWebApi.App",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
