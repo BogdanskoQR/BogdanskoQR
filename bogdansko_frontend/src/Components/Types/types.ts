@@ -24,4 +24,4 @@ export interface Company {
     menu: Category[];
   }
 
-export const BASE_URL = 'test'
+export const BASE_URL = 'http://localhost:5119/api'

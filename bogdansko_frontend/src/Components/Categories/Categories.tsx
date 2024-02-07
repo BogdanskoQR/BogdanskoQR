@@ -9,7 +9,7 @@ interface Drink {
 }
 
 interface Category {
-  id: number;
+  categoryId: number;
   categoryName: string;
   drinks: Drink[];
 }
@@ -36,7 +36,7 @@ const Categories = ({
   return (
     <>
       {categories?.map((category: Category) => (
-        <div key={category.id} className="category">
+        <div key={category.categoryId} className="category">
           <div className="categoryHeader">
             <Popconfirm
               title="Delete the Category"
@@ -73,7 +73,7 @@ const Categories = ({
                       <EditOutlined
                         style={{ padding: "7px" }}
                         onClick={() => {
-                          handleEditDrink(drink);
+                          handleEditDrink(drink,category.categoryId);
                           setIsEditProductModalShown(true);
                         }}
                       />

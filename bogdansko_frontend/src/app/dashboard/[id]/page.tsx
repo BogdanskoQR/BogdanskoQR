@@ -14,7 +14,7 @@ import EditMenuModal from "@/Components/EditMenuModal/EditMenuModal";
 import EditProductModal from "@/Components/EditProductModal/EditProductModal";
 import EditCategoryModal from "@/Components/EditCategoryModal/EditCategoryModal";
 import axios from "axios";
-import { BASE_URL } from "@/Components/Types/types";
+import { BASE_URL, Company } from "@/Components/Types/types";
 
 export type NotificationType = "success" | "info" | "warning" | "error";
 
@@ -38,6 +38,23 @@ interface FormCategoryValues {
 }
 
 export default function Page({ params }: any) {
+  // const [company,setCompany] = useState<Company>()
+  // useEffect(() => {
+  //   const fetchCompanyData = async () => {
+  //     try {
+  //       const response = await axios.get(`${BASE_URL}Company/${Number(params.id)}`);
+  //       console.log("pavic response",response)
+  //       const fetchedCompanyData: Company = response.data;
+  //       setCompany(fetchedCompanyData);
+  //       console.log("pavic company",fetchedCompanyData  )
+  //     } catch (error) {
+  //       console.error('Error fetching company data:', error);
+  //     }
+  //   };
+  //   fetchCompanyData();
+  //   return () => {
+  //   };
+  // }, []);
   const company = companyDetails.find(
     (company) => company.id === Number(params.id)
   );
@@ -75,7 +92,7 @@ export default function Page({ params }: any) {
   const [productImgFile, setProductImgFile] = useState<File>();
   const [editProductImgFile, setEditProductImgFile] = useState<File>();
   const [categoryImgFIle, setCategoryImgFile] = useState<File>();
-
+  const [createProductCategoryId,setCreateProductCategoryId] = useState<number>()
   const [selectedNewDrink, setSelectedNewDrink] = useState<Drink>();
   const [headerImgUrl, setHeaderImgUrl] = useState<{
     url: string;
@@ -101,7 +118,8 @@ export default function Page({ params }: any) {
   }>();
   const [editCategoryImg, setEditCategoryImg] = useState<string>();
   const [editCategoryImgFile, setEditCategoryImgFile] = useState<File>();
-
+  const [editCategoryId,setEditCategoryId] = useState<number>()
+  const [editDrinkCategoryId,setEditDrinkCategoryId]= useState<number>()
   const { edgestore } = useEdgeStore();
   const router = useRouter();
 
@@ -151,24 +169,33 @@ export default function Page({ params }: any) {
     }
   };
 
-  const handleEditDrink = (drink: any): void => {
+  const handleEditDrink = (drink: any,drinkCategoryId:number): void => {
     setEditedDrink(drink);
     setEditDrinkName(drink.name);
     setEditDrinkPrice(drink.price.toFixed(2));
     setEditProductImage(drink?.img);
+    setEditDrinkCategoryId(drinkCategoryId)
+    console.log("pavic drin",drinkCategoryId)
   };
 
   const handleEditCategory = async (category: Category) => {
     console.log("pavic l set the to these", category);
     setEditCategoryName(category.categoryName);
     setEditCategoryImg(category.categoryBackgroundImg);
+    setEditCategoryId(category.id)
   };
 
   const handleUpdateCategory = async (categoryUpdateData: Category) => {
+    console.log("pavic category",categoryUpdateData )
     try {
-      const response = await axios.patch(`${BASE_URL}`, {
-        ...categoryUpdateData
-      });
+      const response = await axios.patch(`${BASE_URL}/Category`, 
+        {
+          "id": editCategoryId,
+          "companyId": company?.id,
+          "name": categoryUpdateData.categoryName,
+          "backgroundImage": categoryUpdateData.categoryBackgroundImg
+        }
+  );
       console.log("Post request successful:", response.data);
     } catch (error) {
       console.error("Error making post request:", error);
@@ -179,7 +206,7 @@ export default function Page({ params }: any) {
     try {
       const response = await axios.delete(`${BASE_URL}/${category.id}`);
       console.log("Post request successful:", response.data);
-      if (response.status === 201) {
+      if (response.status === 200) {
         openNotificationWithIcon(
           "success",
           "text",
@@ -193,16 +220,18 @@ export default function Page({ params }: any) {
   const handleCreateCategory = async (value: any) => {
     console.log("pavic create category values", value);
     try {
-      const response = await axios.post(`${BASE_URL}`, {
-        ...value
+      const response = await axios.post(`${BASE_URL}/Category`, {
+        "companyId": 2,
+        "name":  value.categoryName,
+        "backgroundImage": value.img
       });
-      if(response.status === 201){
+      // if(response.status === 201){
         openNotificationWithIcon(
           "success",
           "text",
           `Successfully Created ${value.categoryName} category`
         );
-      }
+      // }
 
       console.log("Post request successful:", response.data);
     } catch (error) {
@@ -210,11 +239,17 @@ export default function Page({ params }: any) {
     }
   };
 
-  const handleUpdateProduct = async (drinkUpdateData: Drink) => {
+  const handleUpdateProduct = async (drinkUpdateData: any) => {
     if (editedDrink) {
+      console.log("pavic edit drink",editedDrink,editDrinkCategoryId)
       try {
-        const response = await axios.patch(`${BASE_URL}`, {
-          ...drinkUpdateData
+        const response = await axios.patch(`${BASE_URL}/Drink`, {
+          "id": editedDrink.id,
+          "categoryId": editDrinkCategoryId,
+          "name": drinkUpdateData.editDrinkName,
+          "price": drinkUpdateData.editDrinkPrice,
+          "image": drinkUpdateData.editProductImage,
+          "description": null
         });
         console.log("Post request successful:", response.data);
         if (response.status === 201) {
@@ -232,7 +267,7 @@ export default function Page({ params }: any) {
   const handleRemoveDrink = async (drink: Drink) => {
     console.log("pavic", drink)
     try {
-      const response = await axios.delete(`${BASE_URL}/${drink.id}`);
+      const response = await axios.delete(`${BASE_URL}/Drink/${drink.id}`);
       console.log("Post request successful:", response.data);
       if(response.status === 201){
         openNotificationWithIcon("success", "delete", drink.name);
@@ -243,10 +278,15 @@ export default function Page({ params }: any) {
     }
   };
   const handleCreateProduct = async (value: any) => {
+    console.log("pavic create", value,createProductCategoryId)
     try {
-      const response = await axios.post(`${BASE_URL}`, {
-        ...value
-      });
+      const response = await axios.post(`${BASE_URL}/Drink`,{
+        "categoryId": createProductCategoryId,
+        "name": value.drinkName,
+        "price": value.drinkPrice,
+        "image": value.productImage,
+        "description": null
+      } );
       if(response.status === 201){
         openNotificationWithIcon(
           "success",
@@ -267,9 +307,15 @@ export default function Page({ params }: any) {
   };
 
   const handleUpdateEditMenu = async (editMenuData: any) => {
+    console.log("pavic editMenuData",editMenuData)
     try {
-      const response = await axios.patch(`${BASE_URL}`, {
-        ...editMenuData
+      const response = await axios.patch(`${BASE_URL}/Company`, {
+        "id": company?.id,
+        "menuThemeColor": editMenuData.menuBackgroundColor,
+        "categoryTitleColor": editMenuData.categoryTitleBackgroundColor,
+        "categoryTextTitleColor": editMenuData.categoryTextColor,
+        "headerTextColor": editMenuData.categoryTextColor,
+        "headerImage": editMenuData.headerImgUrl ? editMenuData.headerImgUrl : company?.headerImage,
       });
       if(response.status === 201){
         openNotificationWithIcon("success", "editMenu");
@@ -345,6 +391,7 @@ export default function Page({ params }: any) {
         edgestore={edgestore}
         setProductImgUrl={setProductImgUrl}
         handleCreateProduct={handleCreateProduct}
+        setCreateProductCategoryId={setCreateProductCategoryId}
       />
 
       <EditMenuModal

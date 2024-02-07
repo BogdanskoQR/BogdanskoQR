@@ -34,6 +34,7 @@ interface CreateProductModalProps {
       | undefined
   ) => void;
   handleCreateProduct: (value: any) => void;
+  setCreateProductCategoryId: (value:number) => void
 }
 
 const CreateProductModal = ({
@@ -49,11 +50,12 @@ const CreateProductModal = ({
   edgestore,
   setProductImgUrl,
   handleCreateProduct,
+  setCreateProductCategoryId
 }: CreateProductModalProps) => {
   return (
     <Formik
       initialValues={{
-        categoryName: 0,
+        categoryId: 0,
         drinkName: "",
         drinkPrice: 0,
         productImage: productImgUrl,
@@ -64,17 +66,16 @@ const CreateProductModal = ({
         setIsCreateDrinkModalOpen(false);
       }}
     >
-      {({values, handleSubmit, setFieldValue,resetForm }) => (
+      {({ values, handleSubmit, setFieldValue, resetForm }) => (
         <Modal
           title="Create Product"
           open={isCreateDrinkModalOpen}
           onOk={() => {
             handleSubmit();
             closeModal("drink");
-            setTimeout(()=> {
-              resetForm()
-            },1000)
-            
+            setTimeout(() => {
+              resetForm();
+            }, 1000);
           }}
           onCancel={() => {
             closeModal("drink");
@@ -89,8 +90,8 @@ const CreateProductModal = ({
                   value: oneCategory.categoryId,
                   label: oneCategory.categoryName,
                 }))}
-                onSelect={(value: Category) =>
-                  setFieldValue("categoryName", value.categoryName)
+                onSelect={(value: number) =>
+                  setCreateProductCategoryId(value)
                 }
               />
             </div>
