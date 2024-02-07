@@ -1,0 +1,11 @@
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\bin\Debug\net6.0\BogdanskoQRWebApi.DTOs.deps.json
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\bin\Debug\net6.0\BogdanskoQRWebApi.DTOs.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\bin\Debug\net6.0\BogdanskoQRWebApi.DTOs.pdb
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\obj\Debug\net6.0\BogdanskoQRWebApi.DTOs.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\obj\Debug\net6.0\BogdanskoQRWebApi.DTOs.AssemblyInfoInputs.cache
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\obj\Debug\net6.0\BogdanskoQRWebApi.DTOs.AssemblyInfo.cs
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\obj\Debug\net6.0\BogdanskoQRWebApi.DTOs.csproj.CoreCompileInputs.cache
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\obj\Debug\net6.0\BogdanskoQRWebApi.DTOs.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\obj\Debug\net6.0\refint\BogdanskoQRWebApi.DTOs.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\obj\Debug\net6.0\BogdanskoQRWebApi.DTOs.pdb
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DTOs\obj\Debug\net6.0\ref\BogdanskoQRWebApi.DTOs.dll

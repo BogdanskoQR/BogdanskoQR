@@ -1,0 +1,47 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "BogdanskoQRWebApi.Mappers/1.0.0": {
+        "dependencies": {
+          "BogdanskoQRWebApi.DTOs": "1.0.0",
+          "BogdanskoQRWebApi.Domain": "1.0.0"
+        },
+        "runtime": {
+          "BogdanskoQRWebApi.Mappers.dll": {}
+        }
+      },
+      "BogdanskoQRWebApi.Domain/1.0.0": {
+        "runtime": {
+          "BogdanskoQRWebApi.Domain.dll": {}
+        }
+      },
+      "BogdanskoQRWebApi.DTOs/1.0.0": {
+        "runtime": {
+          "BogdanskoQRWebApi.DTOs.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "BogdanskoQRWebApi.Mappers/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BogdanskoQRWebApi.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "BogdanskoQRWebApi.DTOs/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

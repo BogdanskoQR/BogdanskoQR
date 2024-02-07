@@ -1,0 +1,17 @@
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\bin\Debug\net6.0\BogdanskoQRWebApi.DataAccess.deps.json
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\bin\Debug\net6.0\BogdanskoQRWebApi.DataAccess.runtimeconfig.json
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\bin\Debug\net6.0\BogdanskoQRWebApi.DataAccess.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\bin\Debug\net6.0\BogdanskoQRWebApi.DataAccess.pdb
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\bin\Debug\net6.0\BogdanskoQRWebApi.Domain.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\bin\Debug\net6.0\BogdanskoQRWebApi.Domain.pdb
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\BogdanskoQRWebApi.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\BogdanskoQRWebApi.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\BogdanskoQRWebApi.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\BogdanskoQRWebApi.DataAccess.AssemblyInfo.cs
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\BogdanskoQRWebApi.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\BogdanskoQRWebApi.DataAccess.csproj.CopyComplete
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\BogdanskoQRWebApi.DataAccess.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\refint\BogdanskoQRWebApi.DataAccess.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\BogdanskoQRWebApi.DataAccess.pdb
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\BogdanskoQRWebApi.DataAccess.genruntimeconfig.cache
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.DataAccess\obj\Debug\net6.0\ref\BogdanskoQRWebApi.DataAccess.dll

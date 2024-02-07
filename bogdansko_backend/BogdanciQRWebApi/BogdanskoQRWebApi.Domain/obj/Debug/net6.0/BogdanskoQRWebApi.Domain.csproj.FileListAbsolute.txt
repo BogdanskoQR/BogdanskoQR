@@ -1,0 +1,11 @@
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\bin\Debug\net6.0\BogdanskoQRWebApi.Domain.deps.json
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\bin\Debug\net6.0\BogdanskoQRWebApi.Domain.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\bin\Debug\net6.0\BogdanskoQRWebApi.Domain.pdb
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\obj\Debug\net6.0\BogdanskoQRWebApi.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\obj\Debug\net6.0\BogdanskoQRWebApi.Domain.AssemblyInfoInputs.cache
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\obj\Debug\net6.0\BogdanskoQRWebApi.Domain.AssemblyInfo.cs
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\obj\Debug\net6.0\BogdanskoQRWebApi.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\obj\Debug\net6.0\BogdanskoQRWebApi.Domain.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\obj\Debug\net6.0\refint\BogdanskoQRWebApi.Domain.dll
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\obj\Debug\net6.0\BogdanskoQRWebApi.Domain.pdb
+C:\Users\Dragan\Desktop\BogdanskoQR\bogdansko_backend\BogdanciQRWebApi\BogdanskoQRWebApi.Domain\obj\Debug\net6.0\ref\BogdanskoQRWebApi.Domain.dll
