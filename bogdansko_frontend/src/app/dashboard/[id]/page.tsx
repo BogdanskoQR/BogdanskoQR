@@ -166,7 +166,9 @@ export default function Page({ params }: any) {
 
   const handleUpdateCategory = async (categoryUpdateData: Category) => {
     try {
-      const response = await axios.patch(`${BASE_URL}`, categoryUpdateData);
+      const response = await axios.patch(`${BASE_URL}`, {
+        ...categoryUpdateData
+      });
       console.log("Post request successful:", response.data);
     } catch (error) {
       console.error("Error making post request:", error);
@@ -191,12 +193,17 @@ export default function Page({ params }: any) {
   const handleCreateCategory = async (value: any) => {
     console.log("pavic create category values", value);
     try {
-      const response = await axios.post(`${BASE_URL}`, value);
-      openNotificationWithIcon(
-        "success",
-        "text",
-        `Successfully Created ${value.categoryName} category`
-      );
+      const response = await axios.post(`${BASE_URL}`, {
+        ...value
+      });
+      if(response.status === 201){
+        openNotificationWithIcon(
+          "success",
+          "text",
+          `Successfully Created ${value.categoryName} category`
+        );
+      }
+
       console.log("Post request successful:", response.data);
     } catch (error) {
       console.error("Error making post request:", error);
@@ -206,7 +213,9 @@ export default function Page({ params }: any) {
   const handleUpdateProduct = async (drinkUpdateData: Drink) => {
     if (editedDrink) {
       try {
-        const response = await axios.patch(`${BASE_URL}`, drinkUpdateData);
+        const response = await axios.patch(`${BASE_URL}`, {
+          ...drinkUpdateData
+        });
         console.log("Post request successful:", response.data);
         if (response.status === 201) {
           openNotificationWithIcon("success", "update", editDrinkName);
@@ -225,7 +234,9 @@ export default function Page({ params }: any) {
     try {
       const response = await axios.delete(`${BASE_URL}/${drink.id}`);
       console.log("Post request successful:", response.data);
-      openNotificationWithIcon("success", "delete", drink.name);
+      if(response.status === 201){
+        openNotificationWithIcon("success", "delete", drink.name);
+      }
     } catch (error) {
       console.error("Error making post request:", error);
       openNotificationWithIcon("success", "delete", drink.name);
@@ -233,7 +244,16 @@ export default function Page({ params }: any) {
   };
   const handleCreateProduct = async (value: any) => {
     try {
-      const response = await axios.post(`${BASE_URL}`, value);
+      const response = await axios.post(`${BASE_URL}`, {
+        ...value
+      });
+      if(response.status === 201){
+        openNotificationWithIcon(
+          "success",
+          "create",
+          `product with name ${value.drinkName}`
+        );
+      }
       console.log("Post request successful:", response.data);
     } catch (error) {
       console.error("Error making post request:", error);
@@ -248,7 +268,12 @@ export default function Page({ params }: any) {
 
   const handleUpdateEditMenu = async (editMenuData: any) => {
     try {
-      const response = await axios.patch(`${BASE_URL}`, editMenuData);
+      const response = await axios.patch(`${BASE_URL}`, {
+        ...editMenuData
+      });
+      if(response.status === 201){
+        openNotificationWithIcon("success", "editMenu");
+      }
       console.log("Post request successful:", response.data);
     } catch (error) {
       console.error("Error making post request:", error);

@@ -61,11 +61,6 @@ const CreateProductModal = ({
       onSubmit={(values) => {
         handleCreateProduct(values);
         console.log("pavic values", values);
-        openNotificationWithIcon(
-          "success",
-          "create",
-          `product with name ${values.drinkName}`
-        );
         setIsCreateDrinkModalOpen(false);
       }}
     >

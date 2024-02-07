@@ -63,7 +63,6 @@ const EditMenuModal = ({
           "pavic",
           menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl,company?.headerImage
         );
-        openNotificationWithIcon("success", "editMenu");
         handleUpdateEditMenu({menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl})
       }}
       onCancel={() => closeModal("editMenu")}
