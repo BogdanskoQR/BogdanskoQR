@@ -20,14 +20,14 @@ export default function Page({ params }: any) {
     if (storedCategoryData) {
       setSelectedCategory(
         JSON.parse(storedCategoryData).find(
-          (category: Category) => category.Id === Number(params.id)
+          (category: Category) => category.id === Number(params.id)
         )
       );
     }
   }, []);
 
   const onBackClick = () => {
-    router.push(`/${company?.Name}/menu`);
+    router.push(`/${company?.name}/menu`);
   };
 
   if (!selectedCategory) {
@@ -35,7 +35,7 @@ export default function Page({ params }: any) {
   }
 
   const isCocktailsCategory =
-    selectedCategory?.Name?.toLowerCase() === "cocktails";
+    selectedCategory?.name?.toLowerCase() === "cocktails";
 
   return (
     <div className="categoryDetailsPageWrapper">
@@ -43,21 +43,21 @@ export default function Page({ params }: any) {
         <LeftOutlined />
       </p>
       <div className="coffeeImage">
-        <img src={company?.HeaderImage} alt="" />
+        <img src={company?.headerImage} alt="" />
       </div>
 
       <div className="menuItemHeader">
         <div className="menuItemHeadingName">
-          <h2 style={{ color: company?.HeaderTextColor }}>Maxim</h2>
-          <h3 style={{ color: company?.HeaderTextColor }}>Coffee Bar</h3>
+          <h2 style={{ color: company?.headerTextColor }}>Maxim</h2>
+          <h3 style={{ color: company?.headerTextColor }}>Coffee Bar</h3>
         </div>
       </div>
       <div
         className="categoryDetails"
-        style={{ background: company?.MenuThemeColor }}
+        style={{ background: company?.menuThemeColor }}
       >
         <div
-          key={selectedCategory.Name}
+          key={selectedCategory.name}
           className={`oneMenuTableCategory ${
             isCocktailsCategory ? "cocktailsCategory" : ""
           }`}
@@ -70,29 +70,29 @@ export default function Page({ params }: any) {
               fontWeight: "600",
             }}
           >
-            {selectedCategory.Name}
+            {selectedCategory.name}
           </h3>
-          {selectedCategory.Drinks.map((oneDrink: Drink) => (
+          {selectedCategory.drinks.map((oneDrink: Drink) => (
             <div
-              key={oneDrink.Name}
+              key={oneDrink.name}
               className={`categoryDetailsTableDrinks ${
-                oneDrink.Image ? "coctails" : ""
+                oneDrink.image ? "coctails" : ""
               }`}
             >
-              {oneDrink.Image ? (
+              {oneDrink.image ? (
                 <div className="coctailCategory">
-                  <p>{oneDrink.Name}</p>
+                  <p>{oneDrink.name}</p>
                   <div className="coctelCategoryPrices">
-                    <h3>{oneDrink.Name}</h3>
-                    <img className="coctailImage" src={oneDrink.Image} alt="" />
-                    <p>{oneDrink.Price.toFixed(0)} ден.</p>
+                    <h3>{oneDrink.name}</h3>
+                    <img className="coctailImage" src={oneDrink.image} alt="" />
+                    <p>{oneDrink.price.toFixed(0)} ден.</p>
                   </div>
                   <Divider />
                 </div>
               ) : (
                 <>
-                  <h3>{oneDrink.Name}</h3>
-                  <p>{oneDrink.Price.toFixed(0)} ден.</p>
+                  <h3>{oneDrink.name}</h3>
+                  <p>{oneDrink.price.toFixed(0)} ден.</p>
                 </>
               )}
             </div>

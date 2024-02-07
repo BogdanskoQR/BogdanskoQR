@@ -12,7 +12,7 @@ export default function Page({params}: any) {
   const [categories, setCategories] = useState<Category[]>();
 
   const redirectToCategory = (categoryId: number) => {
-    router.push(`/${company?.Name}/menu/${categoryId}`);
+    router.push(`/${company?.name}/menu/${categoryId}`);
   };
 
   useEffect(() => {
@@ -55,24 +55,24 @@ export default function Page({params}: any) {
   return (
     <div className="menuPageWrapper">
       <div className="coffeeImage">
-        <img src={company?.HeaderImage} alt="companyImage" />
+        <img src={company?.headerImage} alt="companyImage" />
       </div>
       <div className="heading">
         <div className="headingName">
-          <h2 style={{ 'color': company?.HeaderTextColor }}>{company?.Name}</h2>
+          <h2 style={{ 'color': company?.headerTextColor }}>{company?.name}</h2>
         </div>
       </div>
-      <div className="categoriesWrapper" style={{ 'background': company?.MenuThemeColor }}>
+      <div className="categoriesWrapper" style={{ 'background': company?.menuThemeColor }}>
         {categories?.map((oneCategory: Category) => (
           <div
-            key={oneCategory.BackgroundImage}
+            key={oneCategory.backgroundImage}
             className="oneCategorieCart"
-            onClick={() => redirectToCategory(oneCategory.Id)}
+            onClick={() => redirectToCategory(oneCategory.id)}
           >
-            <div className="categorieTitle" style={{ 'background': company?.CategoryTitleColor }}>
-              <h3 style={{ 'color': company?.CategoryTextTitleColor }}>{oneCategory.Name}</h3>
+            <div className="categorieTitle" style={{ 'background': company?.categoryTitleColor }}>
+              <h3 style={{ 'color': company?.categoryTextTitleColor }}>{oneCategory.name}</h3>
             </div>
-            <img src={oneCategory.BackgroundImage} alt="img" />
+            <img src={oneCategory.backgroundImage} alt="img" />
           </div>
         ))}
       </div>

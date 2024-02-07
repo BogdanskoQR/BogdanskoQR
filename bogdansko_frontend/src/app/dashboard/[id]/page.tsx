@@ -68,15 +68,15 @@ export default function Page({ params }: any) {
   const [isEditProductModalShown, setIsEditProductModalShown] = useState(false);
   const [isEditMenuModalOpen, setIsEditMenuModalOpen] = useState(false);
   const [menuBackgroundColor, setMenuBackgroundColor] = useState(
-    company?.MenuThemeColor
+    company?.menuThemeColor
   );
   const [categoryTitleBackgroundColor, setCategoryTitleBackgroundColor] =
-    useState(company?.CategoryTitleColor);
+    useState(company?.categoryTitleColor);
   const [categoryTextColor, setCategoryTextColor] = useState(
-    company?.CategoryTextTitleColor
+    company?.categoryTextTitleColor
   );
   const [headerTextColor, setHeaderTextColor] = useState(
-    company?.HeaderTextColor
+    company?.headerTextColor
   );
   const [editedDrink, setEditedDrink] = useState<Drink | null>(null);
   const [editDrinkName, setEditDrinkName] = useState<string>("");
@@ -168,16 +168,16 @@ export default function Page({ params }: any) {
 
   const handleEditDrink = (drink: Drink, drinkCategoryId: number): void => {
     setEditedDrink(drink);
-    setEditDrinkName(drink.Name);
-    setEditDrinkPrice(drink.Price.toFixed(2));
-    setEditProductImage(drink?.Image);
+    setEditDrinkName(drink.name);
+    setEditDrinkPrice(drink.price.toFixed(2));
+    setEditProductImage(drink?.image);
     setEditDrinkCategoryId(drinkCategoryId);
   };
 
   const handleEditCategory = async (category: Category) => {
-    setEditCategoryName(category.Name);
-    setEditCategoryImg(category.BackgroundImage);
-    setEditCategoryId(category.Id);
+    setEditCategoryName(category.name);
+    setEditCategoryImg(category.backgroundImage);
+    setEditCategoryId(category.id);
   };
 
   const handleUpdateCategory = async (categoryUpdateData: Category) => {
@@ -185,15 +185,15 @@ export default function Page({ params }: any) {
       await axios.patch(`${BASE_URL}/Category`, {
         id: editCategoryId,
         companyId: Number(params.id),
-        name: categoryUpdateData.Name,
-        backgroundImage: categoryUpdateData.BackgroundImage,
+        name: categoryUpdateData.name,
+        backgroundImage: categoryUpdateData.backgroundImage,
       });
-      openNotificationWithIcon("success", "update", categoryUpdateData.Name);
+      openNotificationWithIcon("success", "update", categoryUpdateData.name);
       console.log("pavic category", {
         id: editCategoryId,
         companyId: Number(params.id),
-        name: categoryUpdateData.Name,
-        backgroundImage: categoryUpdateData.BackgroundImage,
+        name: categoryUpdateData.name,
+        backgroundImage: categoryUpdateData.backgroundImage,
       });
     } catch (error) {
       openNotificationWithIcon(
@@ -205,11 +205,11 @@ export default function Page({ params }: any) {
   };
   const handleDeleteCategory = async (category: Category) => {
     try {
-      await axios.delete(`${BASE_URL}/${category.Id}`);
+      await axios.delete(`${BASE_URL}/${category.id}`);
       openNotificationWithIcon(
         "success",
         "text",
-        `Successfully deleted ${category.Name} category`
+        `Successfully deleted ${category.name} category`
       );
     } catch (error) {
       openNotificationWithIcon(
@@ -251,7 +251,7 @@ export default function Page({ params }: any) {
     if (editedDrink) {
       try {
         await axios.patch(`${BASE_URL}/Drink`, {
-          id: editedDrink.Id,
+          id: editedDrink.id,
           categoryId: editDrinkCategoryId,
           name: drinkUpdateData.editDrinkName,
           price: drinkUpdateData.editDrinkPrice,
@@ -259,7 +259,7 @@ export default function Page({ params }: any) {
           description: null,
         });
         console.log("pavic data:", {
-          id: editedDrink.Id,
+          id: editedDrink.id,
           categoryId: editDrinkCategoryId,
           name: drinkUpdateData.editDrinkName,
           price: drinkUpdateData.editDrinkPrice,
@@ -283,9 +283,9 @@ export default function Page({ params }: any) {
 
   const handleRemoveDrink = async (drink: Drink) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/Drink/${drink.Id}`);
+      const response = await axios.delete(`${BASE_URL}/Drink/${drink.id}`);
       console.log("Post request successful:", response.data);
-      openNotificationWithIcon("success", "delete", drink.Name);
+      openNotificationWithIcon("success", "delete", drink.name);
     } catch (error) {
       console.error("Error making post request:", error);
       openNotificationWithIcon("error", "text", `Error while deleting drink`);
@@ -327,7 +327,7 @@ export default function Page({ params }: any) {
         headerTextColor: editMenuData.categoryTextColor,
         headerImage: editMenuData.headerImgUrl
           ? editMenuData.headerImgUrl
-          : company?.HeaderImage,
+          : company?.headerImage,
       });
       openNotificationWithIcon("success", "editMenu");
       console.log("pavic data:", {
@@ -338,7 +338,7 @@ export default function Page({ params }: any) {
         headerTextColor: editMenuData.categoryTextColor,
         headerImage: editMenuData.headerImgUrl
           ? editMenuData.headerImgUrl
-          : company?.HeaderImage,
+          : company?.headerImage,
       });
     } catch (error) {
       openNotificationWithIcon("error", "text", `Error while updating menu`);
@@ -357,9 +357,9 @@ export default function Page({ params }: any) {
   return (
     <div className="menuPageWrapper">
       <Header
-        companyName={company?.Name}
+        companyName={company?.name}
         onLogout={onLogoutButton}
-        logoUrl={company?.CompanyLogo}
+        logoUrl={company?.companyLogo}
       />
       <div className="addButtons">
         <Button type="primary" onClick={() => openModal("category")}>
@@ -422,7 +422,7 @@ export default function Page({ params }: any) {
         categoryTextColor={categoryTextColor}
         closeModal={closeModal}
         headerImgUrl={headerImgUrl}
-        companyHeaderImg={company?.HeaderImage}
+        companyHeaderImg={company?.headerImage}
         headerTextColor={headerTextColor}
         categories={categoires}
         setHeaderImgFile={setHeaderImgFile}

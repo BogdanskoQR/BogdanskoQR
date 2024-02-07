@@ -87,7 +87,7 @@ const EditMenuModal = ({
             >
               {categories?.slice(0, 3).map((oneCategory: Category) => (
                 <div
-                  key={oneCategory.Name}
+                  key={oneCategory.name}
                   className="oneCategorieCart"
                 >
                   <div
@@ -95,10 +95,10 @@ const EditMenuModal = ({
                     style={{ background: categoryTitleBackgroundColor }}
                   >
                     <h3 style={{ color: categoryTextColor }}>
-                      {oneCategory.Name}
+                      {oneCategory.name}
                     </h3>
                   </div>
-                  <img src={oneCategory.BackgroundImage} alt="img" />
+                  <img src={oneCategory.backgroundImage} alt="img" />
                 </div>
               ))}
             </div>

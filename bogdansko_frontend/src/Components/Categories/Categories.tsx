@@ -24,7 +24,7 @@ const Categories = ({
   return (
     <>
       {categories?.map((category: Category) => (
-        <div key={category.Id} className="category">
+        <div key={category.id} className="category">
           <div className="categoryHeader">
             <Popconfirm
               title="Delete the Category"
@@ -48,20 +48,20 @@ const Categories = ({
                 <EditOutlined />
               </Button>
             </div>
-            <h2>{category.Name}</h2>
+            <h2>{category.name}</h2>
           </div>
 
           <div className="categoryBody">
             <ul className="drinksWrapper">
-              {category.Drinks.map((drink: Drink) => (
-                <li key={drink.Id} className="drink">
+              {category.drinks.map((drink: Drink) => (
+                <li key={drink.id} className="drink">
                   <>
-                    {drink.Name} - ${drink.Price.toFixed(2)}
+                    {drink.name} - ${drink.price.toFixed(2)}
                     <div className="drinkButtons">
                       <EditOutlined
                         style={{ padding: "7px" }}
                         onClick={() => {
-                          handleEditDrink(drink,category.Id);
+                          handleEditDrink(drink,category.id);
                           setIsEditProductModalShown(true);
                         }}
                       />
