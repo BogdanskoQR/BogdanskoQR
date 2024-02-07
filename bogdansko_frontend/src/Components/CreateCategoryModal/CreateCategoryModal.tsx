@@ -7,7 +7,6 @@ interface CreateCategoryModalProps {
   edgestore: any;
   handleAddMoreDrinks: any;
   isOpen: boolean;
-  onAddMoreDrinks: any;
   onCategorySubmit: (value: any) => void;
   onClose: () => void;
   setCategoryImgFile: (value: File | undefined) => void;
@@ -24,7 +23,6 @@ const CreateCategoryModal = ({
   edgestore,
   handleAddMoreDrinks,
   isOpen,
-  onAddMoreDrinks,
   onCategorySubmit,
   onClose,
   setCategoryImgFile,

@@ -1,7 +1,6 @@
-import { NotificationType } from "@/app/dashboard/[id]/page";
 import { UploadOutlined } from "@ant-design/icons";
 import { Modal, Input, Button } from "antd";
-import { Formik, Form, useFormik } from "formik";
+import { Formik, Form } from "formik";
 import React from "react";
 
 interface EditCategoryModalProps {
@@ -21,11 +20,6 @@ interface EditCategoryModalProps {
   editCategoryImgFile: File | undefined;
   setEditCategoryImgFile: (value: File | undefined) => void;
   edgestore: any;
-  openNotificationWithIcon: (
-    type: NotificationType,
-    point: string,
-    drinkName?: string
-  ) => void;
   editCategoryImg: string | undefined;
   handleUpdateCategory: (value:any) => void;
 }
@@ -40,7 +34,6 @@ const EditCategoryModal = ({
   editCategoryImgFile,
   setEditCategoryImgFile,
   edgestore,
-  openNotificationWithIcon,
   editCategoryImg,
   handleUpdateCategory
 }: EditCategoryModalProps) => {
@@ -52,8 +45,6 @@ const EditCategoryModal = ({
       }}
       onSubmit={(values) => {
         handleUpdateCategory(values);
-        console.log("pavic edit Category Form values:", values,editCategoryImg);
-        openNotificationWithIcon("success", "update", values.editCategoryName);
         setIsEditCategoryModalOpen(false);
         setEditCategoryName("");
         setEditCategoryImageUrl(undefined)

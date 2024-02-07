@@ -1,19 +1,13 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Modal, Select, Input, Button } from "antd";
-import { Formik, Form, useFormikContext } from "formik";
+import { Formik, Form } from "formik";
 import React from "react";
 import { Category, Drink } from "../Types/types";
-import { NotificationType } from "@/app/dashboard/[id]/page";
 
 interface CreateProductModalProps {
   isCreateDrinkModalOpen: boolean;
   setIsCreateDrinkModalOpen: (value: boolean) => void;
   closeModal: (modalType: "category" | "drink" | "editMenu") => void;
-  openNotificationWithIcon: (
-    type: NotificationType,
-    point: string,
-    drinkName?: string
-  ) => void;
   productImgUrl:
     | {
         url: string;
@@ -21,7 +15,6 @@ interface CreateProductModalProps {
       }
     | undefined;
   categories: any;
-  setSelectedNewDrink: any;
   setProductImgFile: (value: File | undefined) => void;
   productImgFile: File | undefined;
   edgestore: any;
@@ -41,10 +34,8 @@ const CreateProductModal = ({
   isCreateDrinkModalOpen,
   setIsCreateDrinkModalOpen,
   closeModal,
-  openNotificationWithIcon,
   productImgUrl,
   categories,
-  setSelectedNewDrink,
   setProductImgFile,
   productImgFile,
   edgestore,

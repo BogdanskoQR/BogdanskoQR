@@ -2,7 +2,6 @@ import { UploadOutlined } from "@ant-design/icons";
 import { Modal, Button, ColorPicker } from "antd";
 import React from "react";
 import { Category } from "../Types/types";
-import { NotificationType } from "@/app/dashboard/[id]/page";
 
 interface EditMenuModalProps {
   isEditMenuModalOpen: boolean;
@@ -10,7 +9,6 @@ interface EditMenuModalProps {
   categoryTitleBackgroundColor: string | undefined;
   categoryTextColor: string | undefined;
   closeModal: (modalType: "category" | "drink" | "editMenu") => void;
-  openNotificationWithIcon: (type: NotificationType, modalType: string) => void;
   headerImgUrl?:
     | {
         url: string;
@@ -36,7 +34,6 @@ const EditMenuModal = ({
   categoryTitleBackgroundColor,
   categoryTextColor,
   closeModal,
-  openNotificationWithIcon,
   headerImgUrl,
   company,
   headerTextColor,

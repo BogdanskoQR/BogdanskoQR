@@ -25,11 +25,6 @@ interface EditProductModalProps {
   edgestore: any;
   editProductImgFile: File | undefined;
   setEditProductImgFile: (value: File | undefined) => void;
-  openNotificationWithIcon: (
-    type: NotificationType,
-    point: string,
-    drinkName?: string
-  ) => void;
   handleUpdateProduct: (value: any) => any;
 }
 
@@ -47,7 +42,6 @@ const EditProductModal = ({
   edgestore,
   editProductImgFile,
   setEditProductImgFile,
-  openNotificationWithIcon,
   handleUpdateProduct,
 }: EditProductModalProps) => {
   return (
@@ -59,12 +53,6 @@ const EditProductModal = ({
       }}
       onSubmit={async (values) => {
         await handleUpdateProduct({editDrinkName,editDrinkPrice,editProductImgUrl});
-        console.log("pavic tes", {editDrinkName,editDrinkPrice,editProductImgUrl,editProductImage});
-        openNotificationWithIcon(
-          "success",
-          "update",
-          `product with name ${values.drinkName}`
-        );
         setIsEditProductModalShown(false);
         setEditProductImage('')
         setEditProductImgFile(undefined)
