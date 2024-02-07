@@ -1,53 +1,63 @@
-"use client";
 import { LeftOutlined } from "@ant-design/icons";
 import "./CategoryDetails.css";
 import { useRouter } from "next/navigation";
-import { companyDetails } from "../../../../data/drinksData";
 import { Divider } from "antd";
-export default function Page({ params }: any) {
+import { Company, Category, Drink } from "@/Components/Types/types";
+import { useState, useEffect } from "react";
 
-  const company = companyDetails.find(
-    (company) => company.name === params.slog
-  );
+export default function Page({ params }: any) {
   const router = useRouter();
-  const selectedCategory = company?.menu.find(
-    (category) => category.categoryId === Number(params.id)
-  );
+  const [company, setCompany] = useState<Company>();
+  const [selectedCategory, setSelectedCategory] = useState<Category>();
+
+  useEffect(() => {
+    const storedCompanyData = localStorage.getItem("companyData");
+    if (storedCompanyData) {
+      setCompany(JSON.parse(storedCompanyData));
+    }
+
+    const storedCategoryData = localStorage.getItem("categories");
+    if (storedCategoryData) {
+      setSelectedCategory(
+        JSON.parse(storedCategoryData).find(
+          (category: Category) => category.Id === Number(params.id)
+        )
+      );
+    }
+  }, []);
+
+  const onBackClick = () => {
+    router.push(`/${company?.Name}/menu`);
+  };
+
   if (!selectedCategory) {
     return null;
   }
 
   const isCocktailsCategory =
-    selectedCategory?.categoryName?.toLowerCase() === "cocktails";
+    selectedCategory?.Name?.toLowerCase() === "cocktails";
 
-  const onBackClick = () => {
-    router.push(`/${company?.name}/menu`);
-  };
-  
   return (
     <div className="categoryDetailsPageWrapper">
       <p className="backButton" onClick={onBackClick}>
         <LeftOutlined />
       </p>
       <div className="coffeeImage">
-        <img
-          src={company?.headerImage}
-          alt=""
-        />
+        <img src={company?.HeaderImage} alt="" />
       </div>
 
       <div className="menuItemHeader">
         <div className="menuItemHeadingName">
-          <h2 style={{ color: company?.headerTextColor }}>Maxim</h2>
-          <h3 style={{ color: company?.headerTextColor }}>Coffee Bar</h3>
+          <h2 style={{ color: company?.HeaderTextColor }}>Maxim</h2>
+          <h3 style={{ color: company?.HeaderTextColor }}>Coffee Bar</h3>
         </div>
       </div>
       <div
         className="categoryDetails"
-        style={{ background: company?.menuThemeColor }}
+        style={{ background: company?.MenuThemeColor }}
       >
         <div
-          key={selectedCategory.categoryName}
+          key={selectedCategory.Name}
           className={`oneMenuTableCategory ${
             isCocktailsCategory ? "cocktailsCategory" : ""
           }`}
@@ -60,29 +70,29 @@ export default function Page({ params }: any) {
               fontWeight: "600",
             }}
           >
-            {selectedCategory.categoryName}
+            {selectedCategory.Name}
           </h3>
-          {selectedCategory.drinks.map((oneDrink) => (
+          {selectedCategory.Drinks.map((oneDrink: Drink) => (
             <div
-              key={oneDrink.name}
+              key={oneDrink.Name}
               className={`categoryDetailsTableDrinks ${
-                oneDrink.img ? "coctails" : ""
+                oneDrink.Image ? "coctails" : ""
               }`}
             >
-              {oneDrink.img ? (
+              {oneDrink.Image ? (
                 <div className="coctailCategory">
-                  <p>{oneDrink.name}</p>
+                  <p>{oneDrink.Name}</p>
                   <div className="coctelCategoryPrices">
-                    <h3>{oneDrink.name}</h3>
-                    <img className="coctailImage" src={oneDrink.img} alt="" />
-                    <p>{oneDrink.price.toFixed(0)} ден.</p>
+                    <h3>{oneDrink.Name}</h3>
+                    <img className="coctailImage" src={oneDrink.Image} alt="" />
+                    <p>{oneDrink.Price.toFixed(0)} ден.</p>
                   </div>
                   <Divider />
                 </div>
               ) : (
                 <>
-                  <h3>{oneDrink.name}</h3>
-                  <p>{oneDrink.price.toFixed(0)} ден.</p>
+                  <h3>{oneDrink.Name}</h3>
+                  <p>{oneDrink.Price.toFixed(0)} ден.</p>
                 </>
               )}
             </div>

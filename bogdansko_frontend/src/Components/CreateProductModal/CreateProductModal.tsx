@@ -78,8 +78,8 @@ const CreateProductModal = ({
               <Select
                 className="createProductSelect"
                 options={categories?.map((oneCategory: Category) => ({
-                  value: oneCategory.categoryId,
-                  label: oneCategory.categoryName,
+                  value: oneCategory.Id,
+                  label: oneCategory.Name,
                 }))}
                 onSelect={(value: number) =>
                   setCreateProductCategoryId(value)

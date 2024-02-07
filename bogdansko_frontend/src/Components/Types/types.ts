@@ -7,13 +7,14 @@ export interface Drink {
   }
   
 export interface Category {
-    categoryId: number;
+    Id: number;
     Name: string;
     BackgroundImage: string;
     Drinks: Drink[];
   }
   
 export interface Company {
+    Id: number
     Name: string
     Email: string;
     Password: string;
@@ -23,7 +24,6 @@ export interface Company {
     HeaderTextColor: string;
     HeaderImage: string;
     CompanyLogo: string;
-    Categories: Category[];
   }
 
 export const BASE_URL = 'http://localhost:5119/api'

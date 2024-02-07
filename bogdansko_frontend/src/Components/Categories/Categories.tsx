@@ -1,18 +1,6 @@
 import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Popconfirm, Button } from "antd";
-
-interface Drink {
-  id: number;
-  name: string;
-  price: number;
-  img?: string;
-}
-
-interface Category {
-  categoryId: number;
-  categoryName: string;
-  drinks: Drink[];
-}
+import { Category, Drink } from "../Types/types";
 
 // interface CategoriesProps {
 //   categories?: Category[];
@@ -36,7 +24,7 @@ const Categories = ({
   return (
     <>
       {categories?.map((category: Category) => (
-        <div key={category.categoryId} className="category">
+        <div key={category.Id} className="category">
           <div className="categoryHeader">
             <Popconfirm
               title="Delete the Category"
@@ -60,20 +48,20 @@ const Categories = ({
                 <EditOutlined />
               </Button>
             </div>
-            <h2>{category.categoryName}</h2>
+            <h2>{category.Name}</h2>
           </div>
 
           <div className="categoryBody">
             <ul className="drinksWrapper">
-              {category.drinks.map((drink: Drink) => (
-                <li key={drink.id} className="drink">
+              {category.Drinks.map((drink: Drink) => (
+                <li key={drink.Id} className="drink">
                   <>
-                    {drink.name} - ${drink.price.toFixed(2)}
+                    {drink.Name} - ${drink.Price.toFixed(2)}
                     <div className="drinkButtons">
                       <EditOutlined
                         style={{ padding: "7px" }}
                         onClick={() => {
-                          handleEditDrink(drink,category.categoryId);
+                          handleEditDrink(drink,category.Id);
                           setIsEditProductModalShown(true);
                         }}
                       />

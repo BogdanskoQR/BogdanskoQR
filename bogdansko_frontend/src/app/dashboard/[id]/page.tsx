@@ -1,5 +1,4 @@
 "use client";
-import { companyDetails } from "../../../data/drinksData";
 import { useEffect, useState } from "react";
 import "./DashboardPage.css";
 import { Button, notification } from "antd";
@@ -14,68 +13,51 @@ import EditMenuModal from "@/Components/EditMenuModal/EditMenuModal";
 import EditProductModal from "@/Components/EditProductModal/EditProductModal";
 import EditCategoryModal from "@/Components/EditCategoryModal/EditCategoryModal";
 import axios from "axios";
-import { BASE_URL, Company } from "@/Components/Types/types";
+import { BASE_URL, Category, Company, Drink } from "@/Components/Types/types";
 
 export type NotificationType = "success" | "info" | "warning" | "error";
-
-interface Drink {
-  id: number;
-  name: string;
-  price: number;
-  img?: string;
-}
-
-interface Category {
-  id: number;
-  categoryName: string;
-  categoryBackgroundImg: string;
-  drinks: Drink[];
-}
-
 interface FormCategoryValues {
   categoryName: string;
   drinks: Drink[];
 }
-
 export default function Page({ params }: any) {
-  // const [company,setCompany] = useState<Company>()
-  // const [categoires,setCategories] = useState()
-  // useEffect(() => {
-  //   const fetchCompanyData = async () => {
-  //     try {
-  //       await axios.get(`${BASE_URL}Company/${Number(params.id)}`);
-  //       console.log("pavic response",response)
-  //       const fetchedCompanyData: Company = response.data;
-  //       setCompany(fetchedCompanyData);
-  //       console.log("pavic company",fetchedCompanyData  )
-  //     } catch (error) {
-  //       console.error('Error fetching company data:', error);
-  //     }
-  //   };
-  //   fetchCompanyData();
-  //   return () => {
-  //   };
-  // }, [params.id]);
+  const [company, setCompany] = useState<Company>();
+  const [categoires, setCategories] = useState<Category[]>();
+  useEffect(() => {
+    const fetchCompanyData = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}Company/${Number(params.id)}`
+        );
+        console.log("pavic response", response);
+        const fetchedCompanyData: Company = response.data;
+        setCompany(fetchedCompanyData);
+        console.log("pavic company", fetchedCompanyData);
+      } catch (error) {
+        console.error("Error fetching company data:", error);
+      }
+    };
+    fetchCompanyData();
+    return () => {};
+  }, [params.id]);
 
-  // useEffect(() => {
-  //   const fetchCompanyCategories = async () => {
-  //     try {
-  //       await axios.get(`${BASE_URL}Category/${Number(params.id)}`);
-  //       console.log("pavic response",response)
-  //       const fetchedCompanyCategories = response.data;
-  //       setCategories(fetchedCompanyCategories);
-  //       console.log("pavic company",fetchedCompanyData  )
-  //     } catch (error) {
-  //       console.error('Error fetching company data:', error);
-  //     }
-  //   };
-  //   fetchCompanyCategories();
-  //   return () => {
-  //   };
-  // }, []);
-  const company = companyDetails.find(
-    (company) => company.id === Number(params.id)
-  );
+  useEffect(() => {
+    const fetchCompanyCategories = async () => {
+      try {
+        const response = await axios.get(
+          `${BASE_URL}Category/${Number(params.id)}`
+        );
+        console.log("pavic categories response", response);
+        const fetchedCompanyCategories = response.data;
+        setCategories(fetchedCompanyCategories);
+        console.log("pavic fetchedCompanyCategories", fetchedCompanyCategories);
+      } catch (error) {
+        console.error("Error fetching company data:", error);
+      }
+    };
+    fetchCompanyCategories();
+    return () => {};
+  }, [params.id]);
   const [api, contextHolder] = notification.useNotification();
   const [isCreateCategoryModalOpen, setIsCreateCategoryModalOpen] =
     useState<boolean>(false);
@@ -86,17 +68,16 @@ export default function Page({ params }: any) {
   const [isEditProductModalShown, setIsEditProductModalShown] = useState(false);
   const [isEditMenuModalOpen, setIsEditMenuModalOpen] = useState(false);
   const [menuBackgroundColor, setMenuBackgroundColor] = useState(
-    company?.menuThemeColor
+    company?.MenuThemeColor
   );
   const [categoryTitleBackgroundColor, setCategoryTitleBackgroundColor] =
-    useState(company?.categoryTitleColor);
+    useState(company?.CategoryTitleColor);
   const [categoryTextColor, setCategoryTextColor] = useState(
-    company?.categoryTextTitleColor
+    company?.CategoryTextTitleColor
   );
   const [headerTextColor, setHeaderTextColor] = useState(
-    company?.headerTextColor
+    company?.HeaderTextColor
   );
-  const categories = company?.menu;
   const [editedDrink, setEditedDrink] = useState<Drink | null>(null);
   const [editDrinkName, setEditDrinkName] = useState<string>("");
   const [editDrinkPrice, setEditDrinkPrice] = useState<string>("");
@@ -185,38 +166,34 @@ export default function Page({ params }: any) {
     }
   };
 
-  const handleEditDrink = (drink: any, drinkCategoryId: number): void => {
+  const handleEditDrink = (drink: Drink, drinkCategoryId: number): void => {
     setEditedDrink(drink);
-    setEditDrinkName(drink.name);
-    setEditDrinkPrice(drink.price.toFixed(2));
-    setEditProductImage(drink?.img);
+    setEditDrinkName(drink.Name);
+    setEditDrinkPrice(drink.Price.toFixed(2));
+    setEditProductImage(drink?.Image);
     setEditDrinkCategoryId(drinkCategoryId);
   };
 
   const handleEditCategory = async (category: Category) => {
-    setEditCategoryName(category.categoryName);
-    setEditCategoryImg(category.categoryBackgroundImg);
-    setEditCategoryId(category.id);
+    setEditCategoryName(category.Name);
+    setEditCategoryImg(category.BackgroundImage);
+    setEditCategoryId(category.Id);
   };
 
   const handleUpdateCategory = async (categoryUpdateData: Category) => {
     try {
       await axios.patch(`${BASE_URL}/Category`, {
         id: editCategoryId,
-        companyId: company?.id,
-        name: categoryUpdateData.categoryName,
-        backgroundImage: categoryUpdateData.categoryBackgroundImg,
+        companyId: Number(params.id),
+        name: categoryUpdateData.Name,
+        backgroundImage: categoryUpdateData.BackgroundImage,
       });
-      openNotificationWithIcon(
-        "success",
-        "update",
-        categoryUpdateData.categoryName
-      );
+      openNotificationWithIcon("success", "update", categoryUpdateData.Name);
       console.log("pavic category", {
         id: editCategoryId,
-        companyId: company?.id,
-        name: categoryUpdateData.categoryName,
-        backgroundImage: categoryUpdateData.categoryBackgroundImg,
+        companyId: Number(params.id),
+        name: categoryUpdateData.Name,
+        backgroundImage: categoryUpdateData.BackgroundImage,
       });
     } catch (error) {
       openNotificationWithIcon(
@@ -228,11 +205,11 @@ export default function Page({ params }: any) {
   };
   const handleDeleteCategory = async (category: Category) => {
     try {
-      await axios.delete(`${BASE_URL}/${category.id}`);
+      await axios.delete(`${BASE_URL}/${category.Id}`);
       openNotificationWithIcon(
         "success",
         "text",
-        `Successfully deleted ${category.categoryName} category`
+        `Successfully deleted ${category.Name} category`
       );
     } catch (error) {
       openNotificationWithIcon(
@@ -274,7 +251,7 @@ export default function Page({ params }: any) {
     if (editedDrink) {
       try {
         await axios.patch(`${BASE_URL}/Drink`, {
-          id: editedDrink.id,
+          id: editedDrink.Id,
           categoryId: editDrinkCategoryId,
           name: drinkUpdateData.editDrinkName,
           price: drinkUpdateData.editDrinkPrice,
@@ -282,7 +259,7 @@ export default function Page({ params }: any) {
           description: null,
         });
         console.log("pavic data:", {
-          id: editedDrink.id,
+          id: editedDrink.Id,
           categoryId: editDrinkCategoryId,
           name: drinkUpdateData.editDrinkName,
           price: drinkUpdateData.editDrinkPrice,
@@ -306,9 +283,9 @@ export default function Page({ params }: any) {
 
   const handleRemoveDrink = async (drink: Drink) => {
     try {
-      const response = await axios.delete(`${BASE_URL}/Drink/${drink.id}`);
+      const response = await axios.delete(`${BASE_URL}/Drink/${drink.Id}`);
       console.log("Post request successful:", response.data);
-      openNotificationWithIcon("success", "delete", drink.name);
+      openNotificationWithIcon("success", "delete", drink.Name);
     } catch (error) {
       console.error("Error making post request:", error);
       openNotificationWithIcon("error", "text", `Error while deleting drink`);
@@ -343,25 +320,25 @@ export default function Page({ params }: any) {
   const handleUpdateEditMenu = async (editMenuData: any) => {
     try {
       await axios.patch(`${BASE_URL}/Company`, {
-        id: company?.id,
+        id: Number(params.id),
         menuThemeColor: editMenuData.menuBackgroundColor,
         categoryTitleColor: editMenuData.categoryTitleBackgroundColor,
         categoryTextTitleColor: editMenuData.categoryTextColor,
         headerTextColor: editMenuData.categoryTextColor,
         headerImage: editMenuData.headerImgUrl
           ? editMenuData.headerImgUrl
-          : company?.headerImage,
+          : company?.HeaderImage,
       });
       openNotificationWithIcon("success", "editMenu");
       console.log("pavic data:", {
-        id: company?.id,
+        id: Number(params.id),
         menuThemeColor: editMenuData.menuBackgroundColor,
         categoryTitleColor: editMenuData.categoryTitleBackgroundColor,
         categoryTextTitleColor: editMenuData.categoryTextColor,
         headerTextColor: editMenuData.categoryTextColor,
         headerImage: editMenuData.headerImgUrl
           ? editMenuData.headerImgUrl
-          : company?.headerImage,
+          : company?.HeaderImage,
       });
     } catch (error) {
       openNotificationWithIcon("error", "text", `Error while updating menu`);
@@ -380,9 +357,9 @@ export default function Page({ params }: any) {
   return (
     <div className="menuPageWrapper">
       <Header
-        companyName={company?.name}
+        companyName={company?.Name}
         onLogout={onLogoutButton}
-        logoUrl={company?.companyLogo}
+        logoUrl={company?.CompanyLogo}
       />
       <div className="addButtons">
         <Button type="primary" onClick={() => openModal("category")}>
@@ -409,7 +386,7 @@ export default function Page({ params }: any) {
           handleRemoveDrink={handleRemoveDrink}
           setIsEditCategoryModalOpen={setIsEditCategoryModalOpen}
           setIsEditProductModalShown={setIsEditProductModalShown}
-          categories={categories}
+          categories={categoires}
         />
       </div>
       <CreateCategoryModal
@@ -429,7 +406,7 @@ export default function Page({ params }: any) {
         setIsCreateDrinkModalOpen={setIsCreateCategoryModalOpen}
         closeModal={closeModal}
         productImgUrl={productImgUrl}
-        categories={categories}
+        categories={categoires}
         setProductImgFile={setProductImgFile}
         productImgFile={productImgFile}
         edgestore={edgestore}
@@ -445,9 +422,9 @@ export default function Page({ params }: any) {
         categoryTextColor={categoryTextColor}
         closeModal={closeModal}
         headerImgUrl={headerImgUrl}
-        company={company}
+        companyHeaderImg={company?.HeaderImage}
         headerTextColor={headerTextColor}
-        categories={categories}
+        categories={categoires}
         setHeaderImgFile={setHeaderImgFile}
         headerImgFile={headerImgFile}
         setHeaderImgUrl={setHeaderImgUrl}

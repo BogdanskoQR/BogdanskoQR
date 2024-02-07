@@ -15,9 +15,9 @@ interface EditMenuModalProps {
         thumbmailUrl: string | null;
       }
     | undefined;
-  company?: { headerImage: string };
+  companyHeaderImg?: string;
   headerTextColor: string | undefined;
-  categories?: any[];
+  categories?: Category[] | undefined;
   setHeaderImgFile: (file: File | undefined) => void;
   headerImgFile?: File | null;
   setHeaderImgUrl: (url: { url: string; thumbmailUrl: string }) => void;
@@ -35,7 +35,7 @@ const EditMenuModal = ({
   categoryTextColor,
   closeModal,
   headerImgUrl,
-  company,
+  companyHeaderImg,
   headerTextColor,
   categories,
   setHeaderImgFile,
@@ -58,7 +58,7 @@ const EditMenuModal = ({
         closeModal("editMenu");
         console.log(
           "pavic",
-          menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl,company?.headerImage
+          menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl,companyHeaderImg
         );
         handleUpdateEditMenu({menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl})
       }}
@@ -70,7 +70,7 @@ const EditMenuModal = ({
             <div className="coffeeImage">
               <img
                 src={
-                  headerImgUrl?.url ? headerImgUrl.url : company?.headerImage
+                  headerImgUrl?.url ? headerImgUrl.url : companyHeaderImg
                 }
                 alt="companyImage"
               />
@@ -87,7 +87,7 @@ const EditMenuModal = ({
             >
               {categories?.slice(0, 3).map((oneCategory: Category) => (
                 <div
-                  key={oneCategory.categoryName}
+                  key={oneCategory.Name}
                   className="oneCategorieCart"
                 >
                   <div
@@ -95,10 +95,10 @@ const EditMenuModal = ({
                     style={{ background: categoryTitleBackgroundColor }}
                   >
                     <h3 style={{ color: categoryTextColor }}>
-                      {oneCategory.categoryName}
+                      {oneCategory.Name}
                     </h3>
                   </div>
-                  <img src={oneCategory.categoryBackgroundImg} alt="img" />
+                  <img src={oneCategory.BackgroundImage} alt="img" />
                 </div>
               ))}
             </div>
