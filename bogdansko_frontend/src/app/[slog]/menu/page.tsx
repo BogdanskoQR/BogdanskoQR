@@ -7,7 +7,6 @@ import { Company, Category, BASE_URL } from "@/Components/Types/types";
 
 export default function Page({params}: any) {
   const router = useRouter();
-
   const [company, setCompany] = useState<Company>();
   const [categories, setCategories] = useState<Category[]>();
 

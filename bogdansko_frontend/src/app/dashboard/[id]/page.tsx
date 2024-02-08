@@ -27,7 +27,7 @@ export default function Page({ params }: any) {
     const fetchCompanyData = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}Company/${Number(params.id)}`
+          `${BASE_URL}/Company/${Number(params.id)}`
         );
         console.log("pavic response", response);
         const fetchedCompanyData: Company = response.data;
@@ -45,7 +45,7 @@ export default function Page({ params }: any) {
     const fetchCompanyCategories = async () => {
       try {
         const response = await axios.get(
-          `${BASE_URL}Category/${Number(params.id)}`
+          `${BASE_URL}/Category/${Number(params.id)}`
         );
         console.log("pavic categories response", response);
         const fetchedCompanyCategories = response.data;
