@@ -1,7 +1,7 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Modal, Button, ColorPicker } from "antd";
 import React from "react";
-import { Category } from "../Types/types";
+import { Category, categoriesTest } from "../Types/types";
 
 interface EditMenuModalProps {
   isEditMenuModalOpen: boolean;
@@ -26,7 +26,7 @@ interface EditMenuModalProps {
   setCategoryTitleBackgroundColor: (color: string) => void;
   setCategoryTextColor: (color: string) => void;
   setHeaderTextColor: (color: string) => void;
-  handleUpdateEditMenu: (value:any) => void
+  handleUpdateEditMenu: (value: any) => void;
 }
 const EditMenuModal = ({
   isEditMenuModalOpen,
@@ -46,7 +46,7 @@ const EditMenuModal = ({
   setCategoryTitleBackgroundColor,
   setCategoryTextColor,
   setHeaderTextColor,
-  handleUpdateEditMenu
+  handleUpdateEditMenu,
 }: EditMenuModalProps) => {
   return (
     <Modal
@@ -58,49 +58,46 @@ const EditMenuModal = ({
         closeModal("editMenu");
         console.log(
           "pavic",
-          menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl,companyHeaderImg
+          menuBackgroundColor,
+          categoryTitleBackgroundColor,
+          categoryTextColor,
+          headerImgUrl,
+          companyHeaderImg
         );
-        handleUpdateEditMenu({menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl})
+        handleUpdateEditMenu({
+          menuBackgroundColor,
+          categoryTitleBackgroundColor,
+          categoryTextColor,
+          headerImgUrl,
+        });
       }}
       onCancel={() => closeModal("editMenu")}
     >
       <div className="editMenuModalWrapper">
         <div className="leftSideEditMenu">
-          <div className="menuPageWrapper">
-            <div className="coffeeImage">
-              <img
-                src={
-                  headerImgUrl?.url ? headerImgUrl.url : companyHeaderImg
-                }
-                alt="companyImage"
-              />
+          <div className="menuLandingPageWrapper">
+            <div className="landingPageMiddleSection">
+              <h1 style={{color: categoryTextColor}}>Welcome to Maxim </h1>
+              <h1 style={{color: categoryTextColor}}>Caffe</h1>
+              <p style={{ marginTop: "10px", color: categoryTextColor }}>
+                Explore out wide range of premium coffee and tea
+              </p>
+              <p style={{color: categoryTextColor}}>products</p>
+              <button style={{backgroundColor: headerTextColor, color: categoryTextColor}}>View All Products</button>
             </div>
-            <div className="heading">
-              <div className="headingName">
-                <h2 style={{ color: headerTextColor }}>Maxim</h2>
-                <h3 style={{ color: headerTextColor }}>Coffee Bar</h3>
+            <div className="categoriesList" style={{backgroundColor: menuBackgroundColor}}>
+              <h2 style={{color: categoryTextColor}}>Categories</h2>
+              <div className="categoires">
+                {categoriesTest?.slice(0,2).map((category: Category) => (
+                  <div className="oneCategory">
+                    <img src={category.backgroundImage} alt="categoryImage" />
+                    <h4>{category.name}</h4>
+                  </div>
+                ))}
               </div>
             </div>
-            <div
-              className="categoriesWrapper"
-              style={{ background: menuBackgroundColor }}
-            >
-              {categories?.slice(0, 3).map((oneCategory: Category) => (
-                <div
-                  key={oneCategory.name}
-                  className="oneCategorieCart"
-                >
-                  <div
-                    className="categorieTitle"
-                    style={{ background: categoryTitleBackgroundColor }}
-                  >
-                    <h3 style={{ color: categoryTextColor }}>
-                      {oneCategory.name}
-                    </h3>
-                  </div>
-                  <img src={oneCategory.backgroundImage} alt="img" />
-                </div>
-              ))}
+            <div className="ladningPageFooter">
+              <p>© 2023 Maxim Coffee. All rights reserved.</p>
             </div>
           </div>
         </div>
@@ -153,7 +150,7 @@ const EditMenuModal = ({
               />
             </div>
             <div className="menuBackgorundColor">
-              <p>Category Title Text Color</p>
+              <p>Text Color</p>
               <ColorPicker
                 defaultValue="#c8d0db"
                 value={categoryTextColor}
@@ -161,7 +158,7 @@ const EditMenuModal = ({
               />
             </div>
             <div className="menuBackgorundColor">
-              <p>Header Title Text Color</p>
+              <p>Button Color</p>
               <ColorPicker
                 defaultValue="#c8d0db"
                 value={headerTextColor}
