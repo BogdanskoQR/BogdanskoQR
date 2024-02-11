@@ -8,11 +8,7 @@
   width: 100%;
 }
 .menuPageHeader{
-  display: flex;
-  height: 60px;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
+  display: none;
 }
 
 .headingName{
@@ -31,7 +27,7 @@
 
 .landingPageMiddleSection {
   width: 100%;
-  height: 490px;
+  height: 560px;
   background-image: url('https://scontent.fskp3-1.fna.fbcdn.net/v/t39.30808-6/361086482_1003088147611941_5940843451065858315_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=783fdb&_nc_ohc=xg7X41Y6I_MAX_tyCj4&_nc_ht=scontent.fskp3-1.fna&oh=00_AfD_GGbuGV87A3q2kko0cum9BvuP6zmrXgd_W8T6Uhhm8w&oe=65CE03D8');
   display: flex;
   flex-direction: column;
@@ -64,6 +60,7 @@
 
 .categoriesList {
   max-width: 100%;
+  margin-top: 30px;
 }
 .oneCategory{
   display: flex;
