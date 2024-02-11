@@ -64,12 +64,6 @@ export default function Page({ params }: any) {
   }, [params.id, params.slog]);
   return (
     <div className="menuLandingPageWrapper">
-      <div className="menuPageHeader">
-        <div className="headingName">
-          <HomeOutlined />
-          <h3>Coffee Store</h3>
-        </div>
-      </div>
       <div className="landingPageMiddleSection">
         <h1>Welcome to Maxim </h1>
         <h1>Caffe</h1>
