@@ -1,180 +1,87 @@
-body {
-  margin: 0;
-  padding: 0;
-}
-
-.categoryDetailsPageWrapper {
-  background: linear-gradient(to bottom, #163136, #17292c);
-  overflow: hidden;
-}
-
-.headerWrapper{
-  display: none;
-}
-.mainHeader {
-  display: flex;
-}
-
-.backButton {
-  position: absolute;
-  z-index: 99;
-  left: 10px;
-}
-
-
-.backButton svg {
-  fill: white;
-  margin-top: 30px;
-  width: 30px;
-}
-
-.menuItemHeader {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 50px;
-  padding-top: 0;
-  padding-bottom: 0;
-  color: #dcf2f1;
+.categoryDetailsMain{
   margin-top: 20px;
-  position: relative;
-  padding-top: 0;
-  margin-top: 0;
-  height: 200px;
-  justify-content: flex-end;
 }
 
-.menuItemHeadingName {
+.menuPageHeader{
   display: flex;
-  flex-direction: column;
-  margin-top: 30px;
-  width: 200px;
-  height: 110px;
-  color: white;
+  height: 60px;
   align-items: center;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  margin-top: 50px;
-  font-size: 23px;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-.menuItemHeadingName h2 {
-  margin-top: 13px;
-}
-.menuItemHeadingName h3 {
-  font-size: 16px;
-}
-.categoryDetails {
-  background-color: #ecf0f1;
-  border-top-left-radius: 36px;
-  border-top-right-radius: 36px;
-  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  padding: 18px;
-  min-height: 80vh;
-  position: relative;
-  z-index: 0;
+.headingName{
   display: flex;
-  justify-content: center;
-  border-radius: 34px 34px 0px 0px;
-  -webkit-border-radius: 34px 34px 0px 0px;
-  -moz-border-radius: 34px 34px 0px 0px;
-
+  align-items: center;
 }
 
-.oneMenuTableCategory {
+.headingName h3{
+  margin-left: 20px;
+  margin-top: 2px;
+}
+.headingName span svg {
+  font-size: 17px;
+}
+
+.categoryDrinksList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 20px;
+  justify-items: center;
+  margin-top: 30px;
+}
+
+.ant-tabs-nav-wrap{
+  margin-left: 10px !important;
+}
+
+.categoryText{
+  padding: 10px;
+  font-size: 30px;
+}
+
+.categoryDrink{
   display: flex;
   flex-direction: column;
-  color: #93ac93;
-  padding: 10px;
-  margin-bottom: 72px;
-  width: 100%;
-  text-align: center;
+  align-items: flex-start;
 }
 
-.oneMenuTableCategory h3 {
-  padding: 5px;
+.categoryDrink img {
+  width: 170px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.categoryDrinkInfo{
+  margin-top: 3px;
+  margin-left: 5px;
+}
+
+.categoryDrinkInfo h3 {
   font-weight: 500;
 }
 
-.categoryDetailsTableDrinks {
-  display: flex;
-  flex-direction: row;
-  padding: 10px;
-  justify-content: space-between;
-  color: black;
+.categoryDrinkInfo p {
+  font-weight: 500;
+  color: #20bf6b;
 }
 
-.coctails {
-  display: flex;
-  flex-direction: row;
-  padding: 5px;
-  justify-content: center;
-  color: black;
-  align-items: center;
-}
-
-.categoryDetailsTableDrinks h3 {
-  padding: 5px;
-  color: black;
-}
-
-.categoryDetailsTableDrinks p {
-  margin-top: 5px;
-  font-size: 1.2rem;
-  color: black;
-  font-weight: 600;
-}
-
-.coctailCategory {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: center;
-}
-
-.coctelCategoryPrices {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.coctailCategoryPrices h3 {
-  font-size: 15px;
-  color: black;
-  margin-left: 0;
-  padding: 0;
-}
-
-.categoryDetails p {
-  font-size: 12px;
-}
-
-.coctailCategory:first-child p {
+.ladningPageFooter{
+  padding: 25px;
   text-align: center;
-  word-wrap: break-word;
-  padding: 3px;
+  color: rgb(128, 111, 111);
+  margin-top: 30px;
 }
 
-.coctelCategoryPrices p {
-  text-align: left;
-  font-size: 16px;
-  font-weight: 900;
+.categoryDrinkNoImage{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
 }
 
-.coffeeImage img {
-  width: 100%;
-  position: absolute;
-  height: 200px;
-  z-index: 0;
-  object-fit: cover;
-}
-
-.coctailImage {
-  width: 300px;
-  height: 200px;
-  border-radius: 12px;
-  object-fit: cover;
-}
-
-.coctelCategoryPrices h3 {
-  padding: 8px;
+.categoryDrinkNoImage h3 {
+  font-weight: 500;
 }

@@ -1,14 +1,17 @@
-import { LeftOutlined } from "@ant-design/icons";
+"use client";
 import "./CategoryDetails.css";
 import { useRouter } from "next/navigation";
-import { Divider } from "antd";
 import { Company, Category, Drink } from "@/Components/Types/types";
 import { useState, useEffect } from "react";
-
+import { LeftOutlined } from "@ant-design/icons";
+import { Tabs } from "antd";
+import { categoriesTest } from "@/Components/Types/types";
 export default function Page({ params }: any) {
+  const { TabPane } = Tabs;
   const router = useRouter();
   const [company, setCompany] = useState<Company>();
   const [selectedCategory, setSelectedCategory] = useState<Category>();
+  const [activeTabKey, setActiveTabKey] = useState<string>(params.id);
 
   useEffect(() => {
     const storedCompanyData = localStorage.getItem("companyData");
@@ -26,78 +29,61 @@ export default function Page({ params }: any) {
     }
   }, []);
 
+  const handleTabChange = (key: string) => {
+    setActiveTabKey(key);
+  };
   const onBackClick = () => {
     router.push(`/${company?.name}/menu`);
   };
 
-  if (!selectedCategory) {
-    return null;
-  }
-
-  const isCocktailsCategory =
-    selectedCategory?.name?.toLowerCase() === "cocktails";
+  // if (!selectedCategory) {
+  //   return null;
+  // }
 
   return (
     <div className="categoryDetailsPageWrapper">
-      <p className="backButton" onClick={onBackClick}>
-        <LeftOutlined />
-      </p>
-      <div className="coffeeImage">
-        <img src={company?.headerImage} alt="" />
+      <div className="menuPageHeader">
+        <div className="headingName">
+          <LeftOutlined onClick={onBackClick} />
+          <h3>Coffee Store</h3>
+        </div>
       </div>
 
-      <div className="menuItemHeader">
-        <div className="menuItemHeadingName">
-          <h2 style={{ color: company?.headerTextColor }}>Maxim</h2>
-          <h3 style={{ color: company?.headerTextColor }}>Coffee Bar</h3>
-        </div>
-      </div>
-      <div
-        className="categoryDetails"
-        style={{ background: company?.menuThemeColor }}
-      >
-        <div
-          key={selectedCategory.name}
-          className={`oneMenuTableCategory ${
-            isCocktailsCategory ? "cocktailsCategory" : ""
-          }`}
-        >
-          <h3
-            style={{
-              color: "black",
-              textAlign: "center",
-              marginBottom: "0px",
-              fontWeight: "600",
-            }}
-          >
-            {selectedCategory.name}
-          </h3>
-          {selectedCategory.drinks.map((oneDrink: Drink) => (
-            <div
-              key={oneDrink.name}
-              className={`categoryDetailsTableDrinks ${
-                oneDrink.image ? "coctails" : ""
-              }`}
-            >
-              {oneDrink.image ? (
-                <div className="coctailCategory">
-                  <p>{oneDrink.name}</p>
-                  <div className="coctelCategoryPrices">
-                    <h3>{oneDrink.name}</h3>
-                    <img className="coctailImage" src={oneDrink.image} alt="" />
-                    <p>{oneDrink.price.toFixed(0)} ден.</p>
-                  </div>
-                  <Divider />
-                </div>
-              ) : (
-                <>
-                  <h3>{oneDrink.name}</h3>
-                  <p>{oneDrink.price.toFixed(0)} ден.</p>
-                </>
-              )}
-            </div>
+      <div className="categoryDetailsMain">
+        <h2 className="categoryText">Menu</h2>
+        <Tabs activeKey={activeTabKey} onChange={handleTabChange}>
+          {categoriesTest.map((category: any) => (
+            <TabPane tab={category.name} key={category.id.toString()}>
+              <div
+                className={
+                  category.view === "images"
+                    ? "categoryDrinksList"
+                    : "categoryDrinksListNoImage"
+                }
+              >
+                {category.drinks.map((drink: Drink) =>
+                  category.view === "images" ? (
+                    <div className="categoryDrink" key={drink.id}>
+                      <img src={drink.image} alt="drink Image" />
+                      <div className="categoryDrinkInfo">
+                        <h3>{drink.name}</h3>
+                        <p>{drink.price} дeн</p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="categoryDrinkNoImage" key={drink.id}>
+                        <h3>{drink.name}</h3>
+                        <p>{drink.price} дeн</p>
+                    </div>
+                  )
+                )}
+              </div>
+            </TabPane>
           ))}
-        </div>
+        </Tabs>
+      </div>
+      <div className="ladningPageFooter">
+        <p>© 2023 Maxim Coffee. All rights reserved.</p>
       </div>
     </div>
   );

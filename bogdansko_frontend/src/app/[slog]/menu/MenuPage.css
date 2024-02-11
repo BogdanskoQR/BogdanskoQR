@@ -1,116 +1,105 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
-
-/* body {
-  font-family: 'Dancing Script', cursive;
-} */
-.headerWrapper{
-  display: none;
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.menuPageWrapper{
-  overflow: hidden;
-}
-.heading {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 0px;
-  color: white;
-  z-index: 0;
-  position: relative;
-      height: 330px;
-
-}
-.headingName{
-  margin-top: 30px;
-  width: 200px;
-  height:130px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-    border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-  margin-top: 220px;
-  font-weight: 900;
-
-}
-.headingName h2{
-  font-size: 29px;
-  margin-top: 10px;
-  font-weight: 900;
-}
-.headingName h3{
-  font-size: 20px;
-  margin-top: 10px;
-  font-weight: 900;
-  margin-top: 0;
-}
-.coffeeImage img {
+.menuLandingPageWrapper{
   width: 100%;
-  position: absolute;
-  min-height: 430px;
-  z-index: 0;
-  object-fit: cover;
+}
+.menuPageHeader{
+  display: flex;
+  height: 60px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
 }
 
-.categoriesWrapper {
-  border-top-left-radius: 36px;
-  border-top-right-radius: 36px;
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
-  padding: 50px;
-  position: relative;
-  z-index: 0;
-  border-radius: 54px 55px 10px 10px;
-  -webkit-border-radius: 54px 55px 10px 10px;
-  -moz-border-radius: 54px 55px 10px 10px;
-  min-height: 70vh;
-
+.headingName{
+  display: flex;
+  align-items: center;
 }
 
-.oneCategorieCart {
+.headingName h3{
+  margin-left: 20px;
+  margin-top: 2px;
+}
+.headingName span svg {
+  font-size: 17px;
+}
+
+
+.landingPageMiddleSection {
+  width: 100%;
+  height: 490px;
+  background-image: url('https://scontent.fskp3-1.fna.fbcdn.net/v/t39.30808-6/361086482_1003088147611941_5940843451065858315_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=783fdb&_nc_ohc=xg7X41Y6I_MAX_tyCj4&_nc_ht=scontent.fskp3-1.fna&oh=00_AfD_GGbuGV87A3q2kko0cum9BvuP6zmrXgd_W8T6Uhhm8w&oe=65CE03D8');
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-bottom: 50px;
-}
-
-.categorieTitle {
-  min-width: 300px;
-  height: 45px;
-  text-align: center;
-  border-top-left-radius: 32px;
-  border-top-right-radius: 32px;
-  display: flex;
   align-items: center;
   justify-content: center;
+  color: white;
+  background-size: cover;
+  background-position: center; 
+}
+
+
+.landingPageMiddleSection button{
+  width: 150px;
+  height: 40px;
+  border: none;
   color: black;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+  font-weight: 600;
+  border-radius: 8px;
+  background-color: orange;
+  margin-top: 30px;
 }
 
-.categoriesWrapper img {
-  min-width: 300px;
-  object-fit: cover;
-  max-height: 120px;
-  border-bottom-left-radius: 32px;
-  border-bottom-right-radius: 32px;
-  box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;
+.landingPageMiddleSection h1{
+  font-weight: 900;
 }
 
-.menuTableWithPrices {
-  padding: 15px;
-  margin-top: 100px;
+.landingPageMiddleSection p {
+  font-weight: 500;
 }
 
-.oneMenuTableCategory {
+.categoriesList {
+  max-width: 100%;
+}
+.oneCategory{
   display: flex;
   flex-direction: column;
-  color: #93ac93;
-  padding: 10px;
-  margin-bottom: 70px;
+  align-items: flex-start;
+
+}
+.categoriesList h2 {
+  padding: 15px;
+  color: #353b48;
+  margin-left: 5px;
+}
+.oneCategory img {
+  width: 170px;
+  height: 190px;
+  object-fit: cover;
+  border-radius: 16px;
 }
 
+.oneCategory h4 {
+  font-weight: 500;
+  padding: 10px;
+  padding-left: 0;
+  margin-left: 3px;
+}
 
-.oneMenuTableCategory h3 {
-  padding: 5px;
+.categoires{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px; 
+  justify-items: center;
+  padding: 10px;
+}
+
+.ladningPageFooter{
+  padding: 25px;
+  text-align: center;
+  color: rgb(128, 111, 111);
 }
