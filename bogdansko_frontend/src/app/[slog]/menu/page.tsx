@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import { Company, Category, BASE_URL } from "@/Components/Types/types";
 import { categoriesTest } from "@/Components/Types/types";
-import { HomeOutlined, MenuOutlined } from "@ant-design/icons";
+import { HomeOutlined } from "@ant-design/icons";
 export default function Page({ params }: any) {
   const router = useRouter();
   const [company, setCompany] = useState<Company>();
@@ -77,7 +77,7 @@ export default function Page({ params }: any) {
           Explore out wide range of premium coffee and tea
         </p>
         <p>products</p>
-        <button>View All Products </button>
+        <button onClick={() => router.push(`/${company?.name}/${categories?.[0].id}`)}>View All Products</button>
       </div>
       <div className="categoriesList">
         <h2>Categories</h2>
