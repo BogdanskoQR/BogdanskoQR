@@ -1,6 +1,9 @@
+
+
 .categoryDetailsMain{
   background-color: #f5f5f5;
   padding-top: 20px ;
+  min-height: 80vh;
 }
 
 .menuPageHeader{
@@ -80,7 +83,7 @@
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  padding: 10px;
+  padding: 17px;
 }
 
 .categoryDrinkNoImage h3 {
