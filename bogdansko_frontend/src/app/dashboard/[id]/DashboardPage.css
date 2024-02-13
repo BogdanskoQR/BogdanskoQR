@@ -26,8 +26,8 @@ body {
   .category {
     min-width: 330px;
   }
-  .editButtonDashboard{
-    display: none;
+  .editMenuModal .ant-modal-body{
+    min-height: 170vh !important;
   }
 }
 
@@ -355,6 +355,8 @@ body {
 
 .menuLandingPageWrapper{
   width: 100%;
+  background-size: cover;
+  background-position: center; 
 }
 .menuPageHeader{
   display: none;
@@ -377,7 +379,6 @@ body {
 .landingPageMiddleSection {
   width: 100%;
   height: 560px;
-  background-image: url('https://scontent.fskp3-1.fna.fbcdn.net/v/t39.30808-6/361086482_1003088147611941_5940843451065858315_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=783fdb&_nc_ohc=xg7X41Y6I_MAX_tyCj4&_nc_ht=scontent.fskp3-1.fna&oh=00_AfD_GGbuGV87A3q2kko0cum9BvuP6zmrXgd_W8T6Uhhm8w&oe=65CE03D8');
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -446,4 +447,15 @@ body {
   padding: 25px;
   text-align: center;
   color: rgb(128, 111, 111);
+}
+
+@media screen and (max-width: 768px) {
+  .editMenuModalWrapper {
+      flex-direction: column;
+  }
+}
+
+
+.editMenuModal .ant-modal-body{
+  min-height: 130vh ;
 }

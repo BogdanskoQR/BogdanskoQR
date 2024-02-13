@@ -73,10 +73,10 @@ const EditMenuModal = ({
       }}
       onCancel={() => closeModal("editMenu")}
     >
-      <div className="editMenuModalWrapper">
+      <div className="editMenuModalWrapper" >
         <div className="leftSideEditMenu">
-          <div className="menuLandingPageWrapper">
-            <div className="landingPageMiddleSection">
+        <div className="menuLandingPageWrapper" >
+            <div className="landingPageMiddleSection" style={{ backgroundImage: headerImgUrl?.url ? `url(${headerImgUrl.url})` : `url(${companyHeaderImg})` }}>
               <h1 style={{color: categoryTextColor}}>Welcome to Maxim </h1>
               <h1 style={{color: categoryTextColor}}>Caffe</h1>
               <p style={{ marginTop: "10px", color: categoryTextColor }}>
@@ -136,16 +136,6 @@ const EditMenuModal = ({
                 defaultValue="linear-gradient(to right, #ffffff, #dfe6e9)"
                 onChange={(color) =>
                   setMenuBackgroundColor(color.toHexString())
-                }
-              />
-            </div>
-            <div className="categoryTitleColor">
-              <p>Category Title Color</p>
-              <ColorPicker
-                defaultValue="linear-gradient(to top, #dfe6e9, #d6e2eb)"
-                value={categoryTitleBackgroundColor}
-                onChange={(color) =>
-                  setCategoryTitleBackgroundColor(color.toHexString())
                 }
               />
             </div>
