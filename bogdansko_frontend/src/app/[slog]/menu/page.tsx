@@ -77,11 +77,12 @@ export default function Page({ params }: any) {
         <h2>Categories</h2>
         <div className="categoires">
           {categoriesTest?.map((category: Category) => (
-            <div className="oneCategory" onClick={()=> redirectToCategory(category.id)}>
+            <div className="oneCategory" onClick={() => redirectToCategory(category.id)}>
               <img src={category.backgroundImage} alt="categoryImage" />
-              <h4>{category.name}</h4>
+              <h4 className="categoryName">{category.name}</h4>
             </div>
           ))}
+
         </div>
       </div>
       <div className="ladningPageFooter">
