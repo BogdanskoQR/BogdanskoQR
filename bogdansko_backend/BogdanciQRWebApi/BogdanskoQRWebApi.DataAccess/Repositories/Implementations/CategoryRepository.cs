@@ -17,9 +17,16 @@
         {
             return await _dbContext.Categories.ToListAsync();
         }
-        public async Task<Category> GetByIdAsync(int id)
+        public async Task<Category> GetByIdOrNameAsync(int? id, string? name)
         {
-            return await _dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+            if (id.HasValue)
+                return await _dbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
+
+            else if (!string.IsNullOrEmpty(name))
+                return await _dbContext.Categories.FirstOrDefaultAsync(x => x.Name == name);
+
+            else
+                throw new ArgumentException("Both id and name cannot be null or empty.");
         }
         public async Task CreateAsync(Category entity)
         {
@@ -41,6 +48,15 @@
             _dbContext.Categories.Remove(categoryDb);
             await _dbContext.SaveChangesAsync();
 
+        }
+
+        public async Task<List<Category>> GetCategoriesForCompanyAsync(int companyId)
+        {
+            List<Category> categories = await _dbContext.Companies
+                                           .Where(c => c.Id == companyId)
+                                           .SelectMany(c => c.Categories)
+                                           .ToListAsync();
+            return categories;
         }
     }
 }

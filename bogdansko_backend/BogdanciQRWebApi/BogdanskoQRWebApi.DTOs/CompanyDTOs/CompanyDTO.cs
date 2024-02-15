@@ -1,5 +1,6 @@
 ﻿namespace BogdanskoQRWebApi.DTOs.CompanyDTOs
 {
+    using BogdanskoQRWebApi.DTOs.CategoryDTOs;
     public class CompanyDTO
     {
         public int Id { get; set; }
@@ -12,5 +13,6 @@
         public string HeaderTextColor { get; set; } = string.Empty;
         public string HeaderImage { get; set; } = string.Empty;
         public string CompanyLogo { get; set; } = string.Empty;
+        public List<CategoryDTO> Categories { get; set; }
     }
 }

@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "BogdanskoQRWebApi.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/BogdanskoQRWebApi.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BogdanskoQRWebApi.Domain.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "BogdanskoQRWebApi.Domain/1.0.0": {
+      "type": "project",
+      "path": "../BogdanskoQRWebApi.Domain/BogdanskoQRWebApi.Domain.csproj",
+      "msbuildProject": "../BogdanskoQRWebApi.Domain/BogdanskoQRWebApi.Domain.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "BogdanskoQRWebApi.Domain >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Dragan\\.nuget\\packages\\": {},
@@ -39,7 +58,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Dragan\\Desktop\\BogdanskoQR\\bogdansko_backend\\BogdanciQRWebApi\\BogdanskoQRWebApi.Domain\\BogdanskoQRWebApi.Domain.csproj": {
+              "projectPath": "C:\\Users\\Dragan\\Desktop\\BogdanskoQR\\bogdansko_backend\\BogdanciQRWebApi\\BogdanskoQRWebApi.Domain\\BogdanskoQRWebApi.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

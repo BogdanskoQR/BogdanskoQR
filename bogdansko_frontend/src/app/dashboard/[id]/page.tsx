@@ -32,6 +32,7 @@ export default function Page({ params }: any) {
         console.log("pavic response", response);
         const fetchedCompanyData: Company = response.data;
         setCompany(fetchedCompanyData);
+        setCategories(fetchCompanyData.categories);
         console.log("pavic company", fetchedCompanyData);
       } catch (error) {
         console.error("Error fetching company data:", error);
@@ -41,23 +42,6 @@ export default function Page({ params }: any) {
     return () => {};
   }, [params.id]);
 
-  useEffect(() => {
-    const fetchCompanyCategories = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/Category/${Number(params.id)}`
-        );
-        console.log("pavic categories response", response);
-        const fetchedCompanyCategories = response.data;
-        setCategories(fetchedCompanyCategories);
-        console.log("pavic fetchedCompanyCategories", fetchedCompanyCategories);
-      } catch (error) {
-        console.error("Error fetching company data:", error);
-      }
-    };
-    fetchCompanyCategories();
-    return () => {};
-  }, [params.id]);
   const [api, contextHolder] = notification.useNotification();
   const [isCreateCategoryModalOpen, setIsCreateCategoryModalOpen] =
     useState<boolean>(false);

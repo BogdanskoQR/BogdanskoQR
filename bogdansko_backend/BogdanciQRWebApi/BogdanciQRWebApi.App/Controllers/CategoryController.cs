@@ -1,6 +1,8 @@
 ﻿namespace BogdanciQRWebApi.App.Controllers
 {
     using BogdanskoQRWebApi.DTOs.CategoryDTOs;
+    using BogdanskoQRWebApi.DTOs.CompanyDTOs;
+    using BogdanskoQRWebApi.Services.Implementations;
     using BogdanskoQRWebApi.Services.Interfaces;
     using Microsoft.AspNetCore.Mvc;
 
@@ -28,20 +30,35 @@
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryDTO>> GetCategory(int id)
+        [HttpGet("{identifier}")]
+        public async Task<ActionResult<CategoryDTO>> GetCategory(string identifier)
         {
             try
             {
-                if (id < 0)
-                    return BadRequest("Invalid input for id");
+                if (string.IsNullOrEmpty(identifier))
+                    return BadRequest("Identifier cannot be null or empty");
 
-                CategoryDTO categoryDTO = await _categoryService.GetCategoryByIdAsync(id);
+                if (int.TryParse(identifier, out int id))
+                {
+                    if (id < 0)
+                        return BadRequest("Invalid input for id");
 
-                if (categoryDTO == null)
-                    return NotFound($"Category with id:{id} not found");
+                    CategoryDTO categoryDTOById = await _categoryService.GetCategoryByIdOrNameAsync(id, null);
 
-                return Ok(categoryDTO);
+                    if (categoryDTOById == null)
+                        return NotFound($"Category with id:{id} not found");
+
+                    return Ok(categoryDTOById);
+                }
+                else
+                {
+                    CategoryDTO categoryDTOByName = await _categoryService.GetCategoryByIdOrNameAsync(null, identifier);
+
+                    if (categoryDTOByName == null)
+                        return NotFound($"Category with name:{identifier} not found");
+
+                    return Ok(categoryDTOByName);
+                }
             }
             catch (Exception ex)
             {
@@ -100,7 +117,7 @@
                 if (id <= 0)
                     return BadRequest("Invalid input for id");
 
-                CategoryDTO categoryDTO = await _categoryService.GetCategoryByIdAsync(id);
+                CategoryDTO categoryDTO = await _categoryService.GetCategoryByIdOrNameAsync(id, null);
 
                 if (categoryDTO == null)
                     return NotFound("Category not found!");
