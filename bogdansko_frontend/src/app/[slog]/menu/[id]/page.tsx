@@ -22,7 +22,7 @@ export default function Page({ params }: any) {
     const storedCategoryData = localStorage.getItem("categories");
     if (storedCategoryData) {
       setSelectedCategory(
-        JSON.parse(storedCategoryData).find(
+        company?.categoires.find(
           (category: Category) => category.id === Number(params.id)
         )
       );

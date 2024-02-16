@@ -9,7 +9,6 @@ import { HomeOutlined } from "@ant-design/icons";
 export default function Page({ params }: any) {
   const router = useRouter();
   const [company, setCompany] = useState<Company>();
-  const [categories, setCategories] = useState<Category[]>();
 
   const redirectToCategory = (categoryId: number) => {
     router.push(`/maxim/menu/${categoryId}`);
@@ -39,29 +38,6 @@ export default function Page({ params }: any) {
     fetchCompanyData();
   }, [params.slog]);
 
-  useEffect(() => {
-    const fetchCompanyCategories = async () => {
-      const storedCategoriesData = localStorage.getItem("categories");
-      if (storedCategoriesData) {
-        setCategories(JSON.parse(storedCategoriesData));
-      } else {
-        try {
-          const response = await axios.get(
-            `${BASE_URL}/Category/${params.slog}}`
-          );
-          const fetchedCompanyCategories = response.data;
-          setCategories(fetchedCompanyCategories);
-          localStorage.setItem(
-            "categories",
-            JSON.stringify(fetchedCompanyCategories)
-          );
-        } catch (error) {
-          console.error("Error fetching company categories:", error);
-        }
-      }
-    };
-    fetchCompanyCategories();
-  }, [params.id, params.slog]);
   return (
     <div className="menuLandingPageWrapper">
       <div className="landingPageMiddleSection">
@@ -71,7 +47,7 @@ export default function Page({ params }: any) {
           Explore out wide range of premium coffee and tea
         </p>
         <p>products</p>
-        <button onClick={() => router.push(`/${company?.name}/${categories?.[0].id}`)}>View All Products</button>
+        <button onClick={() => router.push(`/${company?.name}/${company?.categoires?.[0].id}`)}>View All Products</button>
       </div>
       <div className="categoriesList">
         <h2>Categories</h2>

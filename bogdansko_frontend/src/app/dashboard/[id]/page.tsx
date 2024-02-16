@@ -22,7 +22,6 @@ interface FormCategoryValues {
 }
 export default function Page({ params }: any) {
   const [company, setCompany] = useState<Company>();
-  const [categoires, setCategories] = useState<Category[]>();
   useEffect(() => {
     const fetchCompanyData = async () => {
       try {
@@ -38,24 +37,6 @@ export default function Page({ params }: any) {
       }
     };
     fetchCompanyData();
-    return () => {};
-  }, [params.id]);
-
-  useEffect(() => {
-    const fetchCompanyCategories = async () => {
-      try {
-        const response = await axios.get(
-          `${BASE_URL}/Category/${Number(params.id)}`
-        );
-        console.log("pavic categories response", response);
-        const fetchedCompanyCategories = response.data;
-        setCategories(fetchedCompanyCategories);
-        console.log("pavic fetchedCompanyCategories", fetchedCompanyCategories);
-      } catch (error) {
-        console.error("Error fetching company data:", error);
-      }
-    };
-    fetchCompanyCategories();
     return () => {};
   }, [params.id]);
   const [api, contextHolder] = notification.useNotification();
@@ -386,7 +367,7 @@ export default function Page({ params }: any) {
           handleRemoveDrink={handleRemoveDrink}
           setIsEditCategoryModalOpen={setIsEditCategoryModalOpen}
           setIsEditProductModalShown={setIsEditProductModalShown}
-          categories={categoires}
+          categories={company?.categoires}
         />
       </div>
       <CreateCategoryModal
@@ -406,7 +387,7 @@ export default function Page({ params }: any) {
         setIsCreateDrinkModalOpen={setIsCreateCategoryModalOpen}
         closeModal={closeModal}
         productImgUrl={productImgUrl}
-        categories={categoires}
+        categories={company?.categoires}
         setProductImgFile={setProductImgFile}
         productImgFile={productImgFile}
         edgestore={edgestore}
@@ -424,7 +405,7 @@ export default function Page({ params }: any) {
         headerImgUrl={headerImgUrl}
         companyHeaderImg={company?.headerImage}
         headerTextColor={headerTextColor}
-        categories={categoires}
+        categories={company?.categoires}
         setHeaderImgFile={setHeaderImgFile}
         headerImgFile={headerImgFile}
         setHeaderImgUrl={setHeaderImgUrl}

@@ -358,9 +358,6 @@ body {
   background-size: cover;
   background-position: center; 
 }
-.menuPageHeader{
-  display: none;
-}
 
 .headingName{
   display: flex;
