@@ -1,5 +1,5 @@
 .categoryDetailsPageWrapper{
-  background: linear-gradient(to left, #ebe7e7, #ffff);
+  background: linear-gradient(to bottom, rgb(243, 243, 243) 0%, white 25%, white 100%);
 }
 .categoryDetailsMain{
   padding-top: 20px ;
@@ -52,8 +52,9 @@
   padding: 13px;
   border: none;
   border-radius: 16px;
-  margin-bottom: 23px;
+  margin-bottom: 18px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.11);
+  background-color: #fbfcfc;
 }
 
 
@@ -126,3 +127,23 @@
   font-weight: 600; 
   color: #20bf6b; 
 }
+
+.ant-tabs-tab {
+  color: #969186 !important;
+}
+
+.ant-tabs-tab-btn {
+  font-size: 15.5px;
+  font-weight: 500;
+}
+
+.ant-tabs-tab-active .ant-tabs-tab-btn{
+  color: black !important;
+}
+.ant-tabs-nav-list {
+  border-color: red !important;
+}
+
+
+
+
