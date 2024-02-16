@@ -28,20 +28,35 @@
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CompanyDTO>> GetCompany(int id)
+        [HttpGet("{identifier}")]
+        public async Task<ActionResult<CompanyDTO>> GetCompany(string identifier)
         {
             try
             {
-                if (id < 0)
-                    return BadRequest("Invalid input for id");
+                if (string.IsNullOrEmpty(identifier))
+                    return BadRequest("Identifier cannot be null or empty");
 
-                CompanyDTO companyDTO = await _companyService.GetCompanyByIdAsync(id);
+                if (int.TryParse(identifier, out int id))
+                {
+                    if (id < 0)
+                        return BadRequest("Invalid input for id");
 
-                if (companyDTO == null)
-                    return NotFound($"Company with id:{id} not found");
+                    CompanyDTO companyDTOById = await _companyService.GetCompanyByIdOrNameAsync(id, null);
 
-                return Ok(companyDTO);
+                    if (companyDTOById == null)
+                        return NotFound($"Company with id:{id} not found");
+
+                    return Ok(companyDTOById);
+                }
+                else
+                {
+                    CompanyDTO companyDTOByName = await _companyService.GetCompanyByIdOrNameAsync(null, identifier);
+
+                    if (companyDTOByName == null)
+                        return NotFound($"Company with name:{identifier} not found");
+
+                    return Ok(companyDTOByName);
+                }
             }
             catch (Exception ex)
             {
@@ -92,6 +107,27 @@
             }
         }
 
+        [HttpPatch("colors")]
+        public async Task<IActionResult> EditColors([FromBody] EditColorsDTO editColorsDTO)
+        {
+            try
+            {
+                if (editColorsDTO == null)
+                    return BadRequest("Invalid input");
+
+                if (editColorsDTO.Id <= 0)
+                    return BadRequest("Invalid Id.Please try again");
+
+                await _companyService.EditColorsAsync(editColorsDTO);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Please contact the support team");
+            }
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCompany(int id)
         {
@@ -100,7 +136,7 @@
                 if (id <= 0)
                     return BadRequest("Invalid input for id");
 
-                CompanyDTO companyDTO = await _companyService.GetCompanyByIdAsync(id);
+                CompanyDTO companyDTO = await _companyService.GetCompanyByIdOrNameAsync(id, null);
 
                 if (companyDTO == null)
                     return NotFound("Company not found!");

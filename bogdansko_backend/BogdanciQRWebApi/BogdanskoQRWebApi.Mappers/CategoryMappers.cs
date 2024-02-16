@@ -10,7 +10,8 @@
             {
                 Id = category.Id,
                 BackgroundImage = category.BackgroundImage,
-                Name = category.Name
+                Name = category.Name,
+                View = category.View
             };
         }
 
@@ -20,7 +21,8 @@
             {
                 CompanyId = createCategoryDTO.CompanyId,
                 BackgroundImage = createCategoryDTO.BackgroundImage,
-                Name = createCategoryDTO.Name
+                Name = createCategoryDTO.Name,
+                View = createCategoryDTO.View
             };
         }
     }

@@ -42,5 +42,13 @@
             _dbContext.Drinks.Remove(drinkDb);
             await _dbContext.SaveChangesAsync();
         }
+        public async Task<List<Drink>> GetDrinksForCategoryAsync(int categoryId)
+        {
+            List<Drink> drinks = await _dbContext.Categories
+                                           .Where(c => c.Id == categoryId)
+                                           .SelectMany(c => c.Drinks)
+                                           .ToListAsync();
+            return drinks;
+        }
     }
 }

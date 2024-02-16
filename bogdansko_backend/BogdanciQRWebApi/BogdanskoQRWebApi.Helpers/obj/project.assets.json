@@ -766,6 +766,9 @@
       "BogdanskoQRWebApi.DTOs/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BogdanskoQRWebApi.Domain": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/BogdanskoQRWebApi.DTOs.dll": {}
         },

@@ -19,10 +19,18 @@
         {
             return await _dbContext.Companies.ToListAsync();
         }
-        public async Task<Company> GetByIdAsync(int id)
+        public async Task<Company> GetByIdOrNameAsync(int? id, string? name)
         {
-            return await _dbContext.Companies.FirstOrDefaultAsync(x => x.Id == id);
+            if (id.HasValue)
+                return await _dbContext.Companies.FirstOrDefaultAsync(x => x.Id == id);
+
+            else if (!string.IsNullOrEmpty(name))
+                return await _dbContext.Companies.FirstOrDefaultAsync(x => x.Name == name);
+
+            else
+                throw new ArgumentException("Both id and name cannot be null or empty.");
         }
+
         public async Task CreateAsync(Company entity)
         {
             await _dbContext.Companies.AddAsync(entity);

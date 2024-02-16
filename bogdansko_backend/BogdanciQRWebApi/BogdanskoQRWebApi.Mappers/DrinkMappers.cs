@@ -13,7 +13,7 @@
                 Description = drink.Description,
                 Image = drink.Image,
                 Name = drink.Name,
-                Price = drink.Price
+                Price = drink.Price,
             };
         }
 

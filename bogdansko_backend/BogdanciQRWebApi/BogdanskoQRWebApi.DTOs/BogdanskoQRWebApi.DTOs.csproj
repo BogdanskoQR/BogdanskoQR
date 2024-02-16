@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BogdanskoQRWebApi.Domain\BogdanskoQRWebApi.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

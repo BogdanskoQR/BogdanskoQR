@@ -480,6 +480,9 @@
         }
       },
       "BogdanskoQRWebApi.DTOs/1.0.0": {
+        "dependencies": {
+          "BogdanskoQRWebApi.Domain": "1.0.0"
+        },
         "runtime": {
           "BogdanskoQRWebApi.DTOs.dll": {}
         }

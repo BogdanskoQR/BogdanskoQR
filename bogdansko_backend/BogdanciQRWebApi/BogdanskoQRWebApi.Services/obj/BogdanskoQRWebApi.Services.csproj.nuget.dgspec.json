@@ -178,7 +178,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Dragan\\Desktop\\BogdanskoQR\\bogdansko_backend\\BogdanciQRWebApi\\BogdanskoQRWebApi.Domain\\BogdanskoQRWebApi.Domain.csproj": {
+                "projectPath": "C:\\Users\\Dragan\\Desktop\\BogdanskoQR\\bogdansko_backend\\BogdanciQRWebApi\\BogdanskoQRWebApi.Domain\\BogdanskoQRWebApi.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
