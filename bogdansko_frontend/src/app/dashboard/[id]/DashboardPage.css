@@ -456,3 +456,9 @@ body {
 .editMenuModal .ant-modal-body{
   min-height: 130vh ;
 }
+
+.viewProductPhotos{
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}

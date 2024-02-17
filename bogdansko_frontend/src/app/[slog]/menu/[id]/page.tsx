@@ -1,36 +1,46 @@
 "use client";
 import "./CategoryDetails.css";
 import { useRouter } from "next/navigation";
-import { Company, Category, Drink } from "@/Components/Types/types";
+import { Company, Category, Drink, BASE_URL } from "@/Components/Types/types";
 import { useState, useEffect } from "react";
 import { LeftOutlined } from "@ant-design/icons";
 import { Tabs } from "antd";
-import { categoriesTest } from "@/Components/Types/types";
+import axios from "axios";
 export default function Page({ params }: any) {
   const { TabPane } = Tabs;
   const router = useRouter();
   const [company, setCompany] = useState<Company>();
-  const [selectedCategory, setSelectedCategory] = useState<Category>();
-  const [activeTabKey, setActiveTabKey] = useState<string>(params.id);
+  const [selectedCategory, setSelectedCategory] = useState<Category | null>();
+  const [activeTabKey, setActiveTabKey] = useState<string | null>(params.id);
 
   useEffect(() => {
-    const storedCompanyData = localStorage.getItem("companyData");
-    if (storedCompanyData) {
-      setCompany(JSON.parse(storedCompanyData));
-    }
-
-    const storedCategoryData = localStorage.getItem("categories");
-    if (storedCategoryData) {
-      setSelectedCategory(
-        company?.categoires.find(
+    const fetchCompanyData = async () => {
+      try {
+        const response = await axios.get(`${BASE_URL}/Company/${params.slog}`);
+        const fetchedCompanyData: Company = response.data;
+        setCompany(fetchedCompanyData);
+        const initialSelectedCategory = fetchedCompanyData.categories.find(
           (category: Category) => category.id === Number(params.id)
-        )
-      );
-    }
-  }, []);
+        );
+        setSelectedCategory(initialSelectedCategory || null);
+        console.log(fetchedCompanyData);
+      } catch (error) {
+        console.error("Error fetching company data:", error);
+      }
+    };
+  
+    fetchCompanyData(); // Call the fetchCompanyData function here
+  
+  }, [params.id, params.slog]);
+
+
 
   const handleTabChange = (key: string) => {
     setActiveTabKey(key);
+    const newSelectedCategory = company?.categories.find(
+      (category: Category) => category.id === Number(key)
+    );
+    setSelectedCategory(newSelectedCategory || null);
   };
   const onBackClick = () => {
     router.push(`/${company?.name}/menu`);
@@ -51,8 +61,8 @@ export default function Page({ params }: any) {
 
       <div className="categoryDetailsMain">
         <h2 className="categoryText">Menu</h2>
-        <Tabs activeKey={activeTabKey} onChange={handleTabChange}>
-          {categoriesTest.map((category: any) => (
+        <Tabs activeKey={activeTabKey ? activeTabKey : "2"} onChange={handleTabChange}>
+          {company?.categories.map((category: any) => (
             <TabPane tab={category.name} key={category.id.toString()}>
               <div
                 className={
@@ -61,7 +71,7 @@ export default function Page({ params }: any) {
                     : "categoryDrinksListNoImage"
                 }
               >
-                {category.drinks.map((drink: Drink) =>
+                {selectedCategory?.drinks.map((drink: Drink) =>
                   category.view === "images" ? (
                     <div className="categoryDrink" key={drink.id}>
                       <img src={drink.image} alt="drink Image" />
@@ -72,8 +82,8 @@ export default function Page({ params }: any) {
                     </div>
                   ) : (
                     <div className="categoryDrinkNoImage" key={drink.id}>
-                        <h3>{drink.name}</h3>
-                        <p>{drink.price} дeн</p>
+                      <h3>{drink.name}</h3>
+                      <p>{drink.price} дeн</p>
                     </div>
                   )
                 )}

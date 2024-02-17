@@ -57,19 +57,21 @@ const EditMenuModal = ({
       onOk={() => {
         closeModal("editMenu");
         console.log(
-          "pavic",
-          menuBackgroundColor,
-          categoryTitleBackgroundColor,
-          categoryTextColor,
-          headerImgUrl,
-          companyHeaderImg
+          "pavic123",
+          {
+            menuBackgroundColor,
+            categoryTitleBackgroundColor,
+            categoryTextColor,
+            headerImgUrl: headerImgUrl?.url
+          }
         );
         handleUpdateEditMenu({
-          menuBackgroundColor,
-          categoryTitleBackgroundColor,
-          categoryTextColor,
-          headerImgUrl,
+          menuBackgroundColor:menuBackgroundColor,
+          categoryTitleBackgroundColor:categoryTitleBackgroundColor,
+          categoryTextColor:categoryTextColor,
+          headerImgUrl: headerImgUrl?.url
         });
+        
       }}
       onCancel={() => closeModal("editMenu")}
     >

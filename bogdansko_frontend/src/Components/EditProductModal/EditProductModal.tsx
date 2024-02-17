@@ -52,7 +52,13 @@ const EditProductModal = ({
         productImage: editProductImage,
       }}
       onSubmit={async (values) => {
-        await handleUpdateProduct({editDrinkName,editDrinkPrice,editProductImgUrl});
+        await handleUpdateProduct({
+          editDrinkName: editDrinkName ? editDrinkName : values.drinkName,
+          editDrinkPrice: editDrinkPrice ? editDrinkPrice : values.drinkPrice,
+          editProductImgUrl: editProductImgUrl ? editProductImgUrl.url : editProductImage
+        });
+        
+      console.log("pavic asd",editProductImgUrl,editProductImage)
         setIsEditProductModalShown(false);
         setEditProductImage('')
         setEditProductImgFile(undefined)

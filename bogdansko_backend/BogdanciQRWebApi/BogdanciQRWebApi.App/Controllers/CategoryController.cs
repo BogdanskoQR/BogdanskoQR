@@ -88,7 +88,7 @@
             }
         }
 
-        [HttpPatch()]
+        [HttpPatch]
         public async Task<IActionResult> EditCategory([FromBody] EditCategoryDTO editCategoryDTO)
         {
             try

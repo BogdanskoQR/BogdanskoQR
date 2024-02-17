@@ -1,6 +1,7 @@
 import { Modal, Input, Button } from "antd";
 import { Formik, FieldArray, Form, Field } from "formik";
 import { UploadOutlined, PlusOutlined } from "@ant-design/icons";
+import { Checkbox } from 'antd';
 
 interface CreateCategoryModalProps {
   categoryImgFIle: File | undefined;
@@ -35,6 +36,7 @@ const CreateCategoryModal = ({
         categoryName: "",
         drinks: [{ name: "", price: 0 }],
         img: categoryImgUrl?.url,
+        productView: true
       }}
       onSubmit={(values) => {
         console.log("pavic values", values);
@@ -77,7 +79,11 @@ const CreateCategoryModal = ({
                 required
               />
             </div>
+            <div className="viewProductPhotos">
+              <label>View Product Photos:</label>
+              <Checkbox value={values.productView} onChange={(value)=> setFieldValue('productView',value.target.checked)}>Checkbox</Checkbox>
 
+            </div>
             <div className="createCategoryField">
               <p>Drinks:</p>
               <FieldArray

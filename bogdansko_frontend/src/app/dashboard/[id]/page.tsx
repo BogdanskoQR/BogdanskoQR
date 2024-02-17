@@ -161,21 +161,20 @@ export default function Page({ params }: any) {
     setEditCategoryId(category.id);
   };
 
-  const handleUpdateCategory = async (categoryUpdateData: Category) => {
+  const handleUpdateCategory = async ({editCategoryName,editCategoryImageUrl,productView}: any) => {
     try {
       await axios.patch(`${BASE_URL}/Category`, {
         id: editCategoryId,
         companyId: Number(params.id),
-        name: categoryUpdateData.name,
-        backgroundImage: categoryUpdateData.backgroundImage,
+        name: editCategoryName,
+        backgroundImage: editCategoryImageUrl,
+        View:  productView ? 'images' : null
       });
-      openNotificationWithIcon("success", "update", categoryUpdateData.name);
-      console.log("pavic category", {
-        id: editCategoryId,
-        companyId: Number(params.id),
-        name: categoryUpdateData.name,
-        backgroundImage: categoryUpdateData.backgroundImage,
-      });
+      openNotificationWithIcon(
+        "success",
+        "text",
+        `Successfully updated category`
+      );
     } catch (error) {
       openNotificationWithIcon(
         "error",
@@ -186,7 +185,7 @@ export default function Page({ params }: any) {
   };
   const handleDeleteCategory = async (category: Category) => {
     try {
-      await axios.delete(`${BASE_URL}/${category.id}`);
+      await axios.delete(`${BASE_URL}/Category/${category.id}`);
       openNotificationWithIcon(
         "success",
         "text",
@@ -207,6 +206,7 @@ export default function Page({ params }: any) {
         companyId: params.id,
         name: value.categoryName,
         backgroundImage: value.img,
+        view: value.productView ? 'images' : null
       });
       openNotificationWithIcon(
         "success",
@@ -228,23 +228,27 @@ export default function Page({ params }: any) {
     }
   };
 
-  const handleUpdateProduct = async (drinkUpdateData: any) => {
+  const handleUpdateProduct = async ({
+    editDrinkName,
+    editDrinkPrice,
+    editProductImgUrl,
+  } : any) => {
     if (editedDrink) {
       try {
         await axios.patch(`${BASE_URL}/Drink`, {
           id: editedDrink.id,
           categoryId: editDrinkCategoryId,
-          name: drinkUpdateData.editDrinkName,
-          price: drinkUpdateData.editDrinkPrice,
-          image: drinkUpdateData.editProductImage,
+          name: editDrinkName,
+          price: editDrinkPrice,
+          image: editProductImgUrl,
           description: null,
         });
         console.log("pavic data:", {
           id: editedDrink.id,
           categoryId: editDrinkCategoryId,
-          name: drinkUpdateData.editDrinkName,
-          price: drinkUpdateData.editDrinkPrice,
-          image: drinkUpdateData.editProductImage,
+          name: editDrinkName,
+          price: editDrinkPrice,
+          image: editProductImgUrl,
           description: null,
         });
         openNotificationWithIcon("success", "update", editDrinkName);
@@ -298,29 +302,19 @@ export default function Page({ params }: any) {
     }
   };
 
-  const handleUpdateEditMenu = async (editMenuData: any) => {
+  const handleUpdateEditMenu = async ({menuBackgroundColor,categoryTitleBackgroundColor,categoryTextColor,headerImgUrl}: any) => {
     try {
-      await axios.patch(`${BASE_URL}/Company`, {
+      await axios.patch(`${BASE_URL}/Company/colors`, {
         id: Number(params.id),
-        menuThemeColor: editMenuData.menuBackgroundColor,
-        categoryTitleColor: editMenuData.categoryTitleBackgroundColor,
-        categoryTextTitleColor: editMenuData.categoryTextColor,
-        headerTextColor: editMenuData.categoryTextColor,
-        headerImage: editMenuData.headerImgUrl
-          ? editMenuData.headerImgUrl
+        menuThemeColor: menuBackgroundColor,
+        categoryTitleColor: categoryTitleBackgroundColor,
+        categoryTextTitleColor: categoryTextColor,
+        headerTextColor: categoryTextColor,
+        headerImage: headerImgUrl
+          ? headerImgUrl
           : company?.headerImage,
       });
       openNotificationWithIcon("success", "editMenu");
-      console.log("pavic data:", {
-        id: Number(params.id),
-        menuThemeColor: editMenuData.menuBackgroundColor,
-        categoryTitleColor: editMenuData.categoryTitleBackgroundColor,
-        categoryTextTitleColor: editMenuData.categoryTextColor,
-        headerTextColor: editMenuData.categoryTextColor,
-        headerImage: editMenuData.headerImgUrl
-          ? editMenuData.headerImgUrl
-          : company?.headerImage,
-      });
     } catch (error) {
       openNotificationWithIcon("error", "text", `Error while updating menu`);
     }
@@ -367,7 +361,7 @@ export default function Page({ params }: any) {
           handleRemoveDrink={handleRemoveDrink}
           setIsEditCategoryModalOpen={setIsEditCategoryModalOpen}
           setIsEditProductModalShown={setIsEditProductModalShown}
-          categories={company?.categoires}
+          categories={company?.categories}
         />
       </div>
       <CreateCategoryModal
@@ -387,7 +381,7 @@ export default function Page({ params }: any) {
         setIsCreateDrinkModalOpen={setIsCreateCategoryModalOpen}
         closeModal={closeModal}
         productImgUrl={productImgUrl}
-        categories={company?.categoires}
+        categories={company?.categories}
         setProductImgFile={setProductImgFile}
         productImgFile={productImgFile}
         edgestore={edgestore}
@@ -405,7 +399,7 @@ export default function Page({ params }: any) {
         headerImgUrl={headerImgUrl}
         companyHeaderImg={company?.headerImage}
         headerTextColor={headerTextColor}
-        categories={company?.categoires}
+        categories={company?.categories}
         setHeaderImgFile={setHeaderImgFile}
         headerImgFile={headerImgFile}
         setHeaderImgUrl={setHeaderImgUrl}

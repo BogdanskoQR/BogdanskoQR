@@ -25,7 +25,7 @@ export interface Company {
     headerTextColor: string;
     headerImage: string;
     companyLogo: string;
-    categoires: Category[]
+    categories: Category[]
   }
 
 export const BASE_URL = 'http://localhost:5119/api'

@@ -1,6 +1,8 @@
 import { UploadOutlined } from "@ant-design/icons";
 import { Modal, Input, Button } from "antd";
 import { Formik, Form } from "formik";
+import { Checkbox } from 'antd';
+import type { CheckboxProps } from 'antd';
 import React from "react";
 
 interface EditCategoryModalProps {
@@ -41,13 +43,21 @@ const EditCategoryModal = ({
     <Formik
       initialValues={{
         editCategoryName: editCategoryName,
-        editCategoryImageUrl: editCategoryImageUrl,
+        editCategoryImageUrl: editCategoryImageUrl ? editCategoryImageUrl : editCategoryImg,
+        productView: true
       }}
       onSubmit={(values) => {
-        handleUpdateCategory(values);
+        console.log("pavic values",{
+          editCategoryName: values.editCategoryName ? values.editCategoryName : editCategoryName,
+          editCategoryImageUrl: values.editCategoryImageUrl ? values.editCategoryImageUrl : editCategoryImg,
+          productView: values.productView
+        })
+        handleUpdateCategory({
+          editCategoryName: values.editCategoryName ? values.editCategoryName : editCategoryName,
+          editCategoryImageUrl: values.editCategoryImageUrl ? values.editCategoryImageUrl : editCategoryImg,
+          productView: values.productView
+        });        
         setIsEditCategoryModalOpen(false);
-        setEditCategoryName("");
-        setEditCategoryImageUrl(undefined)
       }}
       
     >
@@ -74,7 +84,11 @@ const EditCategoryModal = ({
                 }}
               />
             </div>
+            <div className="viewProductPhotos">
+              <label>View Product Photos:</label>
+              <Checkbox value={values.productView} onChange={(value)=> setFieldValue('productView',value.target.checked)}>Checkbox</Checkbox>
 
+            </div>
             <br />
             <div className="createProductField">
               <label htmlFor="drinkPrice">Category Image:</label>
