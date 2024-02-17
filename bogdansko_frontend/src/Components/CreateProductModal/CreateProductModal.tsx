@@ -53,7 +53,6 @@ const CreateProductModal = ({
       }}
       onSubmit={(values) => {
         handleCreateProduct(values);
-        console.log("pavic values", values);
         setIsCreateDrinkModalOpen(false);
       }}
     >

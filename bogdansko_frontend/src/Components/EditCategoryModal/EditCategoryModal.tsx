@@ -47,11 +47,6 @@ const EditCategoryModal = ({
         productView: true
       }}
       onSubmit={(values) => {
-        console.log("pavic values",{
-          editCategoryName: values.editCategoryName ? values.editCategoryName : editCategoryName,
-          editCategoryImageUrl: values.editCategoryImageUrl ? values.editCategoryImageUrl : editCategoryImg,
-          productView: values.productView
-        })
         handleUpdateCategory({
           editCategoryName: values.editCategoryName ? values.editCategoryName : editCategoryName,
           editCategoryImageUrl: values.editCategoryImageUrl ? values.editCategoryImageUrl : editCategoryImg,

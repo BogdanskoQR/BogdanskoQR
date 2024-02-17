@@ -58,7 +58,6 @@ const EditProductModal = ({
           editProductImgUrl: editProductImgUrl ? editProductImgUrl.url : editProductImage
         });
         
-      console.log("pavic asd",editProductImgUrl,editProductImage)
         setIsEditProductModalShown(false);
         setEditProductImage('')
         setEditProductImgFile(undefined)

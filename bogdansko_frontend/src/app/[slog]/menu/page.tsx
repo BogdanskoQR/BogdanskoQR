@@ -18,7 +18,6 @@ export default function Page({ params }: any) {
         const response = await axios.get(`${BASE_URL}/Company/${params.slog}`);
         const fetchedCompanyData: Company = response.data;
         setCompany(fetchedCompanyData);
-        console.log(fetchedCompanyData);
       } catch (error) {
         console.error("Error fetching company data:", error);
       }
@@ -26,7 +25,6 @@ export default function Page({ params }: any) {
     fetchCompanyData();
   }, [params.slog]);
 
-  console.log("pavic company", company)
   return (
     <div className="menuLandingPageWrapper">
       <div

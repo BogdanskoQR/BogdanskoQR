@@ -56,15 +56,6 @@ const EditMenuModal = ({
       open={isEditMenuModalOpen}
       onOk={() => {
         closeModal("editMenu");
-        console.log(
-          "pavic123",
-          {
-            menuBackgroundColor,
-            categoryTitleBackgroundColor,
-            categoryTextColor,
-            headerImgUrl: headerImgUrl?.url
-          }
-        );
         handleUpdateEditMenu({
           menuBackgroundColor:menuBackgroundColor,
           categoryTitleBackgroundColor:categoryTitleBackgroundColor,

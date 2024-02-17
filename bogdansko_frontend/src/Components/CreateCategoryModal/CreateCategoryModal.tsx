@@ -39,7 +39,6 @@ const CreateCategoryModal = ({
         productView: true
       }}
       onSubmit={(values) => {
-        console.log("pavic values", values);
         onCategorySubmit(values);
         setTimeout(()=> {
           setCategoryImgFile(undefined)

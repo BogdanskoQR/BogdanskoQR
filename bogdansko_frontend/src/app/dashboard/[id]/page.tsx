@@ -28,10 +28,8 @@ export default function Page({ params }: any) {
         const response = await axios.get(
           `${BASE_URL}/Company/${Number(params.id)}`
         );
-        console.log("pavic response", response);
         const fetchedCompanyData: Company = response.data;
         setCompany(fetchedCompanyData);
-        console.log("pavic company", fetchedCompanyData);
       } catch (error) {
         console.error("Error fetching company data:", error);
       }
@@ -200,7 +198,6 @@ export default function Page({ params }: any) {
     }
   };
   const handleCreateCategory = async (value: any) => {
-    console.log("pavic create category values", value);
     try {
       await axios.post(`${BASE_URL}/Category`, {
         companyId: params.id,
@@ -213,12 +210,6 @@ export default function Page({ params }: any) {
         "text",
         `Successfully Created ${value.categoryName} category`
       );
-
-      console.log("pavic data:", {
-        companyId: params.id,
-        name: value.categoryName,
-        backgroundImage: value.img,
-      });
     } catch (error) {
       openNotificationWithIcon(
         "error",
@@ -236,14 +227,6 @@ export default function Page({ params }: any) {
     if (editedDrink) {
       try {
         await axios.patch(`${BASE_URL}/Drink`, {
-          id: editedDrink.id,
-          categoryId: editDrinkCategoryId,
-          name: editDrinkName,
-          price: editDrinkPrice,
-          image: editProductImgUrl,
-          description: null,
-        });
-        console.log("pavic data:", {
           id: editedDrink.id,
           categoryId: editDrinkCategoryId,
           name: editDrinkName,
@@ -269,7 +252,6 @@ export default function Page({ params }: any) {
   const handleRemoveDrink = async (drink: Drink) => {
     try {
       const response = await axios.delete(`${BASE_URL}/Drink/${drink.id}`);
-      console.log("Post request successful:", response.data);
       openNotificationWithIcon("success", "delete", drink.name);
     } catch (error) {
       console.error("Error making post request:", error);
@@ -290,13 +272,6 @@ export default function Page({ params }: any) {
         "create",
         `product with name ${value.drinkName}`
       );
-      console.log("pavic data:", {
-        categoryId: createProductCategoryId,
-        name: value.drinkName,
-        price: value.drinkPrice,
-        image: value.productImage,
-        description: null,
-      });
     } catch (error) {
       openNotificationWithIcon("error", "text", `Error while creating product`);
     }

@@ -23,7 +23,6 @@ export default function Page({ params }: any) {
           (category: Category) => category.id === Number(params.id)
         );
         setSelectedCategory(initialSelectedCategory || null);
-        console.log(fetchedCompanyData);
       } catch (error) {
         console.error("Error fetching company data:", error);
       }
