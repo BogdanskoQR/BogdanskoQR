@@ -53,8 +53,8 @@
   border: none;
   border-radius: 16px;
   margin-bottom: 18px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.11);
-  background-color: #fbfcfc;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.19);
+  background-color: #fdfdfd;
 }
 
 
@@ -76,7 +76,7 @@
 
 .categoryDrinkInfo p {
   font-weight: 500;
-  color: #20bf6b;
+  color: #969186;
 }
 
 .ladningPageFooter{
@@ -139,11 +139,11 @@
 
 .ant-tabs-tab-active .ant-tabs-tab-btn{
   color: black !important;
+  font-weight: 600;
 }
-.ant-tabs-nav-list {
-  border-color: red !important;
+.ant-tabs-ink-bar{
+  background-color: #969186 !important;
 }
-
 
 
 
